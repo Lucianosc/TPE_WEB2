@@ -14,7 +14,9 @@
     //$r->addRoute("insertFlat", "POST", "FlatController", "InsertFlat");
 
     //default
-    //$r->setDefaultRoute("FlatController", "Home");
+    $r->setDefaultRoute("CityController", "Home");
+    $r->addRoute("insertCity", "POST", "CityController", "InsertCity");
+    $r->addRoute("insertFlat", "POST", "FlatController", "InsertFlat");
     //******************* RUN ***************************
     $r->route($_GET['action'], $_SERVER['REQUEST_METHOD']); 
 ?>

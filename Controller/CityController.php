@@ -9,9 +9,15 @@ class CityController {
     private $view;
 
     public function __construct(){
-        $this->view = new CityView;
-        $this->model = new CityModel;
+        $this->view = new CityView();
+        $this->model = new CityModel();
     }
+
+    function Home(){
+        $cities = $this->model->getCities();
+        $this->view->ShowHome($cities);
+    }
+
     //Alta
     function insertCity() {
         $name = $_POST['input_name'];
