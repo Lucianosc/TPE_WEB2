@@ -82,7 +82,7 @@ class FlatController {
         if(isset($id_city)){
             $flats = $this->model->GetFlatsByCity($id_city);
             $cities = $this->modelC->GetCities();
-            $this->view->ShowHome($flats, $cities/*, $id_city*/ );
+           // $this->view->ShowHome($flats, $cities,  );
         }
     }
 }
