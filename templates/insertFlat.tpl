@@ -7,11 +7,11 @@
         <label for="price">Price</label>
         <input type="number" name="input_price">
         <!-- ver implementacion -->
-
+        
         <select name="input_id_city_fk" id="cities_s">
-            <option value="1">fk 1</option>
-            <option value="2">fk 2</option>
-            <option value="3">fk 3</option>
+            {foreach from=$cities item=city}
+                <option value="{$city->id_ciudad}">{$city->nombre}</option>
+            {/foreach}
         </select>
 
         <button type="submit">Agregar</button>

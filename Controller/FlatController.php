@@ -3,6 +3,8 @@
 require_once './View/FlatView.php';
 require_once './Model/FlatModel.php';
 
+require_once './Model/CityModel.php';
+
 class FlatController {
 
     private $model;
@@ -11,11 +13,13 @@ class FlatController {
     public function __construct(){
         $this->view = new FlatView;
         $this->model = new FlatModel;
+        $this->modelC = new CityModel;
     }
 
     function showFlats(){
         $flats = $this->model->getFlats();
-        $this->view->ShowHome($flats);
+        $cities = $this->modelC->getCities();
+        $this->view->ShowHome($flats, $cities);
     }
 
     //Alta
@@ -24,7 +28,6 @@ class FlatController {
         $address = $_POST['input_address'];
         $price = $_POST['input_price'];
         $id_city_fk = $_POST['input_id_city_fk'];
-        //SELECT DE CIUDAD 
         if((isset($name) && !empty($name)) && 
         (isset($address) && !empty($address)) &&
         (isset($price) && is_numeric($price)) && 
@@ -35,7 +38,7 @@ class FlatController {
         } 
         $this->view->showFlats();
     }
-    //Checkea si existe el depto en la db
+    //Checkea si existe el depto en la db //--------------REVISAR
     function alreadyLoaded($name, $address, $price, $id_city_fk) {
         $flats = $this->model->getFlats();
         $exist = false;
@@ -54,7 +57,7 @@ class FlatController {
         $this->model->deleteFlat($id);
         $this->view->showFlats();
     }
-
+    //--------------REVISAR
     //modificacion
     function editFlat() {
         $name = $_GET['input_edit_name'];

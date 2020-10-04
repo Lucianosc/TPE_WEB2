@@ -45,7 +45,7 @@ class CityController {
         $this->model->deleteCity($id);
         $this->view->showHomeLocation();
     }
-    //modificacion
+    //modificacion //--------------REVISAR
     function editCity() {
         $name = $_GET['input_edit_name'];
         $id = $_GET['input_edit_id'];

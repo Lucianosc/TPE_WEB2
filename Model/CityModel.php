@@ -22,12 +22,12 @@ class CityModel {
     }
     //baja
     function deleteCity($id) {
-        $query = $this->db->prepare('DELETE FROM ciudad WHERE id=?');
+        $query = $this->db->prepare('DELETE FROM ciudad WHERE id_ciudad=?');
         $query->execute(array($id));
     }
-    //modificación
+    //modificación //------IMPLEMENTAR
     function updateCity($name, $id) {
-        $query = $this->db->prepare('UPDATE ciudad SET nombre=? WHERE id=?');
+        $query = $this->db->prepare('UPDATE ciudad SET nombre=? WHERE id_ciudad=?');
         $query->execute(array($name, $id));
     }
 }
