@@ -17,7 +17,6 @@ class CityController {
         $cities = $this->model->getCities();
         $this->view->ShowHome($cities);
     }
-
     //Alta
     function insertCity() {
         $name = $_POST['input_name'];
@@ -50,11 +49,18 @@ class CityController {
         $this->model->deleteCity($id);
         $this->view->showCities();
     }
+    
     //modificacion //--------------REVISAR
+    function updateCity($params = null){
+        $id = $params[':ID'];
+        $this->view->renderFormEdit($id);
+    }
+
+
     function editCity() {
-        $name = $_GET['input_edit_name'];
-        $id = $_GET['input_edit_id'];
-        if( isset($name) && !empty($name) && (isset($id) && is_numeric($id)) ) {
+        $name = $_POST['input_edit_name'];
+        $id = $_POST['input_edit_id'];
+        if(isset($name) && !empty($name)) {
             $this->model->updateCity($name, $id);
         } 
         $this->view->showCities();

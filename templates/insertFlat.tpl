@@ -6,7 +6,6 @@
         <input type="text" name="input_address">
         <label for="price">Price</label>
         <input type="number" name="input_price">
-        <!-- ver implementacion -->
         
         <select name="input_id_city_fk" id="cities_s">
             {foreach from=$cities item=city}

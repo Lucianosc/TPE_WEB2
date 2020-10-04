@@ -9,8 +9,6 @@
     $r = new Router();
 
     // ******************* RUTAS ***************************
-   // $r->addRoute("home", "GET", "FlatController", "Home");
-   // $r->addRoute("city/:ID", "GET", "FlatController", "showMoviesByGenre");
 
     //default
     $r->setDefaultRoute("CityController", "showCities");
@@ -25,7 +23,10 @@
     $r->addRoute("deleteFlat/:ID", "GET", "FlatController", "deleteFlat");
 
     $r->addRoute("editCity/:ID", "GET", "CityController", "editCity");
+    $r->addRoute("updateCity/:ID", "GET", "CityController", "updateCity");
+
     $r->addRoute("editFlat/:ID", "GET", "FlatController", "editFlat");
+    $r->addRoute("editFlat/updateFlat/:ID", "POST", "FlatController", "updateFlat");
 
     $r->addRoute("insertCity", "POST", "CityController", "insertCity");
     $r->addRoute("insertFlat", "POST", "FlatController", "insertFlat");

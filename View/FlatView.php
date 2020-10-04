@@ -10,7 +10,7 @@ class FlatView {
         $this->title = "Lista de Departamentos";
     }
 
-    function ShowHome($flats, $cities = null){
+    function ShowHome($flats, $cities = null){//ver cities = null
 
         $smarty = new Smarty();
         $smarty->assign('titulo', $this->title);
@@ -20,6 +20,15 @@ class FlatView {
 
         $smarty->display('templates/flats.tpl');
     }
+    //MUESTRA EDICION PRODUCTO
+    function ShowEditFlat($flat, $cities){
+        $smarty = new Smarty();
+        $smarty->assign('flat', $flat);
+        $smarty->assign('cities', $cities);
+
+        $smarty->display('templates/editFlat.tpl');
+    }
+
 
     function ShowFlats(){
         header("Location: ".BASE_URL."showFlats");
