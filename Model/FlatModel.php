@@ -5,13 +5,14 @@ class FlatModel {
     private $db;
 
     function __construct(){
-        //el constructor se ejecuta siempre, abre la conexion en este caso
         $this->db = new PDO('mysql:host=localhost;'.'dbname=db_airbnb;charset=utf8', 'root', '');
     }
     
-    //Listado de categorías: Se debe poder visualizar todas las categorías
+    //Listado de departamentos, con sus caracteristicas y la ciudad a la que pertenece
     function getFlats() {
-        $query = $this->db->prepare('SELECT * FROM departamento');
+        $query = $this->db->prepare('SELECT departamento.*, ciudad.nombre as nombre_ciudad
+                                     FROM departamento INNER JOIN ciudad
+                                     ON departamento.id_ciudad_fk = ciudad.id_ciudad');
         $query->execute();
         return  $query->fetchAll(PDO::FETCH_OBJ);
     }
@@ -22,13 +23,13 @@ class FlatModel {
     }
     //baja
     function deleteFlat($id) {
-        $query = $this->db->prepare('DELETE FROM departamento WHERE id=?');
+        $query = $this->db->prepare('DELETE FROM departamento WHERE id_departamento=?');
         $query->execute(array($id));
     }
     //modificación
-    function updateFlat($name, $id) {
-        $query = $this->db->prepare('UPDATE departamento SET nombre=? WHERE id=?');
-        $query->execute(array($name, $id));
+    function updateFlat($name, $id, $address, $price, $id_city_fk) {
+        $query = $this->db->prepare('UPDATE departamento SET nombre=? direccion=? precio=? id_ciudad_fk=? WHERE id_departamento=?');
+        $query->execute(array($name, $address, $price, $id_city_fk, $id));
     }
     
 }

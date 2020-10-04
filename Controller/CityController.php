@@ -31,10 +31,10 @@ class CityController {
         //Checkea si existe la ciudad ya está cargada
     function alreadyLoaded($name) {
         $cities = $this->model->getCities();
-        $exist = true;
+        $exist = false;
         foreach($cities as $city) {
-            if($city->name !== $name) {
-                $exist = false;   
+            if($city->nombre === $name) {
+                $exist = true;   
             }
         }
         return $exist;
@@ -49,7 +49,7 @@ class CityController {
     function editCity() {
         $name = $_GET['input_edit_name'];
         $id = $_GET['input_edit_id'];
-        if( isset($name)&&!empty($name)) {
+        if( isset($name) && !empty($name) && (isset($id) && is_numeric($id)) ) {
             $this->model->updateCity($name, $id);
         } 
         $this->view->showHomeLocation();
