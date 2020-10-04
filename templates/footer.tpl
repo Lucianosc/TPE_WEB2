@@ -1,7 +1,7 @@
 
 
-
-<h3>Footer</h3>
+<a href="showFlats"><button>Departamentos</button></a>
+<a href="showCities"><button>Ciudades</button></a>
 </body>
 
 </html>

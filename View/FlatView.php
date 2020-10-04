@@ -19,6 +19,10 @@ class FlatView {
         $smarty->display('templates/flats.tpl');
     }
 
+    function ShowFlats(){
+        header("Location: ".BASE_URL."showFlats");
+    }
+    
     function ShowHomeLocation(){
         header("Location: ".BASE_URL."home");
     }

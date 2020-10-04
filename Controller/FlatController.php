@@ -13,7 +13,7 @@ class FlatController {
         $this->model = new FlatModel;
     }
 
-    function Home(){
+    function showFlats(){
         $flats = $this->model->getFlats();
         $this->view->ShowHome($flats);
     }
@@ -29,7 +29,7 @@ class FlatController {
                 $this->model->insertFlat($name, $address, $price, $id_city_fk);
             }
         } 
-        $this->view->showHomeLocation();
+        $this->view->showFlats();
     }
     //Checkea si existe el depto ya está cargado
     function alreadyLoaded($name) {
@@ -47,7 +47,7 @@ class FlatController {
     function deleteFlat($params = null) {
         $id = $params[':ID'];
         $this->model->deleteFlat($id);
-        $this->view->showHomeLocation();
+        $this->view->showFlats();
     }
 
     //modificacion
@@ -57,6 +57,6 @@ class FlatController {
         if( isset($name)&&!empty($name)) {
             $this->model->updateFlat($name, $id);
         } 
-        $this->view->showHomeLocation();
+        $this->view->showFlats();
     }
 }
