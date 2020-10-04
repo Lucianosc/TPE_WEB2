@@ -23,6 +23,7 @@ class FlatView {
     //MUESTRA EDICION PRODUCTO
     function ShowEditFlat($flat, $cities){
         $smarty = new Smarty();
+        $smarty->assign('titulo', $this->title);
         $smarty->assign('flat', $flat);
         $smarty->assign('cities', $cities);
 
