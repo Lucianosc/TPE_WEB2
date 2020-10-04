@@ -13,7 +13,7 @@ class CityController {
         $this->model = new CityModel();
     }
 
-    function Home(){
+    function showCities(){
         $cities = $this->model->getCities();
         $this->view->ShowHome($cities);
     }

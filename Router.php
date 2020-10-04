@@ -14,9 +14,22 @@
     //$r->addRoute("insertFlat", "POST", "FlatController", "InsertFlat");
 
     //default
-    $r->setDefaultRoute("CityController", "Home");
-    $r->addRoute("insertCity", "POST", "CityController", "InsertCity");
-    $r->addRoute("insertFlat", "POST", "FlatController", "InsertFlat");
+    $r->setDefaultRoute("CityController", "showCities");
+    
+    $r->addRoute("showCities", "POST", "CityController", "showCities");
+    $r->addRoute("showFlats", "POST", "FlatController", "showFlats");
+
+    $r->addRoute("showCities", "GET", "CityController", "showCities");
+    $r->addRoute("showFlats", "GET", "FlatController", "showFlats");
+
+    $r->addRoute("delete/:ID", "GET", "CityController", "deleteCity");
+    $r->addRoute("delete/:ID", "GET", "FlatController", "deleteFlat");
+
+    $r->addRoute("edit/:ID", "GET", "CityController", "editCity");
+    $r->addRoute("edit/:ID", "GET", "FlatController", "editFlat");
+
+    $r->addRoute("insertCity", "POST", "CityController", "insertCity");
+    $r->addRoute("insertFlat", "POST", "FlatController", "insertFlat");
     //******************* RUN ***************************
     $r->route($_GET['action'], $_SERVER['REQUEST_METHOD']); 
 ?>
