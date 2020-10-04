@@ -11,8 +11,8 @@
         {foreach from=$ciudades item=ciudad}
             <tr>
                 <td>{$ciudad->nombre}</td>
-                <td><a href="edit_c/{$ciudad->id_ciudad}"><button>Editar</button></a></td>
-                <td><a href="delete_c/{$ciudad->id_ciudad}"><button>X</button></a></td>
+                <td><a href="editCity/{$ciudad->id_ciudad}"><button>Editar</button></a></td>
+                <td><a href="deleteCity/{$ciudad->id_ciudad}"><button>X</button></a></td>
             </tr>
         {/foreach}
         </table>

@@ -21,11 +21,11 @@
     $r->addRoute("showCities", "GET", "CityController", "showCities");
     $r->addRoute("showFlats", "GET", "FlatController", "showFlats");
 
-    $r->addRoute("delete_c/:ID", "GET", "CityController", "deleteCity");
-    $r->addRoute("delete_f/:ID", "GET", "FlatController", "deleteFlat");
+    $r->addRoute("deleteCity/:ID", "GET", "CityController", "deleteCity");
+    $r->addRoute("deleteFlat/:ID", "GET", "FlatController", "deleteFlat");
 
-    $r->addRoute("edit_c/:ID", "GET", "CityController", "editCity");
-    $r->addRoute("edit_f/:ID", "GET", "FlatController", "editFlat");
+    $r->addRoute("editCity/:ID", "GET", "CityController", "editCity");
+    $r->addRoute("editFlat/:ID", "GET", "FlatController", "editFlat");
 
     $r->addRoute("insertCity", "POST", "CityController", "insertCity");
     $r->addRoute("insertFlat", "POST", "FlatController", "insertFlat");
