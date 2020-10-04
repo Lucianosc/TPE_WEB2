@@ -1,3 +1,4 @@
+{include file="header.tpl"}
 <div>
     <h3>EDITAR</h3> <!-- codigo repetido -->
     <form action="editFlat" method="post">
@@ -20,3 +21,4 @@
         <a href="updateFlat/{$flat->id_departamento}"><button type="submit">submit edit</button></a>
     </form>
 </div>
+{include file="footer.tpl"}
