@@ -32,13 +32,8 @@ class CityController {
         $cities = $this->model->getCities();
         $exist = false;
         foreach($cities as $city) {
-<<<<<<< HEAD
-            if($city->nombre !== $name) {
-                $exist = false;   
-=======
             if($city->nombre === $name) {
                 $exist = true;   
->>>>>>> 2ee3eac061920bd3668c2b7d4f472f75c9372965
             }
         }
         return $exist;
