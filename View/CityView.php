@@ -19,6 +19,9 @@ class CityView {
         $smarty->display('templates/cities.tpl');
     }
 
+    function ShowCities(){
+        header("Location: ".BASE_URL."showCities");
+    }
     function ShowHomeLocation(){
         header("Location: ".BASE_URL."home");
     }

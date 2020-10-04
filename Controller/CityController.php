@@ -26,14 +26,14 @@ class CityController {
                 $this->model->insertCity($name);
             }
         } 
-        $this->view->showHomeLocation();
+        $this->view->showCities();
     }
         //Checkea si existe la ciudad ya está cargada
     function alreadyLoaded($name) {
         $cities = $this->model->getCities();
         $exist = true;
         foreach($cities as $city) {
-            if($city->name !== $name) {
+            if($city->nombre !== $name) {
                 $exist = false;   
             }
         }
@@ -43,7 +43,7 @@ class CityController {
     function deleteCity($params = null) {
         $id = $params[':ID'];
         $this->model->deleteCity($id);
-        $this->view->showHomeLocation();
+        $this->view->showCities();
     }
     //modificacion
     function editCity() {
@@ -52,7 +52,7 @@ class CityController {
         if( isset($name)&&!empty($name)) {
             $this->model->updateCity($name, $id);
         } 
-        $this->view->showHomeLocation();
+        $this->view->showCities();
     }
 
 }

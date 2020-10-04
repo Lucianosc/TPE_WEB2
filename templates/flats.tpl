@@ -14,8 +14,8 @@
             <td>{$flat->nombre}</td>
             <td>{$flat->direccion}</td>
             <td>{$flat->precio}</td>
-            <td><a href="edit/{$flat->id_departamento}"><button>Editar</button></a></td>
-            <td><a href="delete/{$flat->id_departamento}"><button>X</button></a></td>
+            <td><a href="edit_f/{$flat->id_departamento}"><button>Editar</button></a></td>
+            <td><a href="delete_f/{$flat->id_departamento}"><button>X</button></a></td>
         </tr>
         {/foreach}
     </table>

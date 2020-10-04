@@ -11,7 +11,6 @@
     // ******************* RUTAS ***************************
    // $r->addRoute("home", "GET", "FlatController", "Home");
    // $r->addRoute("city/:ID", "GET", "FlatController", "showMoviesByGenre");
-    //$r->addRoute("insertFlat", "POST", "FlatController", "InsertFlat");
 
     //default
     $r->setDefaultRoute("CityController", "showCities");
@@ -22,11 +21,11 @@
     $r->addRoute("showCities", "GET", "CityController", "showCities");
     $r->addRoute("showFlats", "GET", "FlatController", "showFlats");
 
-    $r->addRoute("delete/:ID", "GET", "CityController", "deleteCity");
-    $r->addRoute("delete/:ID", "GET", "FlatController", "deleteFlat");
+    $r->addRoute("delete_c/:ID", "GET", "CityController", "deleteCity");
+    $r->addRoute("delete_f/:ID", "GET", "FlatController", "deleteFlat");
 
-    $r->addRoute("edit/:ID", "GET", "CityController", "editCity");
-    $r->addRoute("edit/:ID", "GET", "FlatController", "editFlat");
+    $r->addRoute("edit_c/:ID", "GET", "CityController", "editCity");
+    $r->addRoute("edit_f/:ID", "GET", "FlatController", "editFlat");
 
     $r->addRoute("insertCity", "POST", "CityController", "insertCity");
     $r->addRoute("insertFlat", "POST", "FlatController", "insertFlat");

@@ -22,13 +22,13 @@ class FlatModel {
     }
     //baja
     function deleteFlat($id) {
-        $query = $this->db->prepare('DELETE FROM departamento WHERE id=?');
+        $query = $this->db->prepare('DELETE FROM departamento WHERE id_departamento=?');
         $query->execute(array($id));
     }
     //modificación
-    function updateFlat($name, $id) {
-        $query = $this->db->prepare('UPDATE departamento SET nombre=? WHERE id=?');
-        $query->execute(array($name, $id));
+    function updateFlat($id, $name, $address, $price, $id_city_fk) {
+        $query = $this->db->prepare('UPDATE departamento SET nombre=? WHERE id_departamento=?');
+        $query->execute(array($id, $name, $address, $price, $id_city_fk));
     }
     
 }
