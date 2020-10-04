@@ -58,13 +58,31 @@ class FlatController {
         $this->view->showFlats();
     }
     //--------------REVISAR
-    //modificacion
-    function editFlat() {
+   function editFlat($params = null){
+        $id_flat = $params[':ID'];
+        $cities = $this->modelC->getCities();
+        $flat = $this->model->GetFlatById($id_flat);
+        $this->view->ShowEditFlat($flat, $cities);
+   }
+    function updateFlat($params = null) {
+        $id_flat = $params[':ID'];
         $name = $_GET['input_edit_name'];
-        $id = $_GET['input_edit_id'];
-        if((isset($name) && !empty($name)) && (isset($id) && is_numeric($name))) {
-            $this->model->updateFlat($name, $id);
+        $address = $_GET['input_edit_address'];
+        $price = $_GET['input_edit_price'];
+        $id_city_fk = $_GET['input_edit_id_city_fk'];
+
+        if( (isset($name) && !empty($name)) &&  (isset($address) && !empty($address)) &&
+        (isset($price) && is_numeric($price)) && (isset($id_city_fk) && is_numeric($name)) ){
+            $this->model->updateFlat($name, $address, $price, $id_city_fk, $id_flat);
         } 
         $this->view->showFlats();
+    }
+    function FilterFlatsByCity(){
+        $id_city = $_GET['select_city'];
+        if(isset($id_city)){
+            $flats = $this->model->GetFlatsByCity($id_city);
+            $cities = $this->modelC->GetCities();
+            $this->view->ShowHome($flats, $cities/*, $id_city*/ );
+        }
     }
 }
