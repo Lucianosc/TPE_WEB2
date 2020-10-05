@@ -4,6 +4,7 @@ require_once './View/FlatView.php';
 require_once './Model/FlatModel.php';
 
 require_once './Model/CityModel.php';
+require_once './View/CityView.php';
 
 class FlatController {
 
@@ -14,6 +15,7 @@ class FlatController {
         $this->view = new FlatView;
         $this->model = new FlatModel;
         $this->modelC = new CityModel;
+        $this->viewC = new CityView;
     }
 
     function showFlats(){
@@ -82,12 +84,13 @@ class FlatController {
         $this->view->showFlats();
     }
     //filtro
-    function filterFlatsByCity(){
-        $id_city = $_GET['select_city'];
+    function filterFlatsByCity($params = null){
+        $id_city = $params[':NAME'];
         if(isset($id_city)){
             $flats = $this->model->GetFlatsByCity($id_city);
             $cities = $this->modelC->GetCities();
         }
-        $this->view->ShowHome($flats, $cities, $id_city);
+        //$this->view->ShowHome($flats, $cities/*, $id_city*/);
+        $this->view->ShowFlatsById($flats, $cities, $id_city);
     }
 }

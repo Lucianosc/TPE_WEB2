@@ -1,5 +1,7 @@
 {include file="header.tpl"}
-
+<p></p>
+{include file="filterFlat.tpl"}
+<p></p>
 {include file="insertFlat.tpl"}
 <p></p>
 <div>
@@ -9,17 +11,17 @@
             <td>Direccion</td>
             <td>Precio</td>
             <td>Ciudad</td>
-        </thead>
+        </thead> 
         {foreach from=$flats item=flat}
-        <tr>
-            <td>{$flat->nombre}</td>
-            <td>{$flat->direccion}</td>
-            <td>{$flat->precio}</td>
-            <td>{$flat->nombre_ciudad}</td>
-            <td><a href="editFlat/{$flat->id_departamento}"><button>Editar</button></a></td>
-            <td><a href="deleteFlat/{$flat->id_departamento}"><button>X</button></a></td>
-        </tr>
-        {/foreach}
+                    <tr>
+                        <td>{$flat->nombre}</td>
+                        <td>{$flat->direccion}</td>
+                        <td>{$flat->precio}</td>
+                        <td>{$flat->nombre_ciudad}</td>
+                        <td><a href="editFlat/{$flat->id_departamento}"><button>Editar</button></a></td>
+                        <td><a href="deleteFlat/{$flat->id_departamento}"><button>X</button></a></td>
+                    </tr>
+        {/foreach}  
     </table>
 </div>
 <p></p>

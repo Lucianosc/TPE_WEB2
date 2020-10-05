@@ -19,6 +19,17 @@ class FlatView {
 
         $smarty->display('templates/flats.tpl');
     }
+    //muestra los deptos por ciudad
+    function ShowFlatsById($flats, $cities, $id_city){//ver cities = null
+
+        $smarty = new Smarty();
+        $smarty->assign('titulo', $this->title);
+        $smarty->assign('flats', $flats);
+        $smarty->assign('cities', $cities);
+        $smarty->assign('id_city', $id_city);
+
+        $smarty->display('templates/flats.tpl');
+    }
     //muestra -> modificacion
     function ShowEditFlat($flat, $cities){
         $smarty = new Smarty();

@@ -23,9 +23,12 @@ class FlatModel {
         return  $query->fetch(PDO::FETCH_OBJ);
     }
     //Obtiene los departamentos pertenecientes a una determinada ciudad
-    function GetFlatsByCity($id_city){
-        $query = $this->db->prepare('SELECT * FROM departamento WHERE id_ciudad_fk=?');
-        $query->execute(array($id_city));
+    function GetFlatsByCity($nombre_ciudad){
+        $query = $this->db->prepare('SELECT departamento.*, ciudad.nombre as nombre_ciudad 
+                                    FROM departamento INNER JOIN ciudad ON
+                                    departamento.id_ciudad_fk = ciudad.id_ciudad
+                                    WHERE ciudad.nombre=?');
+        $query->execute(array($nombre_ciudad));
         return  $query->fetchAll(PDO::FETCH_OBJ);
     }
 
