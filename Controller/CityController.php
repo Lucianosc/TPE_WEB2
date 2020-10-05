@@ -50,7 +50,7 @@ class CityController {
         $city = $this->model->GetCityById($id_city);
         $this->view->ShowEditCity($city);
     }
-    //modificacion //--------------REVISAR
+    //modificacion
     function updateCity(){
         $id = $_POST['input_edit_id'];
         $name = $_POST['input_edit_name'];

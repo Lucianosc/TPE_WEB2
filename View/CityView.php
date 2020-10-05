@@ -18,12 +18,7 @@ class CityView {
 
         $smarty->display('templates/cities.tpl');
     }
-    // function RenderFormEdit($id){
-    //     $smarty = new Smarty();
-    //     $smarty->assign('titulo', $this->title);
-    //     $smarty->assign('id', $id);
-    //     $smarty->display('templates/editCity.tpl');
-    // }
+    
     function ShowEditCity($city){
         $smarty = new Smarty();
         $smarty->assign('titulo', $this->title);

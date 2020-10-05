@@ -2,9 +2,12 @@
     require_once './RouterClass.php';//Route o router
     require_once './Controller/FlatController.php';
     require_once './Controller/CityController.php';
+    require_once './Controller/UserController.php';
     
     // CONSTANTES PARA RUTEO
     define("BASE_URL", 'http://'.$_SERVER["SERVER_NAME"].':'.$_SERVER["SERVER_PORT"].dirname($_SERVER["PHP_SELF"]).'/');
+    define("LOGIN", 'http://'.$_SERVER["SERVER_NAME"].':'.$_SERVER["SERVER_PORT"].dirname($_SERVER["PHP_SELF"]).'/login');
+    define("LOGOUT", 'http://'.$_SERVER["SERVER_NAME"].':'.$_SERVER["SERVER_PORT"].dirname($_SERVER["PHP_SELF"]).'/logout');
 
     $r = new Router();
 
@@ -29,6 +32,10 @@
     $r->addRoute("insertFlat", "POST", "FlatController", "insertFlat");
 
     $r->addRoute("city/:NAME", "GET", "FlatController", "filterFlatsByCity");
+
+    $r->addRoute("login", "GET", "UserController", "login");
+    $r->addRoute("logout", "GET", "UserController", "logout");
+
    // $r->addRoute("editFlat/:ID", "GET", "FlatController", "editFlat");
 
     //******************* RUN ***************************
