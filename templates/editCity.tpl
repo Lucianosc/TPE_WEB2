@@ -1,3 +1,4 @@
+{include file="header.tpl"}
 <div>
     <form action="editCity/{$id}" method="post"> 
         <label>{$id}</label>
@@ -7,3 +8,4 @@
         <button type="submit">Submit edit</button>
     </form>
 </div>
+{include file="footer.tpl"}

@@ -64,16 +64,19 @@ class FlatController {
         $flat = $this->model->GetFlatById($id_flat);
         $this->view->ShowEditFlat($flat, $cities);
    }
-    function updateFlat($params = null) {
-        $id_flat = $params[':ID'];
-        $name = $_GET['input_edit_name'];
-        $address = $_GET['input_edit_address'];
-        $price = $_GET['input_edit_price'];
-        $id_city_fk = $_GET['input_edit_id_city_fk'];
-
-        if( (isset($name) && !empty($name)) &&  (isset($address) && !empty($address)) &&
-        (isset($price) && is_numeric($price)) && (isset($id_city_fk) && is_numeric($name)) ){
-            $this->model->updateFlat($name, $address, $price, $id_city_fk, $id_flat);
+    function updateFlat() {
+        $id = $_POST['input_edit_id'];
+        $name = $_POST['input_edit_name'];
+        $address = $_POST['input_edit_address'];
+        $price = $_POST['input_edit_price'];
+        $id_city_fk = $_POST['input_edit_id_city_fk'];
+        if((isset($name) && !empty($name)) && 
+        (isset($address) && !empty($address)) &&
+        (isset($price) && is_numeric($price)) && 
+        (isset($id_city_fk) && is_numeric($id_city_fk))) {
+            if($this->alreadyLoaded($id, $name, $address, $price, $id_city_fk) === false) {
+                $this->model->updateFlat($id, $name, $address, $price, $id_city_fk);
+            }
         } 
         $this->view->showFlats();
     }
@@ -82,11 +85,7 @@ class FlatController {
         if(isset($id_city)){
             $flats = $this->model->GetFlatsByCity($id_city);
             $cities = $this->modelC->GetCities();
-<<<<<<< HEAD
-            // $this->view->ShowHome($flats, $cities/, $id_city/ );
-=======
            // $this->view->ShowHome($flats, $cities,  );
->>>>>>> aec8d5e0994bd42450a43057888604d31af6e2b0
         }
     }
 }

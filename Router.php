@@ -25,7 +25,9 @@
     $r->addRoute("editCity/:ID", "GET", "CityController", "editCity");
     $r->addRoute("updateCity/:ID", "GET", "CityController", "updateCity");
 
+    $r->addRoute("editFlat", "POST", "FlatController", "updateFlat");
     $r->addRoute("editFlat/:ID", "GET", "FlatController", "editFlat");
+    
     $r->addRoute("updateFlat/:ID", "POST", "FlatController", "updateFlat");
 
     $r->addRoute("insertCity", "POST", "CityController", "insertCity");

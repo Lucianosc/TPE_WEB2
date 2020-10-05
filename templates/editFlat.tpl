@@ -18,7 +18,7 @@
             {/foreach}
         </select>
 
-        <a href="updateFlat/{$flat->id_departamento}"><button type="submit">submit edit</button></a>
+        <button value="{$flat->id_departamento}" name="input_edit_id" type="submit">submit edit</button>
     </form>
 </div>
 {include file="footer.tpl"}
