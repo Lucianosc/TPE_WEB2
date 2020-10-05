@@ -82,12 +82,12 @@ class FlatController {
         $this->view->showFlats();
     }
     //filtro
-    function FilterFlatsByCity(){
+    function filterFlatsByCity(){
         $id_city = $_GET['select_city'];
         if(isset($id_city)){
             $flats = $this->model->GetFlatsByCity($id_city);
             $cities = $this->modelC->GetCities();
-           // $this->view->ShowHome($flats, $cities,  );
         }
+        $this->view->ShowHome($flats, $cities, $id_city);
     }
 }

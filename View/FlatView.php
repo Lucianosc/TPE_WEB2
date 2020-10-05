@@ -17,7 +17,6 @@ class FlatView {
         $smarty->assign('flats', $flats);
         $smarty->assign('cities', $cities);
 
-
         $smarty->display('templates/flats.tpl');
     }
     //muestra -> modificacion
