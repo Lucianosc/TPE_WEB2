@@ -18,7 +18,7 @@
             {/foreach}
         </select>
 
-        <button value="{$flat->id_departamento}" name="input_edit_id" type="submit">submit edit</button>
+        <button value="{$flat->id_departamento}" name="input_edit_id" type="submit">Submit Edition</button>
     </form>
 </div>
 {include file="footer.tpl"}

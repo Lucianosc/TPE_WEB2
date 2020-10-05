@@ -12,26 +12,22 @@
 
     //default
     $r->setDefaultRoute("CityController", "showCities");
-    
-    $r->addRoute("showCities", "POST", "CityController", "showCities");
-    $r->addRoute("showFlats", "POST", "FlatController", "showFlats");
-
+   
     $r->addRoute("showCities", "GET", "CityController", "showCities");
     $r->addRoute("showFlats", "GET", "FlatController", "showFlats");
 
     $r->addRoute("deleteCity/:ID", "GET", "CityController", "deleteCity");
     $r->addRoute("deleteFlat/:ID", "GET", "FlatController", "deleteFlat");
 
-    $r->addRoute("editCity/:ID", "GET", "CityController", "editCity");
-    $r->addRoute("updateCity/:ID", "GET", "CityController", "updateCity");
-
+    $r->addRoute("editCity", "POST", "CityController", "updateCity");
     $r->addRoute("editFlat", "POST", "FlatController", "updateFlat");
+
+    $r->addRoute("editCity/:ID", "GET", "CityController", "editCity");
     $r->addRoute("editFlat/:ID", "GET", "FlatController", "editFlat");
-    
-    $r->addRoute("updateFlat/:ID", "POST", "FlatController", "updateFlat");
 
     $r->addRoute("insertCity", "POST", "CityController", "insertCity");
     $r->addRoute("insertFlat", "POST", "FlatController", "insertFlat");
+
     //******************* RUN ***************************
     $r->route($_GET['action'], $_SERVER['REQUEST_METHOD']); 
 ?>

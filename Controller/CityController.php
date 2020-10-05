@@ -44,19 +44,20 @@ class CityController {
         $this->model->deleteCity($id);
         $this->view->showCities();
     }
-    
-    //modificacion //--------------REVISAR
-    function updateCity($params = null){
-        $id = $params[':ID'];
-        $this->view->renderFormEdit($id);
+    //redireccion -> para modificacion
+    function editCity($params = null) {
+        $id_city = $params[':ID'];
+        $city = $this->model->GetCityById($id_city);
+        $this->view->ShowEditCity($city);
     }
-
-
-    function editCity() {
-        $name = $_POST['input_edit_name'];
+    //modificacion //--------------REVISAR
+    function updateCity(){
         $id = $_POST['input_edit_id'];
-        if(isset($name) && !empty($name)) {
-            $this->model->updateCity($name, $id);
+        $name = $_POST['input_edit_name'];
+        if((isset($name) && !empty($name))) {
+            if($this->alreadyLoaded($id, $name) === false) {
+                $this->model->updateCity($id, $name);
+            }
         } 
         $this->view->showCities();
     }

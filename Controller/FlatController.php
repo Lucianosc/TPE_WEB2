@@ -57,13 +57,14 @@ class FlatController {
         $this->model->deleteFlat($id);
         $this->view->showFlats();
     }
-    //--------------REVISAR
+    //redireccion -> para modificacion
     function editFlat($params = null){
         $id_flat = $params[':ID'];
         $cities = $this->modelC->getCities();
         $flat = $this->model->GetFlatById($id_flat);
         $this->view->ShowEditFlat($flat, $cities);
    }
+   //modificacion
     function updateFlat() {
         $id = $_POST['input_edit_id'];
         $name = $_POST['input_edit_name'];
@@ -80,6 +81,7 @@ class FlatController {
         } 
         $this->view->showFlats();
     }
+    //filtro
     function FilterFlatsByCity(){
         $id_city = $_GET['select_city'];
         if(isset($id_city)){

@@ -39,9 +39,10 @@ class FlatModel {
         $query = $this->db->prepare('DELETE FROM departamento WHERE id_departamento=?');
         $query->execute(array($id));
     }
-    //modificación //------IMPLEMENTAR
+    //modificacion
     function updateFlat($id, $name, $address, $price, $id_city_fk) {
-        $query = $this->db->prepare('UPDATE departamento SET nombre=? direccion=? precio=? id_ciudad_fk=? WHERE id_departamento=?');
+        $query = $this->db->prepare("UPDATE departamento SET nombre=?, direccion=?, precio=?, id_ciudad_fk=? 
+        WHERE id_departamento=?");
         $query->execute(array($name, $address, $price, $id_city_fk, $id));
     }
     

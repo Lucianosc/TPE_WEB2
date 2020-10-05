@@ -1,11 +1,11 @@
 {include file="header.tpl"}
 <div>
-    <form action="editCity/{$id}" method="post"> 
-        <label>{$id}</label>
-        <label for="title">City Name</label>
-        <input type="text" name="input_edit_name">
+    <h3>EDITAR</h3>
+    <form action="editCity" method="post"> 
+        <label for="title">Name</label>
+        <input type="text" name="input_edit_name" placeholder="{$city->nombre}">
 
-        <button type="submit">Submit edit</button>
+        <button value="{$city->id_ciudad}" name="input_edit_id" type="submit">submit edition</button>
     </form>
 </div>
 {include file="footer.tpl"}
