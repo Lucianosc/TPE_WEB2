@@ -19,8 +19,9 @@ class UserView {
 
         $smarty->display('templates/login.tpl'); // muestro el template 
     }
+    
     function ShowHome(){
-        header("Location: ".BASE_URL);
+        header("Location: ".BASE_URL."showFlats");
     }
 
 }

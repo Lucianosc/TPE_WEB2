@@ -15,8 +15,8 @@ class UserController{
 
     }
 
-    function login(){
-
+    function showLogin(){
+    
         $this->view->ShowLogin();
 
     }
