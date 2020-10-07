@@ -14,7 +14,11 @@
         
         <select name="input_edit_id_city_fk" id="cities_s">
             {foreach from=$cities item=city}
-                <option value="{$city->id_ciudad}">{$city->nombre}</option>
+                {if $city->id_ciudad eq $flat->id_ciudad_fk}
+                    <option value="{$city->id_ciudad}" selected>{$city->nombre}</option>
+                {else}
+                    <option value="{$city->id_ciudad}">{$city->nombre}</option>
+                {/if}
             {/foreach}
         </select>
 
