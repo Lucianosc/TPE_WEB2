@@ -27,7 +27,8 @@ class CityController {
         } 
         $this->view->showCities();
     }
-        //Checkea si existe la ciudad ya está cargada
+
+    //ALTA -> Checkea si existe la ciudad en la db
     function alreadyLoaded($name) {
         $cities = $this->model->getCities();
         $exist = false;
@@ -44,12 +45,14 @@ class CityController {
         $this->model->deleteCity($id);
         $this->view->showCities();
     }
+
     //redireccion -> para modificacion
     function editCity($params = null) {
         $id_city = $params[':ID'];
         $city = $this->model->GetCityById($id_city);
         $this->view->ShowEditCity($city);
     }
+
     //modificacion
     function updateCity(){
         $id = $_POST['input_edit_id'];

@@ -40,18 +40,19 @@ class FlatController {
         } 
         $this->view->showFlats();
     }
-    //Checkea si existe el depto en la db //--------------REVISAR
+    //ALTA -> Checkea si existe el depto en la db 
     function alreadyLoaded($name, $address, $price, $id_city_fk) {
         $flats = $this->model->getFlats();
         $exist = false;
         foreach($flats as $flat) {
             if( ($flat->nombre === $name) && ($flat->direccion === $address)
-            && ($flat->precio === $price) && ($flat->id_city_fk === $id_city_fk)) {
+            && ($flat->precio === $price) && ($flat->id_ciudad_fk === $id_city_fk)) {
                 $exist = true;   
             }
         }
         return $exist;
     }
+    
 
     //baja
     function deleteFlat($params = null) {
@@ -86,10 +87,10 @@ class FlatController {
     //filtro
     function filterFlatsByCity($params = null){
         $city_name = $params[':NAME'];
-        if(isset($id_city)){
+        if(isset($city_name)){
             $flats = $this->model->GetFlatsByCity($city_name);
             $cities = $this->modelC->GetCities();
         }
-        $this->view->ShowFlatsById($flats, $cities, $city_name);
+        $this->view->ShowFlatsByCity($flats, $cities, $city_name);
     }
 }

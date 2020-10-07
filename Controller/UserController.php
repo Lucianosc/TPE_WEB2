@@ -35,24 +35,21 @@ class UserController{
         if(isset($user)){
             $userFromDB = $this->model->GetUser($user);
 
-            if(isset($userFromDB) && $userFromDB){
-                // Existe el usuario
+            if(isset($userFromDB) && $userFromDB){// Existe el usuario
 
-                if (password_verify($pass, $userFromDB->password)){
-
+                if (password_verify($pass, $userFromDB->clave)){ //Contraseña correcta
                     session_start();
                     $_SESSION["EMAIL"] = $userFromDB->email;
-                    $_SESSION['LAST_ACTIVITY'] = time();
+                    $_SESSION['LAST_ACTIVITY'] = time(2000000);
 
-                    header("Location: ".BASE_URL."home");
-                }else{
-                    $this->view->ShowLogin("Contraseña incorrecta");
+                    $this->view->ShowHome();//*******REVISAR***** MODIFICAR EN UserView
                 }
-
-            }else{
+                else
+                    $this->view->ShowLogin("Contraseña incorrecta");
+            }
+            else
                 // No existe el user en la DB
                 $this->view->ShowLogin("El usuario no existe");
-            }
         }
     }
 
