@@ -1,7 +1,6 @@
 
 
-<a href="showFlats"><button>Departamentos</button></a>
-<a href="showCities"><button>Ciudades</button></a>
+
 
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
