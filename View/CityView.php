@@ -10,11 +10,12 @@ class CityView {
         $this->title = "Lista de Ciudades";
     }
 
-    function ShowHome($cities){
+    function ShowHome($cities, $session){
 
         $smarty = new Smarty();
         $smarty->assign('titulo', $this->title);
         $smarty->assign('ciudades', $cities);
+        $smarty->assign('sessionActive', $session);
 
         $smarty->display('templates/cities.tpl');
     }
