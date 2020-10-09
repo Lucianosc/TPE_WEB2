@@ -20,10 +20,12 @@ class CityView {
         $smarty->display('templates/cities.tpl');
     }
     
-    function ShowEditCity($city){
+    function ShowEditCity($city, $session){
         $smarty = new Smarty();
         $smarty->assign('titulo', $this->title);
         $smarty->assign('city', $city);
+        $smarty->assign('sessionActive', $session);
+
         $smarty->display('templates/editCity.tpl');
     }
 

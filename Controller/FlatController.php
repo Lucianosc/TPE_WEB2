@@ -38,6 +38,21 @@ class FlatController
         $this->view->ShowHome($flats, $cities, $logged);
     }
 
+    function showFlat($params = null)
+    {
+        $logged = $this->controllerUser->isLoggedIn();
+        $id_flat = $params[':ID'];
+        $flat = $this->model->GetFlatById($id_flat);
+
+        if ($flat) {    //checkea si obtuvo un objeto no vacío de la db
+            $cities = $this->modelCity->getCities();
+           // $this->view->ShowHome($flat, $cities, $logged, $id_flat);//revisar esta linea de codigo
+           $this->view->ShowHome($flat, $cities, $logged, $id_flat);
+        } else {
+            $this->viewUser->RenderError("No existe id en la base de datos");
+        }
+    }
+
     //alta
     function insertFlat()
     {
@@ -93,7 +108,12 @@ class FlatController
             $id_flat = $params[':ID'];
             $cities = $this->modelCity->getCities();
             $flat = $this->model->GetFlatById($id_flat);
-            $this->view->ShowEditFlat($flat, $cities);
+
+            if ($flat) {    //checkea si obtuvo un objeto no vacío de la db
+                $this->view->ShowEditFlat($flat, $cities, $logged);
+            } else {
+                $this->viewUser->RenderError("No existe id en la base de datos");
+            }
         } else {
             $this->viewUser->RenderError("Logueate he intentá nuevamente");
         }

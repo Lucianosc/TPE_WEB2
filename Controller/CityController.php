@@ -24,12 +24,11 @@ class CityController
     }
 
     function showCities()
-    {   
+    {
         $logged = $this->controllerUser->isLoggedIn();
-        
+
         $cities = $this->model->getCities();
         $this->view->ShowHome($cities, $logged);
-        
     }
     //Alta
     function insertCity()
@@ -75,7 +74,12 @@ class CityController
         if ($logged) {
             $id_city = $params[':ID'];
             $city = $this->model->GetCityById($id_city);
-            $this->view->ShowEditCity($city);
+
+            if ($city) {    //checkea si obtuvo un objeto no vacío de la db
+                $this->view->ShowEditCity($city, $logged);
+            } else {
+                $this->viewUser->RenderError("No existe id en la base de datos");
+            }
         } else {
             $this->viewUser->RenderError("Logueate he intentá nuevamente");
         }

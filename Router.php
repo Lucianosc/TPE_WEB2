@@ -33,6 +33,8 @@
 
     $r->addRoute("city/:NAME", "GET", "FlatController", "filterFlatsByCity");
 
+    $r->addRoute("flat/:ID", "GET", "FlatController", "showFlat");
+
     $r->addRoute("login", "GET", "UserController", "showLogin");
     $r->addRoute("verifyUser", "POST", "UserController", "verifyUser");
     $r->addRoute("logout", "GET", "UserController", "logout");

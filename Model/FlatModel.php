@@ -18,7 +18,11 @@ class FlatModel {
     }
     //Obtiene los datos de un departamento en particular
     function GetFlatById($id_flat){
-        $query = $this->db->prepare('SELECT * FROM departamento WHERE id_departamento=?');
+       // $query = $this->db->prepare('SELECT * FROM departamento WHERE id_departamento=?');
+        $query = $this->db->prepare('SELECT departamento.*, ciudad.nombre as nombre_ciudad
+                                     FROM departamento INNER JOIN ciudad ON
+                                     departamento.id_ciudad_fk = ciudad.id_ciudad
+                                     WHERE id_departamento=?');
         $query->execute(array($id_flat));
         return  $query->fetch(PDO::FETCH_OBJ);
     }
