@@ -15,20 +15,19 @@
 </head>
 
 <body>
-    <header class="header">
-        <div>
-            <h1>{$titulo}</h1>
+    <div class="container">
+
+       <h1>{$titulo}</h1>
+        
+        <div class="alert alert-danger" id="alert" role="alert">
+            {$message}
         </div>
-        <div>
-            {if $sessionActive eq false}
-                <a href="login" class="button1">Login</a>
-            {else}
-                <p>Hola user, estás logueado{*{$user}*}</p>
-                <a href="logout" class="button1">Logout</a>
-            {/if}
+
+        <div class="volver">
+            <a href="showCities">Volver</a>
         </div>
-    </header>
-    <ul class="navigation">
-        <li><a href="showCities">Ciudades</a></li>
-        <li><a href="showFlats">Departamentos</a></li>
-    </ul>
+
+    </div>
+
+    <p></p>
+    {include file="footer.tpl"}
