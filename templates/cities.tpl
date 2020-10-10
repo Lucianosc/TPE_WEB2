@@ -1,6 +1,6 @@
 {include file="header.tpl"}
 
-{if $sessionActive eq true}
+{if $sessionUser eq true}
 {include file="insertCity.tpl"}
 {/if}
 
@@ -13,7 +13,7 @@
         {foreach from=$ciudades item=ciudad}
         <tr>
             <td>{$ciudad->nombre}</td>
-            {if $sessionActive eq true}
+            {if $sessionUser eq true}
                 <td><a href="editCity/{$ciudad->id_ciudad}"><button>Editar</button></a></td>
                 <td><a href="deleteCity/{$ciudad->id_ciudad}"><button>X</button></a></td>
             {/if}

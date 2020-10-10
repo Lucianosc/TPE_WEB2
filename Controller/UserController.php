@@ -8,11 +8,13 @@ class UserController
 {
 
     private $view;
+    private $viewCity;
     private $model;
 
     function __construct()
     {
         $this->view = new UserView();
+        $this->viewCity = new CityView();
         $this->model = new UserModel();
     }
 
@@ -36,7 +38,7 @@ class UserController
                 if (password_verify($pass, $userFromDB->clave)) { //Contraseña correcta
                     session_start();
                     $_SESSION['USER'] = $userFromDB->email;
-                    $_SESSION['LAST_ACTIVITY'] = time(2000000);
+                    $_SESSION['LAST_ACTIVITY'] = time();
 
                     $this->view->ShowHome(); //*******REVISAR***** MODIFICAR EN UserView
                 } else
@@ -54,7 +56,7 @@ class UserController
             session_start();
         }
         if (isset($_SESSION['USER'])) {
-            return true;
+            return $_SESSION['USER'];
         } else {
             return false;
         }
@@ -66,6 +68,6 @@ class UserController
         session_start();
         session_destroy();
        // header("Location: ".LOGIN); //CAMBIAR A SHOW
-       $this->view->ShowLogin();
+       $this->viewCity->ShowCities();
     }
 }

@@ -10,21 +10,21 @@ class CityView {
         $this->title = "Lista de Ciudades";
     }
 
-    function ShowHome($cities, $session){
+    function ShowHome($cities, $sessionUser){
 
         $smarty = new Smarty();
         $smarty->assign('titulo', $this->title);
         $smarty->assign('ciudades', $cities);
-        $smarty->assign('sessionActive', $session);
+        $smarty->assign('sessionUser', $sessionUser);
 
         $smarty->display('templates/cities.tpl');
     }
     
-    function ShowEditCity($city, $session){
+    function ShowEditCity($city, $sessionUser){
         $smarty = new Smarty();
         $smarty->assign('titulo', $this->title);
         $smarty->assign('city', $city);
-        $smarty->assign('sessionActive', $session);
+        $smarty->assign('sessionUser', $sessionUser);
 
         $smarty->display('templates/editCity.tpl');
     }
