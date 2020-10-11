@@ -34,7 +34,7 @@
             <div class="col-md-3 offset-md-7">
                 {if $sessionUser eq false}
                 <div class="col-md-3 offset-md-9">
-                    <a href="login"><button type="button" class="btn btn-danger" style="background-color: #fe585a;">Login</button></a>
+                    <a href="login"><button type="button" class="btn btn-danger" style="background-color: #fe585a; border-color:#fe585a;">Login</button></a>
                 </div>
                 {else}
                 <div class="row">
@@ -42,7 +42,7 @@
                         <h6>Usuario: {$sessionUser}</h6>
                     </div>
                     <div class="col">
-                        <a href="logout"><button type="button" class="btn btn-danger" style="background-color: #fe585a;">Logout</button></a>
+                        <a href="logout"><button type="button" class="btn btn-danger" style="background-color: #fe585a; border-color:#fe585a;">Logout</button></a>
                     </div>
                 </div>
                 {/if}
