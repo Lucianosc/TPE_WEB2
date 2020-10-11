@@ -32,7 +32,7 @@
                         <input type="password" class="form-control" id="pass" name="input_pass"
                             placeholder="Contraseña">
                     </div>
-                    <button type="submit" class="btn btn-danger" style="background-color: #fe585a;">Login</button>
+                    <button type="submit" class="btn btn-danger col-md-4 offset-md-4" style="background-color: #fe585a;">Login</button>
                 </form>
                 <br>
                 {if $message neq false}
