@@ -60,11 +60,18 @@ class CityController
         $logged = $this->controllerUser->isLoggedIn();
         if ($logged) {
             $id = $params[':ID'];
-            $this->model->deleteCity($id);
-            $this->view->showCities();
+            $city = $this->model->deleteCity($id);
+            
+            if(!$city){
+                $errorMessaje = "Debe eliminar los departamentos asociados a esta ciudad primero.";
+                $this->view->ShowError($errorMessaje, $logged);
+            } else {
+                $this->view->showCities();
+            }
         } else {
             $this->viewUser->RenderError("Logueate he intentá nuevamente");
         }
+        
     }
 
     //redireccion -> para modificacion

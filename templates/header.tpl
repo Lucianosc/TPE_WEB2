@@ -9,26 +9,42 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
         integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
-    <title>{$titulo}</title>
+    <title>AirBnB</title>
 </head>
 
-<body>
-    <header class="header">
-        <div>
-            <h1>{$titulo}</h1>
-        </div>
-        <div>
-            {if $sessionUser eq false}
-                <a href="login" class="button1">Login</a>
-            {else}
-                <div class="header">
-                    <h6>User: {$sessionUser}</h6>
-                    <a href="logout" class="button1">Logout</a>
+<body class="h-100" style="background-color: #eee;">
+    <div class="container-fluid" style="background-color: #eee;">
+        <div class="row justify-content-between">
+            <div class="col-lg">
+                <img class="img-fluid" src="header-Airbnb.jpg" alt="header-Airbnb">
+            </div>
+            <div class="col-2">
+                {if $sessionUser eq false}
+                <div class="container">
+                    <a href="login"><button type="button" class="btn btn-primary">Login</button></a>
                 </div>
-            {/if}
+                {else}
+                <div class="row">
+                    <div class="col">
+                        <h6>User: {$sessionUser}</h6>
+                    </div>
+                    <div class="col">
+                        <a href="logout"><button type="button" class="btn btn-primary">Logout</button></a>
+                    </div>
+                </div>
+                {/if}
+            </div>
         </div>
-    </header>
-    <ul class="navigation">
-        <li><a href="showCities">Ciudades</a></li>
-        <li><a href="showFlats">Departamentos</a></li>
-    </ul>
+    </div>
+    <nav class="navbar navbar-expand-lg navbar-light justify-content-between" style="background-color: lightgrey;">
+        <div class="collapse navbar-collapse">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="showCities">Ciudades</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="showFlats">Departamentos</a>
+                </li>
+            </ul>
+        </div>
+    </nav>

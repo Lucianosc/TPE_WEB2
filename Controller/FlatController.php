@@ -66,20 +66,19 @@ class FlatController
             (isset($price) && is_numeric($price)) &&
             (isset($id_city_fk) && is_numeric($id_city_fk))
         ) {
-            if ($this->alreadyLoaded($name, $address, $price, $id_city_fk) === false) {
+            if ($this->alreadyLoaded($name, $address) === false) {
                 $this->model->insertFlat($name, $address, $price, $id_city_fk);
             }
         }
         $this->view->showFlats();
     }
     //ALTA -> Checkea si existe el depto en la db 
-    function alreadyLoaded($name, $address, $price, $id_city_fk)
+    function alreadyLoaded($name, $address)
     {
         $flats = $this->model->getFlats();
         $exist = false;
         foreach ($flats as $flat) {
-            if (($flat->nombre === $name) && ($flat->direccion === $address)
-                && ($flat->precio === $price) && ($flat->id_ciudad_fk === $id_city_fk)
+            if (($flat->nombre === $name) || ($flat->direccion === $address)
             ) {
                 $exist = true;
             }

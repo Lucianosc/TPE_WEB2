@@ -1,11 +1,14 @@
-<div class="container">
-    <div>
-        <h4>Insertar en la base de datos</h4>
-    </div>
-    <form action="insertCity" method="post">
-        <label for="title">Nombre de la ciudad</label>
-        <input type="text" name="input_name">
 
-        <button type="submit" class="btn btn-primary">Agregar</button>
+<div class="col-sm-2">
+    <div>
+        <h4>Agregar Ciudad</h4>
+    </div>
+    <br>
+    <form action="insertCity" method="post">
+        <div class="form-group">
+            <label for="title">Nombre</label>
+            <input type="text" name="input_name" class="form-control" placeholder="Nombre Ciudad">
+        </div>
+        <button type="submit" class="btn btn-secondary">Agregar</button>
     </form>
 </div>

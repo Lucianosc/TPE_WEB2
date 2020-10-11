@@ -7,7 +7,7 @@ class CityView {
     private $title;
     
     function __construct(){
-        $this->title = "Lista de Ciudades";
+        $this->title = "Ciudades";
     }
 
     function ShowHome($cities, $sessionUser){
@@ -27,6 +27,16 @@ class CityView {
         $smarty->assign('sessionUser', $sessionUser);
 
         $smarty->display('templates/editCity.tpl');
+    }
+
+    function ShowError($errorMessaje, $sessionUser, $cities = null){
+        $smarty = new smarty();
+        $smarty->assign('errorMessaje', $errorMessaje);
+        $smarty->assign('sessionUser', $sessionUser);
+        $smarty->assign('id_flat', false);
+        $smarty->assign('cities', $cities);
+
+        $smarty->display('templates/cities.tpl');
     }
 
     function ShowCities(){

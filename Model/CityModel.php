@@ -30,6 +30,7 @@ class CityModel {
     function deleteCity($id) {
         $query = $this->db->prepare('DELETE FROM ciudad WHERE id_ciudad=?');
         $query->execute(array($id));
+        return  $query->fetch(PDO::FETCH_OBJ); // como implementar??
     }
     //modificación
     function updateCity($id, $name) {

@@ -8,7 +8,7 @@ class FlatView
 
     function __construct()
     {
-        $this->title = "Lista de Departamentos";
+        $this->title = "Departamentos";
     }
 
     function ShowHome($flats, $cities, $sessionUser, $id_flat = null)
