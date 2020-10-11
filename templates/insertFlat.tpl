@@ -11,7 +11,7 @@
         </div>
         <div class="form-group">
             <label for="address">Dirección</label>
-            <input type="text" name="input_address" class="form-control" placeholder="Direccion">
+            <input type="text" name="input_address" class="form-control" placeholder="Dirección">
         </div>
         <div class="form-group">
             <label for="price">Precio</label>

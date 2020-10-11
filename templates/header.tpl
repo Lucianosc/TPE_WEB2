@@ -15,25 +15,10 @@
 <body class="h-100" style="background-color: #eee;">
     <div class="container-fluid" style="background-color: #eee;">
         <div class="row justify-content-between">
-            <div class="col-lg">
+            <div>
                 <img class="img-fluid" src="header-Airbnb.jpg" alt="header-Airbnb">
             </div>
-            <div class="col-2">
-                {if $sessionUser eq false}
-                <div class="container">
-                    <a href="login"><button type="button" class="btn btn-primary">Login</button></a>
-                </div>
-                {else}
-                <div class="row">
-                    <div class="col">
-                        <h6>User: {$sessionUser}</h6>
-                    </div>
-                    <div class="col">
-                        <a href="logout"><button type="button" class="btn btn-primary">Logout</button></a>
-                    </div>
-                </div>
-                {/if}
-            </div>
+
         </div>
     </div>
     <nav class="navbar navbar-expand-lg navbar-light justify-content-between" style="background-color: lightgrey;">
@@ -46,5 +31,21 @@
                     <a class="nav-link" href="showFlats">Departamentos</a>
                 </li>
             </ul>
+            <div class="col-md-3 offset-md-7">
+                {if $sessionUser eq false}
+                <div class="col-md-3 offset-md-9">
+                    <a href="login"><button type="button" class="btn btn-danger" style="background-color: #fe585a;">Login</button></a>
+                </div>
+                {else}
+                <div class="row">
+                    <div class="col">
+                        <h6>Usuario: {$sessionUser}</h6>
+                    </div>
+                    <div class="col">
+                        <a href="logout"><button type="button" class="btn btn-danger" style="background-color: #fe585a;">Logout</button></a>
+                    </div>
+                </div>
+                {/if}
+            </div>
         </div>
     </nav>

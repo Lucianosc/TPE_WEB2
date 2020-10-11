@@ -32,7 +32,7 @@
                         <input type="password" class="form-control" id="pass" name="input_pass"
                             placeholder="Contraseña">
                     </div>
-                    <button type="submit" class="btn btn-primary">Login</button>
+                    <button type="submit" class="btn btn-danger" style="background-color: #fe585a;">Login</button>
                 </form>
                 <br>
                 {if $message neq false}
@@ -42,7 +42,7 @@
                 {/if}
                 <br>
                 <div>
-                    <h6><a href="showCities">Volver</a></h6>
+                    <h6><a href="showCities" class="text-dark">Volver</a></h6>
                 </div>
             </div>
             <div class="col"></div>
