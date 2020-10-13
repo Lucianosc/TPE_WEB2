@@ -19,7 +19,7 @@ class UserView
         $smarty->assign('titulo', $this->title);
         $smarty->assign('message', $message);
 
-        $smarty->display('templates/login.tpl'); // muestro el template 
+        $smarty->display('templates/login.tpl');
     }
 
     function ShowHome()

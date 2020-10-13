@@ -40,8 +40,6 @@
     $r->addRoute("logout", "GET", "UserController", "logout");
 
     
-   // $r->addRoute("editFlat/:ID", "GET", "FlatController", "editFlat");
-
     //******************* RUN ***************************
     $r->route($_GET['action'], $_SERVER['REQUEST_METHOD']); 
 ?>

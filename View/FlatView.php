@@ -26,22 +26,7 @@ class FlatView
     
         $smarty->display('templates/flats.tpl');
     }
-   /* function ShowFlat($flats, $cities, $sessionUser, $id_flat = null)
-    {
-        $smarty = new Smarty();
-        $smarty->assign('titulo', $this->title);
-        $smarty->assign('flats', $flats);
-        $smarty->assign('cities', $cities);
-        $smarty->assign('sessionActive', $sessionUser);
-        
-        if($id_flat === null){
-            $id_flat = false;
-        }
-        $smarty->assign('id_flat', $id_flat);
-      
-        $smarty->display('templates/flats.tpl');
-    }
-*/
+
     function ShowError($name_city, $errorMessaje, $sessionUser, $cities){
         $smarty = new smarty();
         $smarty->assign('errorMessaje', $errorMessaje);
@@ -59,10 +44,7 @@ class FlatView
         $smarty->assign('titulo', $name_city);
         $smarty->assign('flats', $flats);
         $smarty->assign('cities', $cities);
-        //$smarty->assign('name_city', $name_city);
-   
         $smarty->assign('sessionUser', $sessionUser);
-
         $smarty->assign('id_flat', false); 
 
         $smarty->display('templates/flats.tpl');

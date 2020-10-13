@@ -5,7 +5,6 @@ class CityModel {
     private $db;
 
     function __construct(){
-        //el constructor se ejecuta siempre, abre la conexion en este caso
         $this->db = new PDO('mysql:host=localhost;'.'dbname=db_airbnb;charset=utf8', 'root', '');
     }
 
@@ -15,12 +14,13 @@ class CityModel {
         $query->execute();
         return  $query->fetchAll(PDO::FETCH_OBJ);
     }
-
-    function GetCityById($id_city){
+    //Obtiene los datos de una ciudad en particular
+    function getCityById($id_city){
         $query = $this->db->prepare('SELECT * FROM ciudad WHERE id_ciudad=?');
         $query->execute(array($id_city));
         return  $query->fetch(PDO::FETCH_OBJ);
     }
+
     //alta
     function insertCity($name) {
         $query = $this->db->prepare('INSERT INTO ciudad(nombre) VALUES(?)');
@@ -30,11 +30,10 @@ class CityModel {
     function deleteCity($id) {
         $query = $this->db->prepare('DELETE FROM ciudad WHERE id_ciudad=?');
         $query->execute(array($id));
-        return  $query->fetch(PDO::FETCH_OBJ); // como implementar??
     }
     //modificación
     function updateCity($id, $name) {
-        $query = $this->db->prepare("UPDATE ciudad SET nombre=? WHERE id_ciudad=?");
+        $query = $this->db->prepare('UPDATE ciudad SET nombre=? WHERE id_ciudad=?');
         $query->execute(array($name, $id));
     }
 }

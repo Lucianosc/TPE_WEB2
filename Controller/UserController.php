@@ -2,6 +2,7 @@
 
 require_once './View/UserView.php';
 require_once './Model/UserModel.php';
+require_once './View/CityView.php';
 
 
 class UserController
@@ -18,38 +19,37 @@ class UserController
         $this->model = new UserModel();
     }
 
-    //LLEVA AL LOGGIN
+    //muestra login
     function showLogin()
     {
         $this->view->ShowLogin();
     }
 
-    //VERIFICA SI LOS DATOS INGRESADOS EN EL LOGIN CORRESPONDE A ALGUN REGISTRO DE LA DB
+    //verifica si los datos ingresados corresponde a un usuario de la db
     function verifyUser()
     {
         $user = $_POST["input_user"];
         $pass = $_POST["input_pass"];
 
         if (isset($user)) {
-            $userFromDB = $this->model->GetUser($user);
+            $userFromDB = $this->model->getUser($user);
 
-            if (isset($userFromDB) && $userFromDB) { // Existe el usuario
+            if (isset($userFromDB) && $userFromDB) {
 
-                if (password_verify($pass, $userFromDB->clave)) { //Contraseña correcta
+                if (password_verify($pass, $userFromDB->clave)) {
                     session_start();
                     $_SESSION['USER'] = $userFromDB->email;
                     $_SESSION['LAST_ACTIVITY'] = time();
 
-                    $this->view->ShowHome(); //*******REVISAR***** MODIFICAR EN UserView
+                    $this->view->ShowHome();
                 } else
                     $this->view->ShowLogin("Contraseña incorrecta");
             } else
-                // No existe el user en la DB
                 $this->view->ShowLogin("El usuario no existe");
         }
     }
 
-    //CHECKEA SI ESTÁ ABIERTA LA SESIÓN -> ESTÁ ACTIVO, LOGUEADO
+    //verifica si hay una sesión activa
     function isLoggedIn()
     {
         if (!isset($_SESSION)) {
@@ -62,12 +62,11 @@ class UserController
         }
     }
 
-    //DESTRUYE LA SESIÓN Y REDIRIGE AL LOGIN
+    //destriye la sesión y redirige a ShowCities
     function logout()
     {
         session_start();
         session_destroy();
-       // header("Location: ".LOGIN); //CAMBIAR A SHOW
        $this->viewCity->ShowCities();
     }
 }

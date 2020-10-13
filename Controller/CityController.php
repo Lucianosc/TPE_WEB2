@@ -23,6 +23,7 @@ class CityController
         $this->viewUser = new UserView();
     }
 
+    //muestra todas las ciudades
     function showCities()
     {
         $logged = $this->controllerUser->isLoggedIn();
@@ -30,7 +31,8 @@ class CityController
         $cities = $this->model->getCities();
         $this->view->ShowHome($cities, $logged);
     }
-    //Alta
+
+    //alta
     function insertCity()
     {
         $name = $_POST['input_name'];
@@ -73,7 +75,6 @@ class CityController
         }
         
     }
-
     //redireccion -> para modificacion
     function editCity($params = null)
     {
@@ -91,8 +92,7 @@ class CityController
             $this->viewUser->RenderError("Logueate he intentá nuevamente");
         }
     }
-
-    //modificacion
+    //modificación
     function updateCity()
     {
         $id = $_POST['input_edit_id'];

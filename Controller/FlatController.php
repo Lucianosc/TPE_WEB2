@@ -42,7 +42,7 @@ class FlatController
     {
         $logged = $this->controllerUser->isLoggedIn();
         $id_flat = $params[':ID'];
-        $flat = $this->model->GetFlatById($id_flat);
+        $flat = $this->model->getFlatById($id_flat);
 
         if ($flat) {    //checkea si obtuvo un objeto no vacío de la db
             $cities = $this->modelCity->getCities();
@@ -106,7 +106,7 @@ class FlatController
         if ($logged) {
             $id_flat = $params[':ID'];
             $cities = $this->modelCity->getCities();
-            $flat = $this->model->GetFlatById($id_flat);
+            $flat = $this->model->getFlatById($id_flat);
 
             if ($flat) {    //checkea si obtuvo un objeto no vacío de la db
                 $this->view->ShowEditFlat($flat, $cities, $logged);
@@ -146,8 +146,8 @@ class FlatController
         $logged = $this->controllerUser->isLoggedIn();
         $city_name = $params[':NAME'];
         if (isset($city_name)) {
-            $flats = $this->model->GetFlatsByCity($city_name);
-            $cities = $this->modelCity->GetCities();
+            $flats = $this->model->getFlatsByCity($city_name);
+            $cities = $this->modelCity->getCities();
         }
         if(empty($flats)){
             $errorMessaje = "No hay departamentos en esta ciudad.";

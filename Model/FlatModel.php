@@ -8,7 +8,7 @@ class FlatModel {
         $this->db = new PDO('mysql:host=localhost;'.'dbname=db_airbnb;charset=utf8', 'root', '');
     }
     
-    //Listado de departamentos, con sus caracteristicas y la ciudad a la que pertenece
+    //Listado de departamentos, con sus campos y la ciudad a la que pertenece
     function getFlats() {
         $query = $this->db->prepare('SELECT departamento.*, ciudad.nombre as nombre_ciudad
                                      FROM departamento INNER JOIN ciudad
@@ -16,9 +16,9 @@ class FlatModel {
         $query->execute();
         return  $query->fetchAll(PDO::FETCH_OBJ);
     }
+
     //Obtiene los datos de un departamento en particular
-    function GetFlatById($id_flat){
-       // $query = $this->db->prepare('SELECT * FROM departamento WHERE id_departamento=?');
+    function getFlatById($id_flat){
         $query = $this->db->prepare('SELECT departamento.*, ciudad.nombre as nombre_ciudad
                                      FROM departamento INNER JOIN ciudad ON
                                      departamento.id_ciudad_fk = ciudad.id_ciudad
@@ -26,13 +26,14 @@ class FlatModel {
         $query->execute(array($id_flat));
         return  $query->fetch(PDO::FETCH_OBJ);
     }
+
     //Obtiene los departamentos pertenecientes a una determinada ciudad
-    function GetFlatsByCity($nombre_ciudad){
+    function getFlatsByCity($name_city){
         $query = $this->db->prepare('SELECT departamento.*, ciudad.nombre as nombre_ciudad 
                                     FROM departamento INNER JOIN ciudad ON
                                     departamento.id_ciudad_fk = ciudad.id_ciudad
                                     WHERE ciudad.nombre=?');
-        $query->execute(array($nombre_ciudad));
+        $query->execute(array($name_city));
         return  $query->fetchAll(PDO::FETCH_OBJ);
     }
 
@@ -46,7 +47,7 @@ class FlatModel {
         $query = $this->db->prepare('DELETE FROM departamento WHERE id_departamento=?');
         $query->execute(array($id));
     }
-    //modificacion
+    //modificación
     function updateFlat($id, $name, $address, $price, $id_city_fk) {
         $query = $this->db->prepare("UPDATE departamento SET nombre=?, direccion=?, precio=?, id_ciudad_fk=? 
         WHERE id_departamento=?");
