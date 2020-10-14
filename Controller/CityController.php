@@ -63,8 +63,8 @@ class CityController
         if ($logged) {
             $id = $params[':ID'];
             $city = $this->model->deleteCity($id);
-            
-            if(!$city){
+            $city = $this->model->getCityById($id);
+            if($city){
                 $errorMessaje = "Debe eliminar los departamentos asociados a esta ciudad primero.";
                 $this->view->ShowError($errorMessaje, $logged);
             } else {
