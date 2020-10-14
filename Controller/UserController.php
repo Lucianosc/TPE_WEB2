@@ -41,7 +41,7 @@ class UserController
                     $_SESSION['USER'] = $userFromDB->email;
                     $_SESSION['LAST_ACTIVITY'] = time();
 
-                    $this->view->ShowHome();
+                    $this->view->ShowFlatsLocation();
                 } else
                     $this->view->ShowLogin("Contraseña incorrecta");
             } else
@@ -62,7 +62,7 @@ class UserController
         }
     }
 
-    //destriye la sesión y redirige a ShowCities
+    //destruye la sesión y redirige a ShowCities
     function logout()
     {
         session_start();

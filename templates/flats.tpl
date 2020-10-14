@@ -1,8 +1,10 @@
 {include file="header.tpl"}
-<br>
+
 
 {if !isset($id_flat)}
-{include file="filterFlat.tpl"}
+<div class="filter-div">
+    {include file="filterFlat.tpl"}
+</div>
 {/if}
 
 {if $sessionUser eq true}
@@ -13,7 +15,6 @@
     <div class="container-fluid">
         <div class="row justify-content-center">
 {/if}
-            <br>
             <div class="col-md-6 offset-md-2">
                 {if isset($errorMessaje)}
                     <div class="alert alert-danger" role="alert">
@@ -21,7 +22,7 @@
                     </div>
                 {else}
                     <div class="col-md">
-                        <div class="row">
+                        <div class="row" id="table-div">
                             <table class="table">
                                 <thead class="thead-dark">
                                     <th scope="col">Departamentos</th>
@@ -29,7 +30,7 @@
                                         <th scope="col">Direccion</th>
                                         <th scope="col">Precio</th>
                                     {/if}
-                                    <th scope="col">Ciudad</th>
+                                    <th scope="col">Ciudades</th>
                                     {if $sessionUser eq true}
                                         <th scope="col"></th>
                                         <th scope="col"></th>

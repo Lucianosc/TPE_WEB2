@@ -3,7 +3,6 @@
     <div>
         <h4>Agregar Ciudad</h4>
     </div>
-    <br>
     <form action="insertCity" method="post">
         <div class="form-group">
             <label for="title">Nombre</label>

@@ -4,17 +4,17 @@ require_once "./libs/smarty/Smarty.class.php";
 
 class FlatView
 {
-    private $title;
+
 
     function __construct()
     {
-        $this->title = "Departamentos";
+
     }
 
     function ShowFlats($flats, $cities, $sessionUser, $id_flat = null)
     {
         $smarty = new Smarty();
-        $smarty->assign('title', $this->title); //no se usa revisar
+
         $smarty->assign('flats', $flats);
         $smarty->assign('cities', $cities);
         $smarty->assign('sessionUser', $sessionUser);
@@ -26,7 +26,6 @@ class FlatView
     function ShowError($cities, $name_city, $errorMessaje, $sessionUser, $id_flat = null){
         $smarty = new smarty();
         $smarty->assign('errorMessaje', $errorMessaje);
-        $smarty->assign('title', $name_city);   //no se usa revisar
         $smarty->assign('cities', $cities);
         $smarty->assign('sessionUser', $sessionUser);
         $smarty->assign('id_flat', $id_flat);
@@ -50,7 +49,6 @@ class FlatView
     function ShowEditFlat($flat, $cities, $sessionUser)
     {
         $smarty = new Smarty();
-        $smarty->assign('title', $this->title);
         $smarty->assign('flat', $flat);
         $smarty->assign('cities', $cities);
         $smarty->assign('sessionUser', $sessionUser);

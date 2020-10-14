@@ -4,16 +4,14 @@ require_once "./libs/smarty/Smarty.class.php";
 
 class CityView {
 
-    private $title;
+
     
     function __construct(){
-        $this->title = "Ciudades";
     }
 
     function ShowHome($cities, $sessionUser){
 
         $smarty = new Smarty();
-        $smarty->assign('title', $this->title);//revisar, no se utiliza
         $smarty->assign('cities', $cities);
         $smarty->assign('sessionUser', $sessionUser);
 
@@ -22,7 +20,6 @@ class CityView {
     
     function ShowEditCity($city, $sessionUser){
         $smarty = new Smarty();
-        $smarty->assign('title', $this->title);//revisar, no se utiliza
         $smarty->assign('city', $city);
         $smarty->assign('sessionUser', $sessionUser);
 

@@ -22,7 +22,7 @@ class UserView
         $smarty->display('templates/login.tpl');
     }
 
-    function ShowHome()
+    function ShowFlatsLocation()
     {
         header("Location: " . BASE_URL . "showFlats");
     }
