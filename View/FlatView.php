@@ -4,12 +4,10 @@ require_once "./libs/smarty/Smarty.class.php";
 
 class FlatView
 {
-    private $title;
     private $smarty;
 
     function __construct()
     {
-        $this->title = "Departamentos";
         $this->smarty = new Smarty();
     }
 
@@ -23,7 +21,7 @@ class FlatView
         $this->smarty->display('templates/flats.tpl');
     }
 
-    function ShowError($cities, $name_city, $errorMessaje, $sessionUser, $id_flat = null){
+    function ShowError($cities, $errorMessaje, $sessionUser, $id_flat = null){
         $this->smarty->assign('errorMessaje', $errorMessaje);
         $this->smarty->assign('cities', $cities);
         $this->smarty->assign('sessionUser', $sessionUser);
@@ -46,7 +44,7 @@ class FlatView
     //muestra -> modificacion
     function ShowEditFlat($flat, $cities, $sessionUser)
     {
-        $this->smarty->assign('title', $this->title);
+
         $this->smarty->assign('flat', $flat);
         $this->smarty->assign('cities', $cities);
         $this->smarty->assign('sessionUser', $sessionUser);
