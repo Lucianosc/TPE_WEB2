@@ -1,8 +1,6 @@
 {include file="header.tpl"}
-<div class="container-fluid">
+<div class="container-fluid" id="edit-div">
     <h3>Editar Departamento</h3>
-    <hr>
-    <br>
     <form action="editFlat" method="post">
 
         <label for="name">Nombre</label>

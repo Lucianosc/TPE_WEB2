@@ -1,6 +1,4 @@
 {include file="header.tpl"}
-<br>
-
 {if $sessionUser eq true}
 <div class="container-fluid">
     <div class="row justify-content-start">
@@ -10,13 +8,14 @@
     <div class="row justify-content-center">
         {/if}
         <div class="col-md-4 offset-md-2">
+
             {if isset($errorMessaje)}
-            <div class="alert alert-danger" role="alert">
+            <div class="alert alert-danger" id="alert-div" role="alert">
                 {$errorMessaje}
             </div>
-
             {else}
-            <div class="row">
+
+            <div class="row" id="table-div">
                 <table class="table">
                     <thead class="thead-dark">
                         <tr>

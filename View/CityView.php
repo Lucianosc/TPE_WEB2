@@ -12,7 +12,6 @@ class CityView {
     }
 
     function ShowHome($cities, $sessionUser){
-
         $this->smarty->assign('cities', $cities);
         $this->smarty->assign('sessionUser', $sessionUser);
 

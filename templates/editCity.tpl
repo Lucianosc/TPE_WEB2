@@ -1,8 +1,6 @@
 {include file="header.tpl"}
-<div class="container-fluid">
+<div class="container-fluid" id="edit-div">
     <h3>Editar Ciudad</h3>
-    <hr>
-    <br>
     <form action="editCity" method="post">
         <label for="title">Nombre</label>
         <input type="text" name="input_edit_name" value="{$city->nombre}" placeholder="{$city->nombre}">

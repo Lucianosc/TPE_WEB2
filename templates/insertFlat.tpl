@@ -1,9 +1,8 @@
-<br>
+
 <div class="col-sm-2">
     <div>
         <h4>Agregar Departamento</h4>
     </div>
-    <br>
     <form action="insertFlat" method="post">
         <div class="form-group">
             <label for="name">Nombre</label>
