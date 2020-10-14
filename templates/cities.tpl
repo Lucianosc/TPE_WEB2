@@ -28,13 +28,13 @@
                         </tr>
                     </thead>
                     <tbody>
-                        {foreach from=$ciudades item=ciudad}
+                        {foreach from=$cities item=city}
                         <tr>
-                            <td>{$ciudad->nombre}</td>
+                            <td>{$city->nombre}</td>
                             {if $sessionUser eq true}
-                            <td><a href="editCity/{$ciudad->id_ciudad}"><button type="button"
+                            <td><a href="editCity/{$city->id_ciudad}"><button type="button"
                                         class="btn btn-secondary">Editar</button></a></td>
-                            <td><a href="deleteCity/{$ciudad->id_ciudad}"><button type="button"
+                            <td><a href="deleteCity/{$city->id_ciudad}"><button type="button"
                                         class="btn btn-secondary">X</button></a></td>
                             {/if}
                         </tr>

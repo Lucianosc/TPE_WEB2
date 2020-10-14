@@ -70,7 +70,7 @@ class FlatController
                 $this->model->insertFlat($name, $address, $price, $id_city_fk);
             }
         }
-        $this->view->showFlats();
+        $this->view->showFlatsLocation();
     }
     //ALTA -> Checkea si existe el depto en la db 
     function alreadyLoaded($name, $address, $id_city_fk)
@@ -93,9 +93,9 @@ class FlatController
         if ($logged) {
             $id = $params[':ID'];
             $this->model->deleteFlat($id);
-            $this->view->showFlats();
+            $this->view->showFlatsLocation();
         } else {
-            $this->viewUser->RenderError("Logueate he intentá nuevamente");
+            $this->viewUser->RenderError("Logueate e intentá nuevamente");
         }
     }
 
@@ -114,7 +114,7 @@ class FlatController
                 $this->viewUser->RenderError("No existe id en la base de datos");
             }
         } else {
-            $this->viewUser->RenderError("Logueate he intentá nuevamente");
+            $this->viewUser->RenderError("Logueate e intentá nuevamente");
         }
     }
     //modificación
@@ -137,7 +137,7 @@ class FlatController
                 $this->model->updateFlat($id, $name, $address, $price, $id_city_fk);
             }
         }
-        $this->view->showFlats();
+        $this->view->showFlatsLocation();
     }
 
     //filtro

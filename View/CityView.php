@@ -13,8 +13,8 @@ class CityView {
     function ShowHome($cities, $sessionUser){
 
         $smarty = new Smarty();
-        $smarty->assign('titulo', $this->title);
-        $smarty->assign('ciudades', $cities);
+        $smarty->assign('title', $this->title);//revisar, no se utiliza
+        $smarty->assign('cities', $cities);
         $smarty->assign('sessionUser', $sessionUser);
 
         $smarty->display('templates/cities.tpl');
@@ -22,7 +22,7 @@ class CityView {
     
     function ShowEditCity($city, $sessionUser){
         $smarty = new Smarty();
-        $smarty->assign('titulo', $this->title);
+        $smarty->assign('title', $this->title);//revisar, no se utiliza
         $smarty->assign('city', $city);
         $smarty->assign('sessionUser', $sessionUser);
 
@@ -39,7 +39,7 @@ class CityView {
         $smarty->display('templates/cities.tpl');
     }
 
-    function ShowCities(){
+    function ShowCitiesLocation(){
         header("Location: ".BASE_URL."showCities");
     }
    

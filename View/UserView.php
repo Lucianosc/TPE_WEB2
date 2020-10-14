@@ -16,7 +16,7 @@ class UserView
     function ShowLogin($message = "")
     {
         $smarty = new Smarty();
-        $smarty->assign('titulo', $this->title);
+        $smarty->assign('title', $this->title);
         $smarty->assign('message', $message);
 
         $smarty->display('templates/login.tpl');
@@ -30,7 +30,7 @@ class UserView
     function RenderError($message)
     {
         $smarty = new Smarty();
-        $smarty->assign('titulo', "Error");
+        $smarty->assign('title', "Error");
         $smarty->assign('message', $message);
 
         $smarty->display('templates/error.tpl');

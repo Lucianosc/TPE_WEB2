@@ -14,7 +14,7 @@ class FlatView
     function ShowHome($flats, $cities, $sessionUser, $id_flat = null)
     {
         $smarty = new Smarty();
-        $smarty->assign('titulo', $this->title);
+        $smarty->assign('title', $this->title);
         $smarty->assign('flats', $flats);
         $smarty->assign('cities', $cities);
         $smarty->assign('sessionUser', $sessionUser);
@@ -30,7 +30,7 @@ class FlatView
     function ShowError($name_city, $errorMessaje, $sessionUser, $cities){
         $smarty = new smarty();
         $smarty->assign('errorMessaje', $errorMessaje);
-        $smarty->assign('titulo', $name_city);
+        $smarty->assign('title', $name_city);
         $smarty->assign('sessionUser', $sessionUser);
         $smarty->assign('id_flat', false);
         $smarty->assign('cities', $cities);
@@ -41,7 +41,7 @@ class FlatView
     function ShowFlatsByCity($flats, $cities, $name_city, $sessionUser)
     {
         $smarty = new Smarty();
-        $smarty->assign('titulo', $name_city);
+        $smarty->assign('title', $name_city);
         $smarty->assign('flats', $flats);
         $smarty->assign('cities', $cities);
         $smarty->assign('sessionUser', $sessionUser);
@@ -54,7 +54,7 @@ class FlatView
     function ShowEditFlat($flat, $cities, $sessionUser)
     {
         $smarty = new Smarty();
-        $smarty->assign('titulo', $this->title);
+        $smarty->assign('title', $this->title);
         $smarty->assign('flat', $flat);
         $smarty->assign('cities', $cities);
         $smarty->assign('sessionUser', $sessionUser);
@@ -62,7 +62,7 @@ class FlatView
         $smarty->display('templates/editFlat.tpl');
     }
 
-    function ShowFlats()
+    function ShowFlatsLocation()
     {
         header("Location: " . BASE_URL . "showFlats");
     }

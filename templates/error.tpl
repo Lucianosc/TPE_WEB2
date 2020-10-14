@@ -11,20 +11,20 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
         integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
 
-    <title>{$titulo}</title>
+    <title>{$title}</title>
 </head>
 
 <body>
     <div class="container">
 
-       <h1>{$titulo}</h1>
+       <h1>{$title}</h1>
         
-        <div class="alert alert-danger" id="alert" role="alert">
+        <div class="alert alert-danger" id="alert" role="alert"> {*REVISAR*}
             {$message}
         </div>
 
-        <div class="volver">
-            <a href="showCities">Volver</a>
+        <div>
+            <h6><a href="showCities" class="text-dark">Volver</a></h6>
         </div>
 
     </div>

@@ -41,7 +41,7 @@ class CityController
                 $this->model->insertCity($name);
             }
         }
-        $this->view->showCities();
+        $this->view->showCitiesLocation();
     }
 
     //ALTA -> Checkea si existe la ciudad en la db
@@ -68,7 +68,7 @@ class CityController
                 $errorMessaje = "Debe eliminar los departamentos asociados a esta ciudad primero.";
                 $this->view->ShowError($errorMessaje, $logged);
             } else {
-                $this->view->showCities();
+                $this->view->showCitiesLocation();
             }
         } else {
             $this->viewUser->RenderError("Logueate he intentá nuevamente");
@@ -102,6 +102,6 @@ class CityController
                 $this->model->updateCity($id, $name);
             }
         }
-        $this->view->showCities();
+        $this->view->showCitiesLocation();
     }
 }
