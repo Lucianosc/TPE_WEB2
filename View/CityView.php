@@ -4,7 +4,6 @@ require_once "./libs/smarty/Smarty.class.php";
 
 class CityView {
 
-    private $title;
     private $smarty;
     
     function __construct(){
