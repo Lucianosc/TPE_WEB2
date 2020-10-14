@@ -39,9 +39,7 @@ class UserController
                 if (password_verify($pass, $userFromDB->clave)) {
                     session_start();
                     $_SESSION['USER'] = $userFromDB->email;
-                    $_SESSION['LAST_ACTIVITY'] = time();
-
-                    $this->view->ShowHome();
+                    $this->viewCity->ShowCitiesLocation();
                 } else
                     $this->view->ShowLogin("Contraseña incorrecta");
             } else
@@ -62,7 +60,7 @@ class UserController
         }
     }
 
-    //destriye la sesión y redirige a ShowCities
+    //destruye la sesión y redirige a ShowCities
     function logout()
     {
         session_start();
