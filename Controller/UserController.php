@@ -67,6 +67,6 @@ class UserController
     {
         session_start();
         session_destroy();
-       $this->viewCity->ShowCities();
+       $this->viewCity->ShowCitiesLocation();
     }
 }
