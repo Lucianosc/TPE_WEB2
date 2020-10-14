@@ -35,7 +35,7 @@ class FlatController
         $logged = $this->controllerUser->isLoggedIn();
         $flats = $this->model->getFlats();
         $cities = $this->modelCity->getCities();
-        $this->view->ShowHome($flats, $cities, $logged);
+        $this->view->ShowFlats($flats, $cities, $logged);
     }
 
     function showFlat($params = null)
@@ -46,9 +46,8 @@ class FlatController
 
         if ($flat) {    //checkea si obtuvo un objeto no vacío de la db
             $cities = $this->modelCity->getCities();
-            // $this->view->ShowHome($flat, $cities, $logged, $id_flat);//revisar esta linea de codigo
             $flat = array($flat);
-            $this->view->ShowHome($flat, $cities, $logged, $id_flat);
+            $this->view->ShowFlats($flat, $cities, $logged, $id_flat);
         } else {
             $this->viewUser->RenderError("No existe id en la base de datos");
         }
@@ -151,7 +150,7 @@ class FlatController
         }
         if(empty($flats)){
             $errorMessaje = "No hay departamentos en esta ciudad.";
-            $this->view->ShowError($city_name, $errorMessaje, $logged, $cities);
+            $this->view->ShowError($city_name, $errorMessaje, $logged);
         }
         else{
             $this->view->ShowFlatsByCity($flats, $cities, $city_name, $logged);

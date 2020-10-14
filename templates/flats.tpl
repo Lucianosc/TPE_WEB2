@@ -1,7 +1,7 @@
 {include file="header.tpl"}
 <br>
 
-{if $id_flat eq false}
+{if !isset($id_flat)}
 {include file="filterFlat.tpl"}
 {/if}
 
@@ -25,7 +25,7 @@
                             <table class="table">
                                 <thead class="thead-dark">
                                     <th scope="col">Departamentos</th>
-                                    {if $id_flat neq false}
+                                    {if !isset($id_flat)}
                                         <th scope="col">Direccion</th>
                                         <th scope="col">Precio</th>
                                     {/if}
@@ -39,12 +39,12 @@
                                 {foreach from=$flats item=flat}
                                     <tr>
                                         <td>{$flat->nombre}</td>
-                                        {if $id_flat neq false}
+                                        {if !isset($id_flat)}
                                             <td>{$flat->direccion}</td>
                                             <td>{$flat->precio}</td>
                                         {/if}
                                         <td>{$flat->nombre_ciudad}</td>
-                                        {if $id_flat eq false}
+                                        {if !isset($id_flat)}
                                             <td>
                                                 <a href="flat/{$flat->id_departamento}"><button type="button"
                                                         class="btn btn-secondary">Ver detalle</button></a>

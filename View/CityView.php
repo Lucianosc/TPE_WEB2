@@ -29,13 +29,11 @@ class CityView {
         $smarty->display('templates/editCity.tpl');
     }
 
-    function ShowError($errorMessaje, $sessionUser, $cities = null){
+    function ShowError($errorMessaje, $sessionUser){
         $smarty = new smarty();
         $smarty->assign('errorMessaje', $errorMessaje);
         $smarty->assign('sessionUser', $sessionUser);
-        $smarty->assign('id_flat', false);
-        $smarty->assign('cities', $cities);
-
+       
         $smarty->display('templates/cities.tpl');
     }
 

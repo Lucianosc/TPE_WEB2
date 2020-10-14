@@ -11,41 +11,36 @@ class FlatView
         $this->title = "Departamentos";
     }
 
-    function ShowHome($flats, $cities, $sessionUser, $id_flat = null)
+    function ShowFlats($flats, $cities, $sessionUser, $id_flat = null)
     {
         $smarty = new Smarty();
-        $smarty->assign('title', $this->title);
+        $smarty->assign('title', $this->title); //no se usa revisar
         $smarty->assign('flats', $flats);
         $smarty->assign('cities', $cities);
         $smarty->assign('sessionUser', $sessionUser);
-        
-        if($id_flat === null){
-            $id_flat = false;
-        }
         $smarty->assign('id_flat', $id_flat);
     
         $smarty->display('templates/flats.tpl');
     }
 
-    function ShowError($name_city, $errorMessaje, $sessionUser, $cities){
+    function ShowError($name_city, $errorMessaje, $sessionUser, $id_flat = null){
         $smarty = new smarty();
         $smarty->assign('errorMessaje', $errorMessaje);
-        $smarty->assign('title', $name_city);
+        $smarty->assign('title', $name_city);   //no se usa revisar
         $smarty->assign('sessionUser', $sessionUser);
-        $smarty->assign('id_flat', false);
-        $smarty->assign('cities', $cities);
+        $smarty->assign('id_flat', $id_flat);
 
         $smarty->display('templates/flats.tpl');
     }
     //muestra los deptos por ciudad
-    function ShowFlatsByCity($flats, $cities, $name_city, $sessionUser)
+    function ShowFlatsByCity($flats, $cities, $name_city, $sessionUser, $id_flat = null)
     {
         $smarty = new Smarty();
         $smarty->assign('title', $name_city);
         $smarty->assign('flats', $flats);
         $smarty->assign('cities', $cities);
         $smarty->assign('sessionUser', $sessionUser);
-        $smarty->assign('id_flat', false); 
+        $smarty->assign('id_flat', $id_flat); 
 
         $smarty->display('templates/flats.tpl');
     }
