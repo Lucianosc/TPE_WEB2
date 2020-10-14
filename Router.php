@@ -1,5 +1,5 @@
 <?php
-    require_once './RouterClass.php';//Route o router
+    require_once './RouterClass.php';
     require_once './Controller/FlatController.php';
     require_once './Controller/CityController.php';
     require_once './Controller/UserController.php';
