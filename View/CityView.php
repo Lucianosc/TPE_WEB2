@@ -8,13 +8,11 @@ class CityView {
     private $smarty;
     
     function __construct(){
-        $this->title = "Ciudades";
         $this->smarty = new Smarty();
     }
 
     function ShowHome($cities, $sessionUser){
 
-        $this->smarty->assign('title', $this->title);//revisar, no se utiliza
         $this->smarty->assign('cities', $cities);
         $this->smarty->assign('sessionUser', $sessionUser);
 
@@ -22,7 +20,6 @@ class CityView {
     }
     
     function ShowEditCity($city, $sessionUser){
-        $this->smarty->assign('title', $this->title);//revisar, no se utiliza
         $this->smarty->assign('city', $city);
         $this->smarty->assign('sessionUser', $sessionUser);
 

@@ -150,10 +150,10 @@ class FlatController
         }
         if(empty($flats)){
             $errorMessaje = "No hay departamentos en esta ciudad.";
-            $this->view->ShowError($cities, $city_name, $errorMessaje, $logged);
+            $this->view->ShowError($cities, $errorMessaje, $logged);
         }
         else{
-            $this->view->ShowFlatsByCity($flats, $cities, $city_name, $logged);
+            $this->view->ShowFlats($flats, $cities, $logged);
         }
     }
 }
