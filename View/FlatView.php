@@ -23,10 +23,11 @@ class FlatView
         $smarty->display('templates/flats.tpl');
     }
 
-    function ShowError($name_city, $errorMessaje, $sessionUser, $id_flat = null){
+    function ShowError($cities, $name_city, $errorMessaje, $sessionUser, $id_flat = null){
         $smarty = new smarty();
         $smarty->assign('errorMessaje', $errorMessaje);
         $smarty->assign('title', $name_city);   //no se usa revisar
+        $smarty->assign('cities', $cities);
         $smarty->assign('sessionUser', $sessionUser);
         $smarty->assign('id_flat', $id_flat);
 

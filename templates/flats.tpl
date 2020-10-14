@@ -25,7 +25,7 @@
                             <table class="table">
                                 <thead class="thead-dark">
                                     <th scope="col">Departamentos</th>
-                                    {if !isset($id_flat)}
+                                    {if isset($id_flat)}
                                         <th scope="col">Direccion</th>
                                         <th scope="col">Precio</th>
                                     {/if}
@@ -39,7 +39,7 @@
                                 {foreach from=$flats item=flat}
                                     <tr>
                                         <td>{$flat->nombre}</td>
-                                        {if !isset($id_flat)}
+                                        {if isset($id_flat)}
                                             <td>{$flat->direccion}</td>
                                             <td>{$flat->precio}</td>
                                         {/if}
