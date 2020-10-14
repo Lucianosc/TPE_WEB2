@@ -71,7 +71,7 @@ class CityController
                 $this->view->showCitiesLocation();
             }
         } else {
-            $this->viewUser->RenderError("Logueate he intentá nuevamente");
+            $this->viewUser->RenderError("Logueate e intentá nuevamente");
         }
         
     }
@@ -89,7 +89,7 @@ class CityController
                 $this->viewUser->RenderError("No existe id en la base de datos");
             }
         } else {
-            $this->viewUser->RenderError("Logueate he intentá nuevamente");
+            $this->viewUser->RenderError("Logueate e intentá nuevamente");
         }
     }
     //modificación
