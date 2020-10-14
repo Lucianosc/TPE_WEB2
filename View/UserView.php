@@ -5,34 +5,27 @@ require_once "./libs/smarty/Smarty.class.php";
 class UserView
 {
 
-    private $title;
-
+    private $smarty;
 
     function __construct()
     {
-        $this->title = "Login";
+        $this->smarty = new Smarty();
     }
 
     function ShowLogin($message = "")
     {
-        $smarty = new Smarty();
-        $smarty->assign('title', $this->title);
-        $smarty->assign('message', $message);
+        $this->smarty->assign('title', "Login");
+        $this->smarty->assign('message', $message);
 
-        $smarty->display('templates/login.tpl');
-    }
-
-    function ShowFlatsLocation()
-    {
-        header("Location: " . BASE_URL . "showFlats");
+        $this->smarty->display('templates/login.tpl');
     }
 
     function RenderError($message)
     {
-        $smarty = new Smarty();
-        $smarty->assign('title', "Error");
-        $smarty->assign('message', $message);
+        $this->smarty->assign('title', "Error");
+        $this->smarty->assign('message', $message);
 
-        $smarty->display('templates/error.tpl');
+        $this->smarty->display('templates/error.tpl');
     }
+    
 }

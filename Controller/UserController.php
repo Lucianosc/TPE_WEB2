@@ -39,9 +39,7 @@ class UserController
                 if (password_verify($pass, $userFromDB->clave)) {
                     session_start();
                     $_SESSION['USER'] = $userFromDB->email;
-                    $_SESSION['LAST_ACTIVITY'] = time();
-
-                    $this->view->ShowFlatsLocation();
+                    $this->viewCity->ShowCitiesLocation();
                 } else
                     $this->view->ShowLogin("Contraseña incorrecta");
             } else
