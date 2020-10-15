@@ -6,7 +6,7 @@
 {else}
 <div class="container-fluid">
     <div class="row justify-content-center">
-        {/if}
+{/if}
         <div class="col-md-4 offset-md-2">
 
             {if isset($errorMessaje)}
@@ -20,7 +20,7 @@
                     <thead class="thead-dark">
                         <tr>
                             <th scope="col">Ciudades</td>
-                                {if $sessionUser eq true}
+                            {if $sessionUser eq true}
                             <th scope="col"></th>
                             <th scope="col"></th>
                             {/if}
@@ -28,15 +28,15 @@
                     </thead>
                     <tbody>
                         {foreach from=$cities item=city}
-                        <tr>
-                            <td>{$city->nombre}</td>
-                            {if $sessionUser eq true}
-                            <td><a href="editCity/{$city->id_ciudad}"><button type="button"
-                                        class="btn btn-secondary">Editar</button></a></td>
-                            <td><a href="deleteCity/{$city->id_ciudad}"><button type="button"
-                                        class="btn btn-secondary">X</button></a></td>
-                            {/if}
-                        </tr>
+                            <tr>
+                                <td>{$city->nombre}</td>
+                                {if $sessionUser eq true}
+                                <td><a href="editCity/{$city->id_ciudad}"><button type="button"
+                                            class="btn btn-secondary">Editar</button></a></td>
+                                <td><a href="deleteCity/{$city->id_ciudad}"><button type="button"
+                                            class="btn btn-secondary">X</button></a></td>
+                                {/if}
+                            </tr>
                         {/foreach}
                     </tbody>
                 </table>

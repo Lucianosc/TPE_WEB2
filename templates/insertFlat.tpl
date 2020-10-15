@@ -20,7 +20,7 @@
             <label for="city">Ciudad</label>
             <select class="form-control" name="input_id_city_fk" id="cities_s">
                 {foreach from=$cities item=city}
-                <option value="{$city->id_ciudad}">{$city->nombre}</option>
+                    <option value="{$city->id_ciudad}">{$city->nombre}</option>
                 {/foreach}
             </select>
         </div>

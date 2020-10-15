@@ -4,7 +4,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
     <base href="{BASE_URL}">
     <!-- Bootstrap CSS -->
 
@@ -19,7 +18,7 @@
 
        <h1>{$title}</h1>
         
-        <div class="alert alert-danger" id="alert" role="alert"> {*REVISAR*}
+        <div class="alert alert-danger" id="alert" role="alert"> 
             {$message}
         </div>
 
