@@ -6,13 +6,15 @@ _Este proyecto corresponde a la materia de Web 2 de la carrera TUDAI - fac. Cien
 
 _Disponer de un web browser / navegador web_
 
-_Tener instalado XAMPP y habilitar los módulos de Apache y MySQL al momento de ingresar a la página_
+_Tener instalado XAMPP_
 
 _Almacenar la carpeta clonada del repositorio en XAMPP/htdocs_
 
 _Importar la base de datos en phpMyAdmin_
 
 ## Acceso 📦
+
+_Habilitar los módulos de Apache y MySQL antes de acceder a la página_
 
 _El ingreso al proyecto deberá ser por medio de la url [http://localhost/TPE_WEB2/](http://localhost/TPE_WEB2/) (tener en cuenta si hay directorios de por medio)_
 
