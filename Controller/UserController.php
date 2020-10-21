@@ -4,10 +4,8 @@ require_once './View/UserView.php';
 require_once './Model/UserModel.php';
 require_once './View/CityView.php';
 
-
 class UserController
 {
-
     private $view;
     private $viewCity;
     private $model;
@@ -47,24 +45,4 @@ class UserController
         }
     }
 
-    //verifica si hay una sesión activa
-    function isLoggedIn()
-    {
-        if (!isset($_SESSION)) {
-            session_start();
-        }
-        if (isset($_SESSION['USER'])) {
-            return $_SESSION['USER'];
-        } else {
-            return false;
-        }
-    }
-
-    //destruye la sesión y redirige a ShowCities
-    function logout()
-    {
-        session_start();
-        session_destroy();
-       $this->viewCity->ShowCitiesLocation();
-    }
 }

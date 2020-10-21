@@ -2,8 +2,7 @@
 
 require_once './View/CityView.php';
 require_once './Model/CityModel.php';
-
-require_once './Controller/UserController.php';
+require_once './helpers/AuthHelper.php';
 require_once './View/UserView.php';
 
 class CityController
@@ -11,7 +10,7 @@ class CityController
 
     private $model;
     private $view;
-    private $controllerUser;
+    private $authHelper;
     private $viewUser;
 
     public function __construct()
@@ -19,14 +18,14 @@ class CityController
         $this->view = new CityView();
         $this->model = new CityModel();
 
-        $this->controllerUser = new UserController();
+        $this->authHelper = new AuthHelper();
         $this->viewUser = new UserView();
     }
 
     //muestra todas las ciudades
     function showCities()
     {
-        $logged = $this->controllerUser->isLoggedIn();
+        $logged = $this->authHelper->isLoggedIn();
 
         $cities = $this->model->getCities();
         $this->view->ShowHome($cities, $logged);
@@ -59,7 +58,7 @@ class CityController
     //baja
     function deleteCity($params = null)
     {
-        $logged = $this->controllerUser->isLoggedIn();
+        $logged = $this->authHelper->isLoggedIn();
         if ($logged) {
             $id = $params[':ID'];
             $city = $this->model->deleteCity($id);
@@ -78,7 +77,7 @@ class CityController
     //redireccion -> para modificacion
     function editCity($params = null)
     {
-        $logged = $this->controllerUser->isLoggedIn();
+        $logged = $this->authHelper->isLoggedIn();
         if ($logged) {
             $id_city = $params[':ID'];
             $city = $this->model->GetCityById($id_city);

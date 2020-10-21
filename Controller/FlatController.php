@@ -5,7 +5,7 @@ require_once './Model/FlatModel.php';
 
 require_once './Model/CityModel.php';
 
-require_once './Controller/UserController.php';
+require_once './helpers/AuthHelper.php';
 require_once './View/UserView.php';
 
 
@@ -15,7 +15,7 @@ class FlatController
     private $model;
     private $view;
     private $modelCity;
-    private $controllerUser;
+    private $authHelper;
     private $viewUser;
 
     public function __construct()
@@ -26,13 +26,13 @@ class FlatController
 
         $this->modelCity = new CityModel();
 
-        $this->controllerUser = new UserController();
+        $this->authHelper = new AuthHelper();
         $this->viewUser = new UserView();
     }
 
     function showFlats()
     {
-        $logged = $this->controllerUser->isLoggedIn();
+        $logged = $this->authHelper->isLoggedIn();
         $flats = $this->model->getFlats();
         $cities = $this->modelCity->getCities();
         $this->view->ShowFlats($flats, $cities, $logged);
@@ -40,7 +40,7 @@ class FlatController
 
     function showFlat($params = null)
     {
-        $logged = $this->controllerUser->isLoggedIn();
+        $logged = $this->authHelper->isLoggedIn();
         $id_flat = $params[':ID'];
         $flat = $this->model->getFlatById($id_flat);
 
@@ -88,7 +88,7 @@ class FlatController
     //baja
     function deleteFlat($params = null)
     {
-        $logged = $this->controllerUser->isLoggedIn();
+        $logged = $this->authHelper->isLoggedIn();
         if ($logged) {
             $id = $params[':ID'];
             $this->model->deleteFlat($id);
@@ -101,7 +101,7 @@ class FlatController
     //redirección -> para modificación
     function editFlat($params = null)
     {
-        $logged = $this->controllerUser->isLoggedIn();
+        $logged = $this->authHelper->isLoggedIn();
         if ($logged) {
             $id_flat = $params[':ID'];
             $cities = $this->modelCity->getCities();
@@ -142,7 +142,7 @@ class FlatController
     //filtro
     function filterFlatsByCity($params = null)
     {
-        $logged = $this->controllerUser->isLoggedIn();
+        $logged = $this->authHelper->isLoggedIn();
         $city_name = $params[':NAME'];
         if (isset($city_name)) {
             $flats = $this->model->getFlatsByCity($city_name);
