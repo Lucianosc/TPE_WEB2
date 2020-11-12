@@ -37,7 +37,7 @@
 
     $r->addRoute("login", "GET", "UserController", "showLogin");
     $r->addRoute("verifyUser", "POST", "UserController", "verifyUser");
-    $r->addRoute("logout", "GET", "UserController", "logout");
+    $r->addRoute("logout", "GET", "AuthHelper", "logout");
 
     
     //******************* RUN ***************************

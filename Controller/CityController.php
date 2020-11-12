@@ -97,7 +97,7 @@ class CityController
         $id = $_POST['input_edit_id'];
         $name = $_POST['input_edit_name'];
         if ((isset($name) && !empty($name))) {
-            if ($this->alreadyLoaded($name) === false) {
+            if ($this->alreadyLoaded($id, $name) === false) {
                 $this->model->updateCity($id, $name);
             }
         }
