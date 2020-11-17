@@ -1,13 +1,12 @@
 {include file="header.tpl"}
 
-
 {if !isset($id_flat)}
 <div class="filter-div">
     {include file="filterFlat.tpl"}
 </div>
 {/if}
 
-{if $sessionUser eq true}
+{if $sessionUser eq true && $sessionUser['ROLE'] eq 0}
     <div class="container-fluid">
         <div class="row justify-content-start">
             {include file="insertFlat.tpl"}
@@ -31,7 +30,7 @@
                                         <th scope="col">Precio</th>
                                     {/if}
                                     <th scope="col">Ciudades</th>
-                                    {if $sessionUser eq true}
+                                    {if $sessionUser eq true && $sessionUser['ROLE'] eq 0}
                                         <th scope="col"></th>
                                         <th scope="col"></th>
                                     {/if}
@@ -51,7 +50,7 @@
                                                         class="btn btn-secondary">Ver detalle</button></a>
                                             </td>
                                         {/if}
-                                        {if $sessionUser eq true}
+                                        {if $sessionUser eq true && $sessionUser['ROLE'] eq 0}
                                             <td>
                                                 <a href="editFlat/{$flat->id_departamento}"><button
                                                 type="button" class="btn btn-secondary">Editar</button></a>

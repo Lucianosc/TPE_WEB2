@@ -1,5 +1,5 @@
 {include file="header.tpl"}
-{if $sessionUser eq true}
+{if $sessionUser eq true && $sessionUser['ROLE'] eq 0}
 <div class="container-fluid">
     <div class="row justify-content-start">
 {include file="insertCity.tpl"}
@@ -20,7 +20,7 @@
                     <thead class="thead-dark">
                         <tr>
                             <th scope="col">Ciudades</td>
-                            {if $sessionUser eq true}
+                            {if $sessionUser eq true && $sessionUser['ROLE'] eq 0}
                             <th scope="col"></th>
                             <th scope="col"></th>
                             {/if}
@@ -30,7 +30,7 @@
                         {foreach from=$cities item=city}
                             <tr>
                                 <td>{$city->nombre}</td>
-                                {if $sessionUser eq true}
+                                {if $sessionUser eq true && $sessionUser['ROLE'] eq 0}
                                 <td><a href="editCity/{$city->id_ciudad}"><button type="button"
                                             class="btn btn-secondary">Editar</button></a></td>
                                 <td><a href="deleteCity/{$city->id_ciudad}"><button type="button"

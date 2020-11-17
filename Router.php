@@ -39,7 +39,10 @@
     $r->addRoute("verifyUser", "POST", "UserController", "verifyUser");
     $r->addRoute("logout", "GET", "AuthHelper", "logout");
 
-    
+    //NUEVO
+    $r->addRoute("signUp", "GET", "UserController", "showSignUp");
+    $r->addRoute("insertUser", "POST", "UserController", "insertUser");
+
     //******************* RUN ***************************
     $r->route($_GET['action'], $_SERVER['REQUEST_METHOD']); 
 ?>

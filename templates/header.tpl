@@ -34,11 +34,12 @@
                 {if $sessionUser eq false}
                 <div class="col-md-3 offset-md-9">
                     <a href="login"><button type="button" class="btn btn-danger" id="btn-color">Login</button></a>
+                    <a href="signUp"><button type="button" class="btn btn-danger" id="btn-color">Registrate</button></a>
                 </div>
                 {else}
                 <div class="row">
                     <div class="col">
-                        <h6>Usuario: {$sessionUser}</h6>
+                        <h6>Usuario: {$sessionUser['USER']}</h6>
                     </div>
                     <div class="col">
                         <a href="logout"><button type="button" class="btn btn-danger" id="btn-color">Logout</button></a>

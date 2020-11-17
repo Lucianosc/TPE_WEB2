@@ -13,14 +13,13 @@ class CityView {
     function ShowHome($cities, $sessionUser){
         $this->smarty->assign('cities', $cities);
         $this->smarty->assign('sessionUser', $sessionUser);
-
         $this->smarty->display('templates/cities.tpl');
     }
     
     function ShowEditCity($city, $sessionUser){
         $this->smarty->assign('city', $city);
         $this->smarty->assign('sessionUser', $sessionUser);
-
+        
         $this->smarty->display('templates/editCity.tpl');
     }
 

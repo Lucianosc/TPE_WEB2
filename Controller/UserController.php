@@ -17,7 +17,7 @@ class UserController
         $this->model = new UserModel();
     }
 
-    //muestra login
+    //muestra login     //-------DEBERIA IR EN EL AuthHelper?
     function showLogin()
     {
         $this->view->ShowLogin();
@@ -37,6 +37,8 @@ class UserController
                 if (password_verify($pass, $userFromDB->clave)) {
                     session_start();
                     $_SESSION['USER'] = $userFromDB->email;
+                    $_SESSION['ID'] = $userFromDB->id_usuario;
+                    $_SESSION['ROLE'] = $userFromDB->rol;
                     $this->viewCity->ShowCitiesLocation();
                 } else
                     $this->view->ShowLogin("Contraseña incorrecta");
@@ -45,4 +47,38 @@ class UserController
         }
     }
 
+    //---------------------------------------NUEVO
+
+    //muestra sign Up
+    function showSignUp()
+    {
+        $this->view->showSignUp();
+    }
+    //alta
+    function insertUser()
+    {
+        $user = $_POST['input_user'];
+        $password = $_POST['input_pass'];
+        $role = 1;
+        if (isset($user) && !empty($user) && isset($password) && !empty($password)) {
+            if ($this->alreadyLoaded($user) === false) {
+                $password_hash = password_hash($password, PASSWORD_DEFAULT);
+                $this->model->createUser($user, $password_hash, $role);
+                $this->verifyUser();
+            } else $this->view->ShowSignUp("El usuario ya existe");
+        } else
+            $this->view->ShowSignUp("Complete todos los campos");
+    }
+    
+    //ALTA -> Checkea si existe el mail en la db
+    function alreadyLoaded($email)
+    {
+        $users = $this->model->getUsers();
+        foreach ($users as $user) {
+            if ($user->email === $email) {
+                return true;
+            }
+        }
+        return false;
+    }
 }

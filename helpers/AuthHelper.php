@@ -19,7 +19,7 @@ class AuthHelper{
             session_start();
         }
         if (isset($_SESSION['USER'])) {
-            return $_SESSION['USER'];
+            return $_SESSION;
         } else {
             return false;
         }
