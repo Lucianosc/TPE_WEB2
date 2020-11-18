@@ -42,6 +42,9 @@
                         <h6>Usuario: {$sessionUser['USER']}</h6>
                     </div>
                     <div class="col">
+                        {if $sessionUser eq true && $sessionUser['ROLE'] eq 0}
+                        <a href="administer"><button type="button" class="btn btn-danger" id="btn-color">Administración</button></a>
+                        {/if}
                         <a href="logout"><button type="button" class="btn btn-danger" id="btn-color">Logout</button></a>
                     </div>
                 </div>

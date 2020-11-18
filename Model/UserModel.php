@@ -15,9 +15,9 @@ class UserModel {
     }
 
     //NUEVO->
-    function updateUserRole($id_user, $admin){
+    function updateUserRole($id_user, $role){
         $query = $this->db->prepare("UPDATE usuario SET rol=? WHERE id_usuario=?");
-        $query->execute(array($admin, $id_user));
+        $query->execute(array($role, $id_user));
     }
  
     function deleteUser($id_user){
@@ -34,5 +34,11 @@ class UserModel {
         $query = $this->db->prepare('SELECT * FROM usuario');
         $query->execute();
         return  $query->fetchAll(PDO::FETCH_OBJ);
+    }
+
+    function getUserById($id){
+        $query = $this->db->prepare('SELECT * FROM usuario WHERE id_usuario=?');
+        $query->execute(array($id));
+        return $query->fetch(PDO::FETCH_OBJ);
     }
 }

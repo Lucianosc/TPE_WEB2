@@ -3,6 +3,7 @@
 require_once './View/UserView.php';
 require_once './Model/UserModel.php';
 require_once './View/CityView.php';
+require_once './helpers/AuthHelper.php';
 
 class UserController
 {
@@ -15,6 +16,7 @@ class UserController
         $this->view = new UserView();
         $this->viewCity = new CityView();
         $this->model = new UserModel();
+        $this->authHelper = new AuthHelper();
     }
 
     //muestra login     //-------DEBERIA IR EN EL AuthHelper?
@@ -69,7 +71,7 @@ class UserController
         } else
             $this->view->ShowSignUp("Complete todos los campos");
     }
-    
+
     //ALTA -> Checkea si existe el mail en la db
     function alreadyLoaded($email)
     {
@@ -80,5 +82,56 @@ class UserController
             }
         }
         return false;
+    }
+    //CONTROLAR Q NO SE PUEDA ENTRAR POR LA URL
+    function showUsers()
+    {
+        $logged = $this->authHelper->isLoggedIn();
+        if ($logged && $logged['ROLE'] == 0) {
+            $users = $this->model->getUsers();
+            $this->view->ShowUsers($users, $logged);
+        } else {
+            $this->view->RenderError("Debe ser usuario administrador para acceder a esta sección");
+        }
+    }
+
+    function deleteUser($params = null){    //TESTEAR POSIBLES ERRORES DE SEGURIDAD
+        $logged = $this->authHelper->isLoggedIn();
+        if ($logged && $_SESSION['ROLE'] == 0) {
+            $id = $params[':ID'];
+            //falta controlar si el usuario existe---> x si entra x url?
+            $user = $this->model->deleteUser($id);
+           /* $user = $this->model->getUserById($id);
+            if($user){
+                $errorMessaje = "Debe eliminar los comentarios asociados de este usuario primero.";
+                $this->view->ShowError($errorMessaje, $logged);
+            } else {*/
+                $this->view->showUsersLocation();
+            //}
+        } else {
+            $this->view->RenderError("Debe ser usuario administrador para acceder a esta sección");
+        }
+    }
+
+    function updateUserRole($params = null){
+        $logged = $this->authHelper->isLoggedIn();
+        if ($logged && $_SESSION['ROLE'] == 0) {
+            $id = $params[':ID'];
+            //falta controlar si el usuario existe---> x si entra x url?
+            $user = $this->model->getUserById($id);
+            if($user->rol == 1)
+            $user = $this->model->updateUserRole($id, 0);
+            else
+            $user = $this->model->updateUserRole($id, 1);
+           /* $user = $this->model->getUserById($id);
+            if($user){
+                $errorMessaje = "Debe eliminar los comentarios asociados de este usuario primero.";
+                $this->view->ShowError($errorMessaje, $logged);
+            } else {*/
+                $this->view->showUsersLocation();
+            //}
+        } else {
+            $this->view->RenderError("Debe ser usuario administrador para acceder a esta sección");
+        }
     }
 }

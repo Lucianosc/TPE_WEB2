@@ -36,4 +36,17 @@ class UserView
 
         $this->smarty->display('templates/signUp.tpl');
     }
+
+    function ShowUsers($users, $sessionUser)
+    {
+        $this->smarty->assign('title', "Administración de usuarios");
+        $this->smarty->assign('users', $users);
+        $this->smarty->assign('sessionUser', $sessionUser);
+
+        $this->smarty->display('templates/users.tpl');
+    }
+
+    function ShowUsersLocation(){
+        header("Location: ".BASE_URL."administer");
+    }
 }
