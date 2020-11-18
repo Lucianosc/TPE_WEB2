@@ -29,7 +29,7 @@ _*clave: admin_
 * [php](https://www.php.net/) - Lenguaje base
 * [smarty](https://www.smarty.net/) - Renderizado
 * [bootstrap](https://getbootstrap.com/) - Estilo y apariencia
-* [Visual Studio Code](https://code.visualstudio.com/) - IDE --> CSS & HTML
+* [Visual Studio Code](https://code.visualstudio.com/) - IDE
 
 ## Información 📖
 
