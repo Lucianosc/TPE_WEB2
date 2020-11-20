@@ -7,7 +7,7 @@
                 <tr>
                     <th scope="col">Usuarios</td>
                     <th scope="col">Permiso</th>
-                    <th scope="col">Modificar rol</th>
+                    <th scope="col">Modificar</th>
                     <th scope="col"></th>
                 </tr>
             </thead>

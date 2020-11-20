@@ -26,5 +26,6 @@
         <button value="{$flat->id_departamento}" name="input_edit_id" class="btn btn-secondary"
             type="submit">Editar</button>
     </form>
+    {include file="images.tpl"}
 </div>
 {include file="footer.tpl"}

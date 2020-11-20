@@ -3,7 +3,7 @@
     <div>
         <h4>Agregar Departamento</h4>
     </div>
-    <form action="insertFlat" method="post">
+    <form action="insertFlat" method="post" enctype="multipart/form-data">
         <div class="form-group">
             <label for="name">Nombre</label>
             <input type="text" name="input_name" class="form-control" placeholder="Nombre Depto">
@@ -15,6 +15,10 @@
         <div class="form-group">
             <label for="price">Precio</label>
             <input type="number" name="input_price" class="form-control" placeholder="Precio">
+        </div>
+        <div class="form-group">
+            <label for="price">Imágenes</label>
+            <input type="file" name="imagesToUpload[]" id="imagesToUpload" multiple>
         </div>
         <div class="form-group">
             <label for="city">Ciudad</label>
