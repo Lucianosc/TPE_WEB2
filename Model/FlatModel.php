@@ -77,10 +77,19 @@ class FlatModel
         $query->execute(array($id));
     }
     //modificación
-    function updateFlat($id, $name, $address, $price, $id_city_fk)
+    function updateFlat($id, $name, $address, $price, $id_city_fk, $tmp_images = null)
     {
         $query = $this->db->prepare("UPDATE departamento SET nombre=?, direccion=?, precio=?, id_ciudad_fk=? 
         WHERE id_departamento=?");
         $query->execute(array($name, $address, $price, $id_city_fk, $id));
+         //Carga de imágenes ---> va acá o en imagesModel? RompeMVC?
+         if($tmp_images !== null){
+            $last_id = $this->db->lastInsertId();
+            $paths = $this->uploadImages($tmp_images);
+            $images_query = $this->db->prepare('INSERT INTO imagen(id_departamento_fk, ruta) VALUES(?,?)');
+            foreach ($paths as $path) {
+                $images_query->execute([$last_id, $path]);
+            }
+        }
     }
 }

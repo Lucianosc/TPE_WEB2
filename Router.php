@@ -3,6 +3,7 @@
     require_once './Controller/FlatController.php';
     require_once './Controller/CityController.php';
     require_once './Controller/UserController.php';
+    require_once './Controller/ImageController.php';
     
     // CONSTANTES PARA RUTEO
     define("BASE_URL", 'http://'.$_SERVER["SERVER_NAME"].':'.$_SERVER["SERVER_PORT"].dirname($_SERVER["PHP_SELF"]).'/');
@@ -46,6 +47,8 @@
 
     $r->addRoute("deleteUser/:ID", "GET", "UserController", "deleteUser");
     $r->addRoute("updateUserRole/:ID", "GET", "UserController", "updateUserRole");
+
+    $r->addRoute("deleteImage/:ID", "GET", "ImageController", "deleteImage");
 
 
     //******************* RUN ***************************

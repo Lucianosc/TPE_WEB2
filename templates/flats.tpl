@@ -66,7 +66,11 @@
                                 {/foreach}
                             </table>
                             {if isset($id_flat)}
-                                {include file="images.tpl"}
+                                {foreach from=$images item=image}
+                                    <div class="form-group">
+                                        <img src="{$image->ruta}" alt="Imagen del departamento {$flat->nombre}">
+                                    </div>
+                                {/foreach}
                             {/if}
                         </div>
                     </div>

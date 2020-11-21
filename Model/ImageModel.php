@@ -20,12 +20,19 @@ class ImageModel
         $query->execute(array($id_flat));
         return  $query->fetchAll(PDO::FETCH_OBJ);
     }
+    function getImage($id_image)
+    {
+        $query = $this->db->prepare('SELECT imagen.* 
+                                    FROM imagen WHERE id_imagen=?');
+        $query->execute(array($id_image));
+        return  $query->fetch(PDO::FETCH_OBJ);
+    }
     //Alta
 
     //Baja
     function deleteImage($id)
     {
-        $query = $this->db->prepare('DELETE FROM imange WHERE id_imagen=?');
+        $query = $this->db->prepare('DELETE FROM imagen WHERE id_imagen=?');
         $query->execute(array($id));
     }
     //Modificacion

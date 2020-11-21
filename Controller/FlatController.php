@@ -81,9 +81,9 @@ class FlatController
                     //HABRIA QUE MOSTRAR ESTE ERROR?
                     //$this->view->renderError("Las imagenes tienen que ser JPG.", $titulo, $descripcion, $completada);
                     // }
-                }
-            } else
-                $this->model->insertFlat($name, $address, $price, $id_city_fk);
+                } else
+                    $this->model->insertFlat($name, $address, $price, $id_city_fk);
+            }
         }
         $this->view->showFlatsLocation();
     }
@@ -152,6 +152,7 @@ class FlatController
         $address = $_POST['input_edit_address'];
         $price = $_POST['input_edit_price'];
         $id_city_fk = $_POST['input_edit_id_city_fk'];
+        //$tmp_images = $_FILES['imagesToUploadEdit']['tmp_name'];
 
         if ((isset($name) && !empty($name)) &&
             (isset($address) && !empty($address)) &&
