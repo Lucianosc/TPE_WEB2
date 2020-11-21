@@ -50,6 +50,11 @@ class FlatView
 
     function ShowFlatLocation($id)
     {
+        header("Location: " . BASE_URL . "flat/". $id);
+    }
+
+    function ShowFlatEditLocation($id)
+    {
         header("Location: " . BASE_URL . "editFlat/". $id);
     }
 }

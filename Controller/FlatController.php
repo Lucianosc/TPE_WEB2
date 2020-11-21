@@ -146,14 +146,12 @@ class FlatController
     //modificación
     function updateFlat()   //FALTA CHECKEAR QUE SEA SOLO ADMIN
     {
-
         $id = $_POST['input_edit_id'];
         $name = $_POST['input_edit_name'];
         $address = $_POST['input_edit_address'];
         $price = $_POST['input_edit_price'];
         $id_city_fk = $_POST['input_edit_id_city_fk'];
-        //$tmp_images = $_FILES['imagesToUploadEdit']['tmp_name'];
-
+        $tmp_images = $_FILES['imagesToUploadEdit']['tmp_name'];
         if ((isset($name) && !empty($name)) &&
             (isset($address) && !empty($address)) &&
             (isset($price) && is_numeric($price)) &&
@@ -161,10 +159,18 @@ class FlatController
         ) {
 
             if ($this->alreadyLoaded($id, $name, $address, $price, $id_city_fk) === false) {
-                $this->model->updateFlat($id, $name, $address, $price, $id_city_fk);
+                if ($tmp_images[0] !== "") {    //si hay alguna imagen
+                    if ($this->areType($_FILES['imagesToUploadEdit']['type']))
+                        $this->model->updateFlat($id, $name, $address, $price, $id_city_fk, $tmp_images);
+                    //else {
+                    //HABRIA QUE MOSTRAR ESTE ERROR?
+                    //$this->view->renderError("Las imagenes tienen que ser JPG.", $titulo, $descripcion, $completada);
+                    // }
+                } else
+                    $this->model->updateFlat($id, $name, $address, $price, $id_city_fk);
             }
         }
-        $this->view->showFlatsLocation();
+        $this->view->showFlatLocation($id);
     }
 
     //filtro

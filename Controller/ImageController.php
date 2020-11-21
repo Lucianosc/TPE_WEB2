@@ -26,7 +26,7 @@ class ImageController
               $image = $this->model->getImage($id);
 
             $this->model->deleteImage($id);
-            $this->viewFlat->showFlatLocation($image->id_departamento_fk);
+            $this->viewFlat->showFlatEditLocation($image->id_departamento_fk);
         } else {
             $this->viewUser->RenderError("Logueate e intentá nuevamente");
         }

@@ -84,11 +84,11 @@ class FlatModel
         $query->execute(array($name, $address, $price, $id_city_fk, $id));
          //Carga de imágenes ---> va acá o en imagesModel? RompeMVC?
          if($tmp_images !== null){
-            $last_id = $this->db->lastInsertId();
+             //es dif al de insertar, el otro tiene q buscar last_id
             $paths = $this->uploadImages($tmp_images);
             $images_query = $this->db->prepare('INSERT INTO imagen(id_departamento_fk, ruta) VALUES(?,?)');
             foreach ($paths as $path) {
-                $images_query->execute([$last_id, $path]);
+                $images_query->execute([$id, $path]);
             }
         }
     }
