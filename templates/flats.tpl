@@ -64,9 +64,42 @@
                                 {/foreach}
                             </table>
                         </div>
+                        {if isset($id_flat)}
+                        {if $sessionUser eq true}
+                        <div class="row" id="form-div">
+                            <div class="container mt-5">
+                                <div class="d-flex justify-content-center row">
+                                    <div class="col">
+                                        <form id="comment-form" action="insert" method="post">
+                                            <div class="rating"> 
+                                                <input type="radio" name="rating" value="5" id="5"><label for="5">☆</label>
+                                                <input type="radio" name="rating" value="4" id="4"><label for="4">☆</label> 
+                                                <input type="radio" name="rating" value="3" id="3"><label for="3">☆</label>
+                                                <input type="radio" name="rating" value="2" id="2"><label for="2">☆</label> 
+                                                <input type="radio" name="rating" value="1" id="1"><label for="1">☆</label>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="text-area">Deja tu comentario</label>
+                                                <textarea class="form-control" name="input_text" id="input-text" rows="3"></textarea>
+                                            </div>
+                                            <div class="form-group">
+                                                <button type="submit" class="btn btn-primary">Enviar</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {/if}
+                        <div class="row" id="vue-div" user-name="{$sessionUser['USER']}" flat-id="{$id_flat}" user-id="{$sessionUser['ID']}">
+                        {include file="vue/comments.vue"}
+                        </div>
+                        {/if}
                     </div>
                 {/if}
             </div>  
         </div>
     </div>
+    {* CSR *}
+    <script src="js/comments.js"></script>
 {include file="footer.tpl"}

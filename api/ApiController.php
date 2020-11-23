@@ -20,6 +20,16 @@ class ApiController{
         return json_decode($this->data); 
     }
 
+    function getComment($params = null){
+        $id = $params[':ID'];
+        $data = $this->model->getComment($id);
+
+        if ($data)
+            $this->view->response($data, 200);
+        else
+            $this->view->response("Comentario con id: $id no existe", 404);
+    }
+
     function getComments(){
         $data = $this->model->getComments();
         $this->view->response($data, 200);
@@ -32,22 +42,18 @@ class ApiController{
         if ($data)
             $this->view->response($data, 200);
         else 
-            $this->view->response("Departamento Id: $flatId No Existe!", 404);
+            $this->view->response($data, 404);
         
     }
 
     function postComment(){
-        // $text = $_POST['input_text'];
-        // $userId = $_POST['input_user_id'];
-        // $flatId = $_POST['input_flat_id'];
+
         $body = $this->getData();
 
-        // $this->model->postComment($text, $userId, $flatId);
-
-        $comment = $this->model->postComment($body->texto, $body->id_usuario_fk, $body->id_depto_fk);
+        $comment = $this->model->postComment($body->texto, $body->puntaje, $body->id_usuario_fk, $body->id_depto_fk);
 
         if ($comment)
-            $this->view->response( $body, 201);
+            $this->view->response($body, 201);
         else
             $this->view->response("El comentario no se pudo crear", 404);
     }

@@ -1,6 +1,6 @@
 {include file="header.tpl"}
 
-<div class="col-md-4 offset-md-2">
+<div class="col-md-4 offset-md-4">
     <div class="row" id="table-div">
         <table class="table">
             <thead class="thead-dark">
