@@ -1,7 +1,7 @@
 {include file="header.tpl"}
 <div class="container-fluid" id="edit-div">
     <h3>Editar Departamento</h3>
-    <form action="editFlat" method="post">
+    <form action="editFlat" method="post" enctype="multipart/form-data">
 
         <label for="name">Nombre</label>
         <input type="text" name="input_edit_name" value="{$flat->nombre}" placeholder="{$flat->nombre}">
@@ -22,9 +22,13 @@
                 {/if}
             {/foreach}
         </select>
-
+       
+        <label for="price">Imágenes</label>
+        <input type="file" name="imagesToUploadEdit[]" id="imagesToUploadEdit" multiple>
+      
         <button value="{$flat->id_departamento}" name="input_edit_id" class="btn btn-secondary"
             type="submit">Editar</button>
     </form>
+    {include file="images.tpl"}
 </div>
 {include file="footer.tpl"}

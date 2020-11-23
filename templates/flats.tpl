@@ -24,12 +24,14 @@
                         <div class="row" id="table-div">
                             <table class="table">
                                 <thead class="thead-dark">
-                                    <th scope="col">Departamentos</th>
                                     {if isset($id_flat)}
-                                        <th scope="col">Direccion</th>
+                                        <th scope="col">Departamento</th>
+                                        <th scope="col">Dirección</th>
                                         <th scope="col">Precio</th>
+                                    {else}
+                                        <th scope="col">Departamentos</th>
                                     {/if}
-                                    <th scope="col">Ciudades</th>
+                                    <th scope="col">Ciudad</th>
                                     {if $sessionUser eq true && $sessionUser['ROLE'] eq 0}
                                         <th scope="col"></th>
                                         <th scope="col"></th>
@@ -63,6 +65,13 @@
                                     </tr>
                                 {/foreach}
                             </table>
+                            {if isset($id_flat)}
+                                {foreach from=$images item=image}
+                                    <div class="form-group">
+                                        <img src="{$image->ruta}" alt="Imagen del departamento {$flat->nombre}">
+                                    </div>
+                                {/foreach}
+                            {/if}
                         </div>
                         {if isset($id_flat)}
                         {if $sessionUser eq true}

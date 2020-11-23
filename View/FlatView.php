@@ -11,12 +11,13 @@ class FlatView
         $this->smarty = new Smarty();
     }
 
-    function ShowFlats($flats, $cities, $sessionUser, $id_flat = null)
+    function ShowFlats($flats, $cities, $sessionUser, $id_flat = null, $images = null)
     {
         $this->smarty->assign('flats', $flats);
         $this->smarty->assign('cities', $cities);
         $this->smarty->assign('sessionUser', $sessionUser);
         $this->smarty->assign('id_flat', $id_flat);
+        $this->smarty->assign('images', $images);
     
         $this->smarty->display('templates/flats.tpl');
     }
@@ -32,11 +33,12 @@ class FlatView
     }
 
     //muestra -> modificacion
-    function ShowEditFlat($flat, $cities, $sessionUser)
+    function ShowEditFlat($flat, $cities, $images, $sessionUser)
     {
         $this->smarty->assign('flat', $flat);
         $this->smarty->assign('cities', $cities);
         $this->smarty->assign('sessionUser', $sessionUser);
+        $this->smarty->assign('images', $images);
 
         $this->smarty->display('templates/editFlat.tpl');
     }
@@ -44,5 +46,15 @@ class FlatView
     function ShowFlatsLocation()
     {
         header("Location: " . BASE_URL . "showFlats");
+    }
+
+    function ShowFlatLocation($id)
+    {
+        header("Location: " . BASE_URL . "flat/". $id);
+    }
+
+    function ShowFlatEditLocation($id)
+    {
+        header("Location: " . BASE_URL . "editFlat/". $id);
     }
 }
