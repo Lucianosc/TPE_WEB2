@@ -19,6 +19,7 @@ class FlatController
     private $authHelper;
     private $viewUser;
     private $modelImage;
+    private $controllerImage;
 
     public function __construct()
     {
@@ -32,6 +33,7 @@ class FlatController
         $this->viewUser = new UserView();
 
         $this->modelImage = new ImageModel();
+        $this->controllerImage = new ImageController();
     }
 
     function showFlats()
@@ -71,31 +73,17 @@ class FlatController
             (isset($address) && !empty($address)) &&
             (isset($price) && is_numeric($price)) &&
             (isset($id_city_fk) && is_numeric($id_city_fk))
-        ) { //Acá no se si poner directamente un solo if y si no cumple con los requisitos de formato
-            //de las imagenes que recargue la página
+        ) {
             if ($this->alreadyLoaded($name, $address, $id_city_fk) === false) {
-                if ($tmp_images[0] !== "") {    //si hay alguna imagen
-                    if ($this->areType($_FILES['imagesToUpload']['type']))
-                        $this->model->insertFlat($name, $address, $price, $id_city_fk, $tmp_images);
-                    //else {
-                    //HABRIA QUE MOSTRAR ESTE ERROR?
-                    //$this->view->renderError("Las imagenes tienen que ser JPG.", $titulo, $descripcion, $completada);
-                    // }
-                } else
-                    $this->model->insertFlat($name, $address, $price, $id_city_fk);
-            }
-        }
-        $this->view->showFlatsLocation();
-    }
 
-    //ALTA -> Checkea si todas las imagenes para subir son del tipo correspondiente
-    private function areType($typeImages)
-    {
-        foreach ($typeImages as $type) {
-            if (!($type == 'image/jpeg' || $type == 'image/jpg' || $type == 'image/png'))
-                return false;
-        }
-        return true;
+                $id_flat = $this->model->insertFlat($name, $address, $price, $id_city_fk);
+
+                if (!empty($tmp_images[0]))  //si hay alguna imagen
+                    $this->controllerImage->insertImages($tmp_images, $id_flat);
+
+                else $this->view->showFlatLocation($id_flat);
+            }
+        } else $this->viewUser->RenderError("Debe completar todos los campos del formulario");
     }
 
     //ALTA -> Checkea si existe el depto en la db 
@@ -152,22 +140,18 @@ class FlatController
         $price = $_POST['input_edit_price'];
         $id_city_fk = $_POST['input_edit_id_city_fk'];
         $tmp_images = $_FILES['imagesToUploadEdit']['tmp_name'];
+
         if ((isset($name) && !empty($name)) &&
             (isset($address) && !empty($address)) &&
             (isset($price) && is_numeric($price)) &&
             (isset($id_city_fk) && is_numeric($id_city_fk))
         ) {
-
             if ($this->alreadyLoaded($id, $name, $address, $price, $id_city_fk) === false) {
-                if ($tmp_images[0] !== "") {    //si hay alguna imagen
-                    if ($this->areType($_FILES['imagesToUploadEdit']['type']))
-                        $this->model->updateFlat($id, $name, $address, $price, $id_city_fk, $tmp_images);
-                    //else {
-                    //HABRIA QUE MOSTRAR ESTE ERROR?
-                    //$this->view->renderError("Las imagenes tienen que ser JPG.", $titulo, $descripcion, $completada);
-                    // }
-                } else
-                    $this->model->updateFlat($id, $name, $address, $price, $id_city_fk);
+
+                $this->model->updateFlat($id, $name, $address, $price, $id_city_fk);
+
+                if (!empty($tmp_images[0]))   //si hay alguna imagen
+                    $this->controllerImage->insertImages($tmp_images, $id);
             }
         }
         $this->view->showFlatLocation($id);

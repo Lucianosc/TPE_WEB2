@@ -43,33 +43,13 @@ class FlatModel
     }
 
     //alta
-    function insertFlat($name, $address, $price, $id_city_fk, $tmp_images = null)
-    {  //---VER SI NULL
+    function insertFlat($name, $address, $price, $id_city_fk)
+    {
         $query = $this->db->prepare('INSERT INTO departamento(nombre, direccion, precio, id_ciudad_fk) VALUES(?,?,?,?)');
         $query->execute(array($name, $address, $price, $id_city_fk));
-        //Carga de imágenes ---> va acá o en imagesModel? RompeMVC?
-        if($tmp_images !== null){
-            $last_id = $this->db->lastInsertId();
-            $paths = $this->uploadImages($tmp_images);
-            $images_query = $this->db->prepare('INSERT INTO imagen(id_departamento_fk, ruta) VALUES(?,?)');
-            foreach ($paths as $path) {
-                $images_query->execute([$last_id, $path]);
-            }
-        }
+        return $this->db->lastInsertId();
     }
-    //ALTA->carga las imágenes de un departamento
-    private function uploadImages($images)
-    {
-        $paths = [];
-        foreach ($images as $image) {
-            $final_path = 'images/' . uniqid() . '.jpg';
-            //$final_path = 'images/' . uniqid() . $image['type'];
-            //$final_path = 'images/' . uniqid();
-            move_uploaded_file($image, $final_path);
-            $paths[] = $final_path;
-        }
-        return $paths;
-    }
+    
     //baja
     function deleteFlat($id)
     {
@@ -85,11 +65,11 @@ class FlatModel
          //Carga de imágenes ---> va acá o en imagesModel? RompeMVC?
          if($tmp_images !== null){
              //es dif al de insertar, el otro tiene q buscar last_id
-            $paths = $this->uploadImages($tmp_images);
+            /*$paths = $this->uploadImages($tmp_images);
             $images_query = $this->db->prepare('INSERT INTO imagen(id_departamento_fk, ruta) VALUES(?,?)');
             foreach ($paths as $path) {
                 $images_query->execute([$id, $path]);
-            }
+            }*/
         }
     }
 }
