@@ -29,9 +29,9 @@ class ImageModel
     }
 
     //Alta
-    function insertImages($tmp_images, $types_images, $id_flat)
+    function insertImages($tmp_images, $name_images, $id_flat)
     {
-        $paths = $this->uploadImages($tmp_images, $types_images);
+        $paths = $this->uploadImages($tmp_images, $name_images);
         $images_query = $this->db->prepare('INSERT INTO imagen(id_departamento_fk, ruta) VALUES(?,?)');
         foreach ($paths as $path) {
             $images_query->execute([$id_flat, $path]);
@@ -39,16 +39,16 @@ class ImageModel
     }
 
     //ALTA->carga las imágenes de un departamento
-    private function uploadImages($images, $types_images)
+    private function uploadImages($tmp_images, $name_images)
     {
         $paths = [];
 
-        for($i = 0; $i < count($images); $i++){
-            $image = $images[$i];
-            $type_image = $types_images[$i];
+        for($i = 0; $i < count($tmp_images); $i++){
+            $tmp_image = $tmp_images[$i];
+            $name_image = $name_images[$i];
             $final_path = 'images/temp/' . uniqid() . "." 
-            . strtolower(pathinfo($type_image, PATHINFO_EXTENSION));
-            move_uploaded_file($image, $final_path);
+            . strtolower(pathinfo($name_image, PATHINFO_EXTENSION));
+            move_uploaded_file($tmp_image, $final_path);
             $paths[] = $final_path;
         }
         /*foreach ($images as $image) {

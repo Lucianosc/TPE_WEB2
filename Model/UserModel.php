@@ -23,6 +23,7 @@ class UserModel {
     function deleteUser($id_user){
         $query = $this->db->prepare("DELETE FROM usuario WHERE id_usuario=?");
         $query->execute(array($id_user));
+        return $query->rowCount();
     }
 
     function createUser($user, $password_hash, $role){

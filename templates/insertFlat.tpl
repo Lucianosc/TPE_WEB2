@@ -6,15 +6,15 @@
     <form action="insertFlat" method="post" enctype="multipart/form-data">
         <div class="form-group">
             <label for="name">Nombre</label>
-            <input type="text" name="input_name" class="form-control" placeholder="Nombre Depto">
+            <input type="text" name="input_name" class="form-control" placeholder="Nombre Depto" required>
         </div>
         <div class="form-group">
             <label for="address">Dirección</label>
-            <input type="text" name="input_address" class="form-control" placeholder="Dirección">
+            <input type="text" name="input_address" class="form-control" placeholder="Dirección" required>
         </div>
         <div class="form-group">
             <label for="price">Precio</label>
-            <input type="number" name="input_price" class="form-control" placeholder="Precio">
+            <input type="number" name="input_price" class="form-control" placeholder="Precio" required>
         </div>
         <div class="form-group">
             <label for="price">Imágenes</label>

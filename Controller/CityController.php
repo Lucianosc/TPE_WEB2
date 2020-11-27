@@ -25,26 +25,34 @@ class CityController
     //muestra todas las ciudades
     function showCities()
     {
-        $logged = $this->authHelper->isLoggedIn();
+        $logged = $this->authHelper->isLoggedIn();  //debe ser admin?
 
         $cities = $this->model->getCities();
         $this->view->ShowHome($cities, $logged);
     }
 
     //alta
-    function insertCity()
+    function insertCity()   //Es necesario checkeo línea 37?
     {
-        $name = $_POST['input_name'];
-        if (isset($name) && !empty($name)) {
-            if ($this->alreadyLoaded($name) === false) {
-                $this->model->insertCity($name);
-            }
-        }
-        $this->view->showCitiesLocation();
+        $logged = $this->authHelper->isLoggedIn();  //FALTA CHECKEAR QUE SEA SOLO ADMIN
+        if ($logged) {
+            $name = $_POST['input_name'];
+            if (isset($name) && !empty($name)) {
+                if ($this->alreadyLoaded($name) === false) {
+                    $this->model->insertCity($name);
+                    $this->view->showCitiesLocation();
+                } else {
+                    $errorMessaje = "Esta ciudad ya existe en la base de datos.";
+                    $this->view->ShowError($errorMessaje, $logged);
+                }
+            } else
+                $this->viewUser->RenderError("Debe completar todos los campos del formulario"); //---es necesario?
+        } else
+            $this->viewUser->RenderError("Debe ser administrador para acceder a esta sección.");
     }
 
     //ALTA -> Checkea si existe la ciudad en la db
-    function alreadyLoaded($name)
+    private function alreadyLoaded($name)
     {
         $cities = $this->model->getCities();
         $exist = false;
@@ -58,49 +66,54 @@ class CityController
     //baja
     function deleteCity($params = null)
     {
-        $logged = $this->authHelper->isLoggedIn();
+        $logged = $this->authHelper->isLoggedIn();  //DEBE SER ADMIN
         if ($logged) {
-            $id = $params[':ID'];
-            $city = $this->model->deleteCity($id);
-            $city = $this->model->getCityById($id);
-            if($city){
+            $id = $params[':ID'];   //debo checkear q los params sea isset?
+            $result = $this->model->deleteCity($id);
+            if ($result > 0)
+                $this->view->showCitiesLocation();
+            else {
                 $errorMessaje = "Debe eliminar los departamentos asociados a esta ciudad primero.";
                 $this->view->ShowError($errorMessaje, $logged);
-            } else {
-                $this->view->showCitiesLocation();
             }
-        } else {
-            $this->viewUser->RenderError("Logueate e intentá nuevamente");
-        }
-        
+        } else
+            $this->viewUser->RenderError("Debe ser administrador para acceder a esta sección.");
     }
+
     //redireccion -> para modificacion
     function editCity($params = null)
     {
-        $logged = $this->authHelper->isLoggedIn();
+        $logged = $this->authHelper->isLoggedIn();  //debe ser admin
         if ($logged) {
-            $id_city = $params[':ID'];
-            $city = $this->model->GetCityById($id_city);
+            $id_city = $params[':ID'];  //debo checkear q este seteado params?
+            $city = $this->model->getCityById($id_city);
 
             if ($city) {    //checkea si obtuvo un objeto no vacío de la db
                 $this->view->ShowEditCity($city, $logged);
             } else {
                 $this->viewUser->RenderError("No existe id en la base de datos");
             }
-        } else {
-            $this->viewUser->RenderError("Logueate e intentá nuevamente");
-        }
+        } else
+            $this->viewUser->RenderError("Debe ser administrador para acceder a esta sección.");
     }
     //modificación
-    function updateCity()
+    function updateCity()   //es necesario el checkeo de linea 103?
     {
-        $id = $_POST['input_edit_id'];
-        $name = $_POST['input_edit_name'];
-        if ((isset($name) && !empty($name))) {
-            if ($this->alreadyLoaded($id, $name) === false) {
-                $this->model->updateCity($id, $name);
-            }
-        }
-        $this->view->showCitiesLocation();
+        $logged = $this->authHelper->isLoggedIn();  //debe ser admin
+        if ($logged) {
+            $id = $_POST['input_edit_id'];
+            $name = $_POST['input_edit_name'];
+            if ((isset($name) && !empty($name))) {
+                if ($this->alreadyLoaded($name) === false) {
+                    $this->model->updateCity($id, $name);
+                    $this->view->showCitiesLocation();
+                } else {
+                    $errorMessaje = "Esta ciudad ya existe en la base de datos. Intente nuevamente";
+                    $this->view->ShowError($errorMessaje, $logged);
+                }
+            } else
+                $this->viewUser->RenderError("Debe completar todos los campos del formulario"); //---es necesario?
+        } else
+            $this->viewUser->RenderError("Debe ser administrador para acceder a esta sección.");
     }
 }
