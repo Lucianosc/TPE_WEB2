@@ -47,34 +47,7 @@ class FlatModel
     {
         $query = $this->db->prepare('INSERT INTO departamento(nombre, direccion, precio, id_ciudad_fk) VALUES(?,?,?,?)');
         $query->execute(array($name, $address, $price, $id_city_fk));
-<<<<<<< HEAD
-        //Carga de imágenes ---> va acá o en imagesModel? RompeMVC?
-        if($tmp_images !== null){
-
-            // mandar al img controller 
-            $last_id = $this->db->lastInsertId();
-            $paths = $this->uploadImages($tmp_images);
-            $images_query = $this->db->prepare('INSERT INTO imagen(id_departamento_fk, ruta) VALUES(?,?)');
-            foreach ($paths as $path) {
-                $images_query->execute([$last_id, $path]);
-            }
-        }
-    }
-    //ALTA->carga las imágenes de un departamento
-    private function uploadImages($images)
-    {
-        $paths = [];
-        foreach ($images as $image) {
-            $final_path = 'images/' . uniqid() . '.jpg';
-            //$final_path = 'images/' . uniqid() . $image['type'];
-            //$final_path = 'images/' . uniqid();
-            move_uploaded_file($image, $final_path);
-            $paths[] = $final_path;
-        }
-        return $paths;
-=======
         return $this->db->lastInsertId();
->>>>>>> 5620b6847abd365e277afccd8563c061802f17de
     }
     
     //baja

@@ -41,28 +41,19 @@ class FlatController
         $sessionUser = $this->authHelper->isLoggedIn();
         $flats = $this->model->getFlats();
         $cities = $this->modelCity->getCities();
-<<<<<<< HEAD
-        $this->view->ShowFlats($flats, $cities, $sessionUser);
-    }
-
-    function showFlat($params = null)
-    {
-        $sessionUser = $this->authHelper->isLoggedIn();
-=======
         $this->view->ShowFlats($flats, $cities, $logged);
     }*/
 
     function showFlat($params = null)
     {
         $logged = $this->authHelper->isLoggedIn();  //debe ser admin?
->>>>>>> 5620b6847abd365e277afccd8563c061802f17de
         $id_flat = $params[':ID'];
         $flat = $this->model->getFlatById($id_flat);
 
         if ($flat) {    //checkea si obtuvo un objeto no vacío de la db
             $city = $this->modelCity->getCities();
             $images = $this->modelImage->getImagesByFlat($id_flat);
-            $this->view->ShowFlat($flat, $city, $sessionUser, $images);
+            $this->view->ShowFlat($flat, $city, $logged, $images);
         } else {
             $this->viewUser->RenderError("No existe id en la base de datos");
         }
@@ -71,14 +62,6 @@ class FlatController
     //alta
     function insertFlat()   //Es necesario checkeo línea 66?
     {
-<<<<<<< HEAD
-        // mandar al img controller
-        foreach ($typeImages as $type) {
-            if (!($type == 'image/jpeg' || $type == 'image/jpg' || $type == 'image/png'))
-                return false;
-        }
-        return true;
-=======
         $logged = $this->authHelper->isLoggedIn();  //FALTA CHECKEAR QUE SEA SOLO ADMIN
         if ($logged) {
             $name = $_POST['input_name'];
@@ -109,7 +92,6 @@ class FlatController
             } else $this->viewUser->RenderError("Debe completar todos los campos del formulario"); //---es necesario?
         } else
             $this->viewUser->RenderError("Debe ser administrador para acceder a esta sección.");
->>>>>>> 5620b6847abd365e277afccd8563c061802f17de
     }
 
     //ALTA -> Checkea si existe el depto en la db 

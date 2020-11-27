@@ -104,22 +104,10 @@ class UserController
     function deleteUser($params = null)
     {
         $logged = $this->authHelper->isLoggedIn();
-<<<<<<< HEAD
-        if ($logged && $_SESSION['ROLE'] == 0) { // preguntar al helper por la sesion
-            $id = $params[':ID'];
-            //falta controlar si el usuario existe---> x si entra x url?
-            $user = $this->model->deleteUser($id);
-           /* $user = $this->model->getUserById($id);
-            if($user){
-                $errorMessaje = "Debe eliminar los comentarios asociados de este usuario primero.";
-                $this->view->ShowError($errorMessaje, $logged);
-            } else {*/
-=======
         if ($logged && $_SESSION['ROLE'] == 0) {
             $id = $params[':ID'];   //tengo que checkear si esta seteado params?
             $result = $this->model->deleteUser($id);
             if ($result > 0)
->>>>>>> 5620b6847abd365e277afccd8563c061802f17de
                 $this->view->showUsersLocation();
             else
                 $this->view->RenderError("No existe usuario en la base de datos para ser eliminado.");
@@ -127,19 +115,11 @@ class UserController
             $this->view->RenderError("Debe ser usuario administrador para acceder a esta sección");
     }
 
-<<<<<<< HEAD
-    function updateUserRole($params = null){
-        $logged = $this->authHelper->isLoggedIn();
-        if ($logged && $_SESSION['ROLE'] == 0) { // preguntar al helper
-            $id = $params[':ID'];
-            //falta controlar si el usuario existe---> x si entra x url?
-=======
     function updateUserRole($params = null)
     {
         $logged = $this->authHelper->isLoggedIn();  //DEBE SER ADMIN
         if ($logged && $_SESSION['ROLE'] == 0) {
             $id = $params[':ID'];   //ES NECESARIO CHECKEAR PARAMS?
->>>>>>> 5620b6847abd365e277afccd8563c061802f17de
             $user = $this->model->getUserById($id);
             if ($user) {
                 if ($user->rol == 1)
