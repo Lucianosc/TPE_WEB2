@@ -30,6 +30,7 @@ class CityModel {
     function deleteCity($id) {
         $query = $this->db->prepare('DELETE FROM ciudad WHERE id_ciudad=?');
         $query->execute(array($id));
+        return $query->rowCount();
     }
     //modificación
     function updateCity($id, $name) {

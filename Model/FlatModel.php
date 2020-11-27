@@ -43,10 +43,11 @@ class FlatModel
     }
 
     //alta
-    function insertFlat($name, $address, $price, $id_city_fk, $tmp_images = null)
-    {  //---VER SI NULL
+    function insertFlat($name, $address, $price, $id_city_fk)
+    {
         $query = $this->db->prepare('INSERT INTO departamento(nombre, direccion, precio, id_ciudad_fk) VALUES(?,?,?,?)');
         $query->execute(array($name, $address, $price, $id_city_fk));
+<<<<<<< HEAD
         //Carga de imágenes ---> va acá o en imagesModel? RompeMVC?
         if($tmp_images !== null){
 
@@ -71,7 +72,11 @@ class FlatModel
             $paths[] = $final_path;
         }
         return $paths;
+=======
+        return $this->db->lastInsertId();
+>>>>>>> 5620b6847abd365e277afccd8563c061802f17de
     }
+    
     //baja
     function deleteFlat($id)
     {
@@ -87,11 +92,36 @@ class FlatModel
          //Carga de imágenes ---> va acá o en imagesModel? RompeMVC?
          if($tmp_images !== null){
              //es dif al de insertar, el otro tiene q buscar last_id
-            $paths = $this->uploadImages($tmp_images);
+            /*$paths = $this->uploadImages($tmp_images);
             $images_query = $this->db->prepare('INSERT INTO imagen(id_departamento_fk, ruta) VALUES(?,?)');
             foreach ($paths as $path) {
                 $images_query->execute([$id, $path]);
-            }
+            }*/
         }
+    }
+
+    //paginación
+
+    function getFlatsByLimit($start_from_record, $quantity_to_show){
+        $query = $this->db->prepare("SELECT departamento.*, ciudad.nombre as nombre_ciudad
+                                    FROM departamento INNER JOIN ciudad ON
+                                    departamento.id_ciudad_fk = ciudad.id_ciudad 
+                                    LIMIT $start_from_record, $quantity_to_show");
+        $query->execute();
+        return $query->fetchAll(PDO::FETCH_OBJ);
+    }
+
+    function getCountFlats()
+    {
+        $query = $this->db->prepare('SELECT COUNT(*) FROM departamento');
+        $query->execute();
+        return  $query->fetch(PDO::FETCH_OBJ);
+    }
+
+    function getNumberFlats()
+    {
+        $query = $this->db->prepare('SELECT departamento.* FROM departamento');
+        $query->execute();
+        return  $query->rowCount();
     }
 }

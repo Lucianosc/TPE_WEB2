@@ -6,7 +6,7 @@
     <form action="insertCity" method="post">
         <div class="form-group">
             <label for="title">Nombre</label>
-            <input type="text" name="input_name" class="form-control" placeholder="Nombre Ciudad">
+            <input type="text" name="input_name" class="form-control" placeholder="Nombre Ciudad" required>
         </div>
         <button type="submit" class="btn btn-secondary">Agregar</button>
     </form>

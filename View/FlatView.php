@@ -65,4 +65,9 @@ class FlatView
     {
         header("Location: " . BASE_URL . "editFlat/". $id);
     }
+    //VER SI VA ACA Y SI QUITAR LOS OTROS DOS -> CONSULTAR
+    function showFlatURL($url)
+    {
+        header("Location: " . $url);
+    }
 }
