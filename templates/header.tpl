@@ -52,7 +52,7 @@
                     </div>
                     {if $sessionUser eq true && $sessionUser['ROLE'] eq 0}
                     <div class="col">
-                        <a href="administer"><button type="button" class="btn btn-danger"
+                        <a href="admin"><button type="button" class="btn btn-danger"
                             id="btn-color">Administración</button></a>
                     </div>
                     {/if}

@@ -36,23 +36,22 @@ class FlatController
 
     function showFlats()
     {
-        $logged = $this->authHelper->isLoggedIn();
+        $sessionUser = $this->authHelper->isLoggedIn();
         $flats = $this->model->getFlats();
         $cities = $this->modelCity->getCities();
-        $this->view->ShowFlats($flats, $cities, $logged);
+        $this->view->ShowFlats($flats, $cities, $sessionUser);
     }
 
     function showFlat($params = null)
     {
-        $logged = $this->authHelper->isLoggedIn();
+        $sessionUser = $this->authHelper->isLoggedIn();
         $id_flat = $params[':ID'];
         $flat = $this->model->getFlatById($id_flat);
 
         if ($flat) {    //checkea si obtuvo un objeto no vacío de la db
-            $cities = $this->modelCity->getCities();
-            $flat = array($flat);
+            $city = $this->modelCity->getCities();
             $images = $this->modelImage->getImagesByFlat($id_flat);
-            $this->view->ShowFlats($flat, $cities, $logged, $id_flat, $images);
+            $this->view->ShowFlat($flat, $city, $sessionUser, $images);
         } else {
             $this->viewUser->RenderError("No existe id en la base de datos");
         }
@@ -91,6 +90,7 @@ class FlatController
     //ALTA -> Checkea si todas las imagenes para subir son del tipo correspondiente
     private function areType($typeImages)
     {
+        // mandar al img controller
         foreach ($typeImages as $type) {
             if (!($type == 'image/jpeg' || $type == 'image/jpg' || $type == 'image/png'))
                 return false;

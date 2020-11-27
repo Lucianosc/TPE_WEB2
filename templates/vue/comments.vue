@@ -15,7 +15,7 @@
                                     <p>Puntaje: {{comment.puntaje}}</p>
                                 </div>
                             </div>
-                            <div>
+                            <div v-if="admin">
                                 <button v-on:click="deleteComment($event)" class="btn btn-secondary btn-sm" :id="comment.id_comentario"> X </button>
                             </div>
                         </div>

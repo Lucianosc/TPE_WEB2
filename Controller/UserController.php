@@ -37,10 +37,10 @@ class UserController
             if (isset($userFromDB) && $userFromDB) {
 
                 if (password_verify($pass, $userFromDB->clave)) {
-                    session_start();
+                    session_start();                       //
                     $_SESSION['USER'] = $userFromDB->email;
                     $_SESSION['ID'] = $userFromDB->id_usuario;
-                    $_SESSION['ROLE'] = $userFromDB->rol;
+                    $_SESSION['ROLE'] = $userFromDB->rol; // mandar al auth helper
                     $this->viewCity->ShowCitiesLocation();
                 } else
                     $this->view->ShowLogin("Contraseña incorrecta");
@@ -97,7 +97,7 @@ class UserController
 
     function deleteUser($params = null){    //TESTEAR POSIBLES ERRORES DE SEGURIDAD
         $logged = $this->authHelper->isLoggedIn();
-        if ($logged && $_SESSION['ROLE'] == 0) {
+        if ($logged && $_SESSION['ROLE'] == 0) { // preguntar al helper por la sesion
             $id = $params[':ID'];
             //falta controlar si el usuario existe---> x si entra x url?
             $user = $this->model->deleteUser($id);
@@ -115,7 +115,7 @@ class UserController
 
     function updateUserRole($params = null){
         $logged = $this->authHelper->isLoggedIn();
-        if ($logged && $_SESSION['ROLE'] == 0) {
+        if ($logged && $_SESSION['ROLE'] == 0) { // preguntar al helper
             $id = $params[':ID'];
             //falta controlar si el usuario existe---> x si entra x url?
             $user = $this->model->getUserById($id);

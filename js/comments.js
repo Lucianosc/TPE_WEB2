@@ -3,7 +3,8 @@ const app = new Vue({
     el: '#app-comments',
     data: {
         comments: [],
-        commentsLength: 0
+        commentsLength: 0,
+        admin: false
     },
     methods: {
         deleteComment: function (event) {
@@ -16,20 +17,36 @@ const app = new Vue({
 
 document.addEventListener("DOMContentLoaded", () => {
     "use strict"
+    
+    isAdminLoggedIn();
     getFlatComments();
+    addEventListeners();
+   
+});
 
+function isAdminLoggedIn(){
+    let userId = document.getElementById("form-div").getAttribute("user-role");
+
+    console.log(userId);
+
+    if(userId == 0){
+        app.admin = true;
+    }
+}
+
+function addEventListeners(){
     let div = document.querySelector("#comment-form");
+
     if(div != null){
         document.getElementById("comment-form").addEventListener("submit", e => {
             e.preventDefault();
             addComment();
         })
     }
-});
+}
 
-const flatId = document.getElementById("vue-div").getAttribute("flat-id");
-const userId = document.getElementById("vue-div").getAttribute("user-id");
-const nameUser = document.getElementById("vue-div").getAttribute("user-name");
+let flatId = document.getElementById("vue-div").getAttribute("flat-id");
+
 
 function getFlatComments(){
     fetch("api/flatComments/" + flatId)
@@ -66,7 +83,8 @@ function deleteCommentById(id){
 }
 
 function addComment(){
-
+    let userId = document.getElementById("form-div").getAttribute("user-id");
+    let nameUser = document.getElementById("form-div").getAttribute("user-name");
     let inputs = document.querySelectorAll("div.rating input[name='rating']");
     let number;
     inputs.forEach(element => {
@@ -95,6 +113,7 @@ function addComment(){
         return response.json();
     })
     .then(comment => {
+        console.log(comment);
         app.comments.push(comment);
         app.commentsLength = app.comments.length;
     })

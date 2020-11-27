@@ -11,6 +11,7 @@
 
     $r->addRoute('comments', 'GET', 'ApiController', 'getComments');
     $r->addRoute('comments/:ID', 'GET', 'ApiController', 'getComment');
+    
     $r->addRoute('flatComments/:ID', 'GET', 'ApiController', 'getCommentsByFlatId');
     $r->addRoute('comments', 'POST', 'ApiController', 'postComment');
     $r->addRoute('comments/:ID', 'DELETE', 'ApiController', 'deleteComment'); 

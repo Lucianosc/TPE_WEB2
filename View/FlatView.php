@@ -11,15 +11,23 @@ class FlatView
         $this->smarty = new Smarty();
     }
 
-    function ShowFlats($flats, $cities, $sessionUser, $id_flat = null, $images = null)
+    function ShowFlats($flats, $cities, $sessionUser)
     {
         $this->smarty->assign('flats', $flats);
         $this->smarty->assign('cities', $cities);
         $this->smarty->assign('sessionUser', $sessionUser);
-        $this->smarty->assign('id_flat', $id_flat);
-        $this->smarty->assign('images', $images);
     
         $this->smarty->display('templates/flats.tpl');
+    }
+
+    function ShowFlat($flat, $city, $sessionUser, $images = null)
+    {
+        $this->smarty->assign('flat', $flat);
+        $this->smarty->assign('city', $city);
+        $this->smarty->assign('sessionUser', $sessionUser);
+        $this->smarty->assign('images', $images);
+    
+        $this->smarty->display('templates/flat.tpl');
     }
 
     function ShowError($cities, $errorMessaje, $sessionUser, $id_flat = null)

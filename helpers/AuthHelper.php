@@ -16,7 +16,7 @@ class AuthHelper{
     function isLoggedIn()
     {            
         if (!isset($_SESSION)) {
-            session_start();
+            session_start();   
         }
         if (isset($_SESSION['USER'])) {
             return $_SESSION;
@@ -24,6 +24,9 @@ class AuthHelper{
             return false;
         }
     }
+
+    // chequear nivel de acceso admin/user y llamar al isLoggedIn
+
 
     //destruye la sesión y redirige a ShowCities
     function logout()
@@ -34,4 +37,5 @@ class AuthHelper{
     $this->viewCity->ShowCitiesLocation();
     }
 
+    //iniciar sesion
 }

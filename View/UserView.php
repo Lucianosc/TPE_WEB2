@@ -47,6 +47,6 @@ class UserView
     }
 
     function ShowUsersLocation(){
-        header("Location: ".BASE_URL."administer");
+        header("Location: ".BASE_URL."admin");
     }
 }

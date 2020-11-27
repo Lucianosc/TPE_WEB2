@@ -7,16 +7,15 @@ class ApiController{
     
     private $model;
     private $view;
-
-    private $data; /* solo para prueba */
+    private $data; 
 
     function __construct(){
         $this->model = new CommentModel();
         $this->view = new ApiView();
-        $this->data = file_get_contents("php://input"); /* solo para prueba */
+        $this->data = file_get_contents("php://input"); 
     }
 
-    function getData(){ /* solo para prueba */
+    function getData(){ 
         return json_decode($this->data); 
     }
 
@@ -50,7 +49,10 @@ class ApiController{
 
         $body = $this->getData();
 
-        $comment = $this->model->postComment($body->texto, $body->puntaje, $body->id_usuario_fk, $body->id_depto_fk);
+        $comment = $this->model->postComment($body->texto, $body->puntaje,
+            $body->id_usuario_fk, $body->id_depto_fk);
+
+        $body->id_comentario = $comment;
 
         if ($comment)
             $this->view->response($body, 201);
@@ -63,7 +65,7 @@ class ApiController{
         $result = $this->model->deleteComment($commentId);
 
         if($result > 0)
-            $this->view->response("Comentario eliminado", 200);
+            $this->view->response($result, 200);
         else
             $this->view->response("Comentario Id: $commentId No Existe!", 404);
     }

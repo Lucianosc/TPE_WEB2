@@ -43,7 +43,7 @@
     //--------------------NUEVO----------------------------------------
     $r->addRoute("signUp", "GET", "UserController", "showSignUp");
     $r->addRoute("insertUser", "POST", "UserController", "insertUser");
-    $r->addRoute("administer", "GET", "UserController", "showUsers");
+    $r->addRoute("admin", "GET", "UserController", "showUsers");
 
     $r->addRoute("deleteUser/:ID", "GET", "UserController", "deleteUser");
     $r->addRoute("updateUserRole/:ID", "GET", "UserController", "updateUserRole");
