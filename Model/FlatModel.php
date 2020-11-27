@@ -72,4 +72,29 @@ class FlatModel
             }*/
         }
     }
+
+    //paginación
+
+    function getFlatsByLimit($start_from_record, $quantity_to_show){
+        $query = $this->db->prepare("SELECT departamento.*, ciudad.nombre as nombre_ciudad
+                                    FROM departamento INNER JOIN ciudad ON
+                                    departamento.id_ciudad_fk = ciudad.id_ciudad 
+                                    LIMIT $start_from_record, $quantity_to_show");
+        $query->execute();
+        return $query->fetchAll(PDO::FETCH_OBJ);
+    }
+
+    function getCountFlats()
+    {
+        $query = $this->db->prepare('SELECT COUNT(*) FROM departamento');
+        $query->execute();
+        return  $query->fetch(PDO::FETCH_OBJ);
+    }
+
+    function getNumberFlats()
+    {
+        $query = $this->db->prepare('SELECT departamento.* FROM departamento');
+        $query->execute();
+        return  $query->rowCount();
+    }
 }
