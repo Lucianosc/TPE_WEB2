@@ -18,7 +18,7 @@
     $r->setDefaultRoute("CityController", "showCities");
    
     $r->addRoute("showCities", "GET", "CityController", "showCities");
-    $r->addRoute("showFlats", "GET", "FlatController", "showFlats");
+    $r->addRoute("showFlats/:PAGE", "GET", "FlatController", "showFlats");
 
     $r->addRoute("deleteCity/:ID", "GET", "CityController", "deleteCity");
     $r->addRoute("deleteFlat/:ID", "GET", "FlatController", "deleteFlat");

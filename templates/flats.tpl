@@ -53,6 +53,7 @@
                             </table>
                         </div>
                     </div>
+                    {include file="pagination.tpl"}
                 {/if}
             </div>  
         </div>

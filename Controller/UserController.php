@@ -60,22 +60,19 @@ class UserController
     //alta
     function insertUser()
     {
-        $logged = $this->authHelper->isLoggedIn();  //DEBE SER ADMIN
-        if ($logged && $logged['ROLE'] == 0) {
-            $user = $_POST['input_user'];
-            $password = $_POST['input_pass'];
-            $role = 1;
-            if (isset($user) && !empty($user) && isset($password) && !empty($password)) {
-                if ($this->alreadyLoaded($user) === false) {
-                    $password_hash = password_hash($password, PASSWORD_DEFAULT);
-                    $this->model->createUser($user, $password_hash, $role);
-                    $this->verifyUser();
-                } else
-                    $this->view->ShowSignUp("El usuario ya existe");
+        $user = $_POST['input_user'];
+        $password = $_POST['input_pass'];
+        $role = 1;
+
+        if (isset($user) && !empty($user) && isset($password) && !empty($password)) {
+            if ($this->alreadyLoaded($user) === false) {
+                $password_hash = password_hash($password, PASSWORD_DEFAULT);
+                $this->model->createUser($user, $password_hash, $role);
+                $this->verifyUser();
             } else
-                $this->view->ShowSignUp("Complete todos los campos");
+                $this->view->ShowSignUp("El usuario ya existe");
         } else
-            $this->view->RenderError("Debe ser usuario administrador para acceder a esta sección");
+            $this->view->ShowSignUp("Complete todos los campos");
     }
 
     //ALTA -> Checkea si existe el mail en la db
@@ -96,14 +93,13 @@ class UserController
         if ($logged && $logged['ROLE'] == 0) {
             $users = $this->model->getUsers();
             $this->view->ShowUsers($users, $logged);
-        } else {
+        } else 
             $this->view->RenderError("Debe ser usuario administrador para acceder a esta sección");
-        }
     }
 
     function deleteUser($params = null)
     {
-        $logged = $this->authHelper->isLoggedIn();
+        $logged = $this->authHelper->isLoggedIn();  //DEBE SER ADMIN
         if ($logged && $_SESSION['ROLE'] == 0) {
             $id = $params[':ID'];   //tengo que checkear si esta seteado params?
             $result = $this->model->deleteUser($id);
