@@ -37,10 +37,12 @@ class UserController
             if (isset($userFromDB) && $userFromDB) {
 
                 if (password_verify($pass, $userFromDB->clave)) {
-                    session_start();                       //
-                    $_SESSION['USER'] = $userFromDB->email;
-                    $_SESSION['ID'] = $userFromDB->id_usuario;
-                    $_SESSION['ROLE'] = $userFromDB->rol; // mandar al auth helper
+                    $this->authHelper->login($userFromDB);
+
+                    // session_start();                       //
+                    // $_SESSION['USER'] = $userFromDB->email;
+                    // $_SESSION['ID'] = $userFromDB->id_usuario;
+                    // $_SESSION['ROLE'] = $userFromDB->rol; // mandar al auth helper
                     $this->viewCity->ShowCitiesLocation();
                 } else
                     $this->view->ShowLogin("Contraseña incorrecta");

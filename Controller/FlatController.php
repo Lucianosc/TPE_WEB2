@@ -36,13 +36,13 @@ class FlatController
         $this->controllerImage = new ImageController();
     }
 
-    /* function showFlats()
+    function showFlats()
     {
-        $sessionUser = $this->authHelper->isLoggedIn();
+        $logged = $this->authHelper->isLoggedIn();
         $flats = $this->model->getFlats();
         $cities = $this->modelCity->getCities();
         $this->view->ShowFlats($flats, $cities, $logged);
-    }*/
+    }
 
     function showFlat($params = null)
     {
@@ -195,25 +195,25 @@ class FlatController
 
     //paginación
 
-    function showFlats($params = null)
-    {
-        $logged = $this->authHelper->isLoggedIn();
+    // function showFlats($params = null)
+    // {
+    //     $logged = $this->authHelper->isLoggedIn();
 
-        $quantity_to_show = 5;
+    //     $quantity_to_show = 5;
 
-        if (isset($params[':ID']))
-            $page = $params[':ID'];
-        else
-            $page = 1;
+    //     if (isset($params[':ID']))
+    //         $page = $params[':ID'];
+    //     else
+    //         $page = 1;
 
 
-        $start_from_record = ($page - 1) * $quantity_to_show;
-        $total_records = $this->model->getNumberFlats();
-        $total_pages = ceil($total_records / $quantity_to_show);
+    //     $start_from_record = ($page - 1) * $quantity_to_show;
+    //     $total_records = $this->model->getNumberFlats();
+    //     $total_pages = ceil($total_records / $quantity_to_show);
 
-        $flats = $this->model->getFlatsByLimit($start_from_record, $quantity_to_show);
+    //     $flats = $this->model->getFlatsByLimit($start_from_record, $quantity_to_show);
         
-        $cities = $this->modelCity->getCities();
-        $this->view->ShowFlats($flats, $cities, $total_pages, $logged);
-    }
+    //     $cities = $this->modelCity->getCities();
+    //     $this->view->ShowFlats($flats, $cities, $total_pages, $logged);
+    // }
 }

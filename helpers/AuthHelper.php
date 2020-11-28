@@ -1,23 +1,17 @@
 <?php
 
-require_once './View/CityView.php';
-
 class AuthHelper{
-
-
-    private $viewCity;
 
     public function __construct()
     {
-        $this->viewCity = new CityView();
+        if (session_status() != PHP_SESSION_ACTIVE) {
+            session_start();
+        }
     }
 
     //verifica si hay una sesión activa
     function isLoggedIn()
     {            
-        if (!isset($_SESSION)) {
-            session_start();   
-        }
         if (isset($_SESSION['USER'])) {
             return $_SESSION;
         } else {
@@ -25,17 +19,30 @@ class AuthHelper{
         }
     }
 
-    // chequear nivel de acceso admin/user y llamar al isLoggedIn
+    function checkLoggedSession() {
+        if ($this->isLoggedIn()) {
+            if($_SESSION['ROLE'] == 0){
+                return 0;
+            }
+            else
+            return 1;
+        }
+        else 2;
 
+    }
+
+    function login($user) {
+        $_SESSION['ID'] = $user->id_usuario;
+        $_SESSION['USER'] = $user->email;
+        $_SESSION['ROLE'] = $user->rol;
+        
+    }
 
     //destruye la sesión y redirige a ShowCities
     function logout()
     {
-        session_start();
         session_destroy();
-
-    $this->viewCity->ShowCitiesLocation();
+        header("Location: ".BASE_URL."showCities");
     }
 
-    //iniciar sesion
 }
