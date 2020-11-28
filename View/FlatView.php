@@ -11,11 +11,12 @@ class FlatView
         $this->smarty = new Smarty();
     }
 
-    function ShowFlats($flats, $cities, $sessionUser)
+    function ShowFlats($flats, $cities, $sessionUser, $totalPages = null)
     {
         $this->smarty->assign('flats', $flats);
         $this->smarty->assign('cities', $cities);
         $this->smarty->assign('sessionUser', $sessionUser);
+        $this->smarty->assign('totalPages', $totalPages);
     
         $this->smarty->display('templates/flats.tpl');
     }

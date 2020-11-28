@@ -199,13 +199,12 @@ class FlatController
     // {
     //     $logged = $this->authHelper->isLoggedIn();
 
-    //     $quantity_to_show = 5;
-
-    //     if (isset($params[':ID']))
-    //         $page = $params[':ID'];
-    //     else
-    //         $page = 1;
-
+        // $quantity_to_show = 3;
+      
+        //if (isset($params[':PAGE']))
+            // $page = $params[':PAGE'];
+        //else
+            //$page = 1;
 
     //     $start_from_record = ($page - 1) * $quantity_to_show;
     //     $total_records = $this->model->getNumberFlats();
@@ -213,7 +212,8 @@ class FlatController
 
     //     $flats = $this->model->getFlatsByLimit($start_from_record, $quantity_to_show);
         
-    //     $cities = $this->modelCity->getCities();
-    //     $this->view->ShowFlats($flats, $cities, $total_pages, $logged);
+        // $cities = $this->modelCity->getCities();
+    //     // $this->view->ShowFlats($flats, $cities, $logged, $total_pages);
     // }
+
 }
