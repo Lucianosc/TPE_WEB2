@@ -31,7 +31,7 @@
                             </div>
                         {/foreach}
                     </div>
-                        {if $sessionUser eq true}
+                    {if $sessionUser eq true}
                         <div class="row" id="form-div" user-name="{$sessionUser['USER']}" user-id="{$sessionUser['ID']}" >
                             <div class="container mt-5">
                                 <div class="d-flex justify-content-center row">
@@ -56,8 +56,10 @@
                                 </div>
                             </div>
                         </div>
-                        {/if}
-                    <div class="row" id="vue-div" flat-id="{$flat->id_departamento}" user-role="{$sessionUser['ROLE']}">
+                    <div class="row" id="vue-div" flat-id="{$flat->id_departamento}" user-role="{$sessionUser['ROLE']}">    
+                    {else}
+                    <div class="row" id="vue-div" flat-id="{$flat->id_departamento}" user-role="2">    
+                    {/if}
                     {include file="vue/comments.vue"}
                     </div>
                 </div>

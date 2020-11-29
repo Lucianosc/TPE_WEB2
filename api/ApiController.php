@@ -49,15 +49,24 @@ class ApiController{
 
         $body = $this->getData();
 
-        $comment = $this->model->postComment($body->texto, $body->puntaje,
+        if(empty($body->texto) || empty($body->puntaje) || empty($body->id_usuario_fk) ||
+            empty($body->id_depto_fk)){
+
+            $this->view->response("Complete todos los campos", 404);
+        }
+        else{
+            $comment = $this->model->postComment($body->texto, $body->puntaje,
             $body->id_usuario_fk, $body->id_depto_fk);
 
-        $body->id_comentario = $comment;
+            $body->id_comentario = $comment;
 
-        if ($comment)
-            $this->view->response($body, 201);
-        else
-            $this->view->response("El comentario no se pudo crear", 404);
+            if ($comment)
+                $this->view->response($body, 201);
+            else
+                $this->view->response("El comentario no se pudo crear", 404);
+        }  
+        
+        
     }
 
     function deleteComment($params = null){

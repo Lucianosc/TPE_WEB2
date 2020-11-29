@@ -4,7 +4,8 @@ const app = new Vue({
     data: {
         comments: [],
         commentsLength: 0,
-        admin: false
+        admin: false,
+        errorMessage: ""
     },
     methods: {
         deleteComment: function (event) {
@@ -25,9 +26,7 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 function isAdminLoggedIn(){
-    let userId = document.getElementById("form-div").getAttribute("user-role");
-
-    console.log(userId);
+    let userId = document.getElementById("vue-div").getAttribute("user-role");
 
     if(userId == 0){
         app.admin = true;
@@ -62,8 +61,9 @@ function deleteComment(id){
     fetch("api/comments/" + id, {method: "DELETE"})
     .then(response => {
         if(!response.ok)
-            console.log(response);
-
+            app.errorMessage = "No se ah podido eliminar el comentario";
+        else
+            app.errorMessage = "";
         return response.json();
     })
     .then(response => {
@@ -86,10 +86,11 @@ function addComment(){
     let userId = document.getElementById("form-div").getAttribute("user-id");
     let nameUser = document.getElementById("form-div").getAttribute("user-name");
     let inputs = document.querySelectorAll("div.rating input[name='rating']");
-    let number;
+    let rating;
+
     inputs.forEach(element => {
         if(element.checked){
-            number = element.value;
+            rating = element.value;
         }
     });
 
@@ -97,10 +98,10 @@ function addComment(){
         nombre_usuario: nameUser,
         id_depto_fk: flatId,
         id_usuario_fk: userId,
-        puntaje: number,
+        puntaje: rating,
         texto: document.querySelector('#input-text').value
     }
-
+    
     fetch("api/comments", {
         method: 'POST',
         headers: { "Content-Type": "application/json" },
@@ -108,12 +109,13 @@ function addComment(){
     })
     .then(response => {
         if(!response.ok)
-            console.log(response);
-
-        return response.json();
+            app.errorMessage = "Error no se ah podido postear el comentario";
+        else{
+            app.errorMessage = "";
+            return response.json();
+        }
     })
     .then(comment => {
-        console.log(comment);
         app.comments.push(comment);
         app.commentsLength = app.comments.length;
     })

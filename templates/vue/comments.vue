@@ -1,5 +1,6 @@
 {literal}
 <div id="app-comments">
+    <div v-if="errorMessage != ''" class="alert alert-danger" role="alert">{{errorMessage}}</div>
     <div class="container mt-5">
         <div class="d-flex justify-content-center row">
             <div class="col">
