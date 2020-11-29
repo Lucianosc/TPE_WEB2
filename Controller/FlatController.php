@@ -36,13 +36,13 @@ class FlatController
         $this->controllerImage = new ImageController();
     }
 
-    function showFlats()
+    /*function showFlats()
     {
         $logged = $this->authHelper->isLoggedIn();
         $flats = $this->model->getFlats();
         $cities = $this->modelCity->getCities();
         $this->view->ShowFlats($flats, $cities, $logged);
-    }
+    }*/
 
     function showFlat($params = null)
     {
@@ -62,8 +62,9 @@ class FlatController
     //alta
     function insertFlat()   //Es necesario checkeo línea 66?
     {
-        $logged = $this->authHelper->isLoggedIn();  //FALTA CHECKEAR QUE SEA SOLO ADMIN
-        if ($logged) {
+        $logged = $this->authHelper->isLoggedIn();  //FALTA CHECKEAR QUE SEA SOLO ADMIN check
+        $role = $this->authHelper->checkLoggedSession();
+        if ($logged && $role == 0) {
             $name = $_POST['input_name'];
             $address = $_POST['input_address'];
             $price = $_POST['input_price'];
@@ -110,8 +111,9 @@ class FlatController
     //baja
     function deleteFlat($params = null)
     {
-        $logged = $this->authHelper->isLoggedIn();  //FALTA CHECKEAR QUE SEA SOLO ADMIN
-        if ($logged) {
+        $logged = $this->authHelper->isLoggedIn();  //FALTA CHECKEAR QUE SEA SOLO ADMIN check
+        $role = $this->authHelper->checkLoggedSession();
+        if ($logged && $role == 0) {
             $id = $params[':ID'];   //falta checkear que exista el departamento en la db x si entra por url?
             $this->model->deleteFlat($id);
             $this->view->showFlatsLocation();
@@ -123,8 +125,9 @@ class FlatController
     //redirección -> para modificación
     function editFlat($params = null)
     {
-        $logged = $this->authHelper->isLoggedIn();  //FALTA CHECKEAR QUE SEA SOLO ADMIN
-        if ($logged) {
+        $logged = $this->authHelper->isLoggedIn();  //FALTA CHECKEAR QUE SEA SOLO ADMIN check
+        $role = $this->authHelper->checkLoggedSession();
+        if ($logged && $role == 0) {
             $id_flat = $params[':ID'];
             $cities = $this->modelCity->getCities();
             $flat = $this->model->getFlatById($id_flat);
@@ -143,20 +146,21 @@ class FlatController
     function updateFlat()   //Es necesario checkeo línea 142?
     {
         $logged = $this->authHelper->isLoggedIn();  //FALTA CHECKEAR QUE SEA SOLO ADMIN
-        if ($logged) {
+        $role = $this->authHelper->checkLoggedSession();
+        if ($logged && $role == 0) {
             $id = $_POST['input_edit_id'];
             $name = $_POST['input_edit_name'];
             $address = $_POST['input_edit_address'];
             $price = $_POST['input_edit_price'];
             $id_city_fk = $_POST['input_edit_id_city_fk'];
-            $tmp_images = $_FILES['imagesToUploadEdit']['tmp_name'];
+            $tmp_images = $_FILES['imagesToUpload']['tmp_name'];
 
             if ((isset($name) && !empty($name)) &&
                 (isset($address) && !empty($address)) &&
                 (isset($price) && is_numeric($price)) &&
                 (isset($id_city_fk) && is_numeric($id_city_fk))
             ) {
-                if ($this->alreadyLoaded($name, $address, $id_city_fk) === false) {
+                //if ($this->alreadyLoaded($name, $address, $id_city_fk) === false) {
 
                     $this->model->updateFlat($id, $name, $address, $price, $id_city_fk);
 
@@ -164,12 +168,12 @@ class FlatController
                         $this->controllerImage->insertImages($tmp_images, $id);
                     else
                         $this->view->showFlatLocation($id);
-                } else {
+                /*} else {
                     //$this->viewUser->RenderError("Estos datos corresponden a un departamento en la base de datos. Intente nuevamente.");
                     $cities = $this->modelCity->getCities();
                     $errorMessaje = "Estos datos corresponden a un departamento en la base de datos. Intente nuevamente.";
                     $this->view->ShowError($cities, $errorMessaje, $logged);
-                }
+                }*/
             } else
                 $this->viewUser->RenderError("Debe completar todos los campos del formulario");
         } else
@@ -179,7 +183,7 @@ class FlatController
     //filtro
     function filterFlatsByCity($params = null)
     {
-        $logged = $this->authHelper->isLoggedIn();  //FALTA CHECKEAR QUE SEA ADMIN
+        $logged = $this->authHelper->isLoggedIn();  //FALTA CHECKEAR QUE SEA ADMIN NO?
         $city_name = $params[':NAME'];
         if (isset($city_name)) {
             $flats = $this->model->getFlatsByCity($city_name);
@@ -195,25 +199,53 @@ class FlatController
 
     //paginación
 
-    // function showFlats($params = null)
-    // {
-    //     $logged = $this->authHelper->isLoggedIn();
+    function showFlats($params = null)
+    {
+        $logged = $this->authHelper->isLoggedIn();
 
-        // $quantity_to_show = 3;
-      
-        //if (isset($params[':PAGE']))
-            // $page = $params[':PAGE'];
-        //else
-            //$page = 1;
+        $quantity_to_show = 3;
 
-    //     $start_from_record = ($page - 1) * $quantity_to_show;
-    //     $total_records = $this->model->getNumberFlats();
-    //     $total_pages = ceil($total_records / $quantity_to_show);
+        if (isset($params[':PAGE']))
+            $page = $params[':PAGE'];
+        else
+            $page = 1;
 
-    //     $flats = $this->model->getFlatsByLimit($start_from_record, $quantity_to_show);
+        $start_from_record = ($page - 1) * $quantity_to_show;
+        $total_records = $this->model->getNumberFlats();
+        $total_pages = ceil($total_records / $quantity_to_show);
+
+        $flats = $this->model->getFlatsByLimit($start_from_record, $quantity_to_show);
+
+        $cities = $this->modelCity->getCities();
+        $this->view->ShowFlats($flats, $cities, $logged, $total_pages);
+    }
+    //paginacion con filtro sin funcionar
+    /*function filterFlatsByCity($params = null, $page = null)
+    {
+        $logged = $this->authHelper->isLoggedIn();  //FALTA CHECKEAR QUE SEA ADMIN
+        $city_name = $params[':NAME'];
+
+        $quantity_to_show = 3;
+
+        if (isset($params[':PAGE']))
+            $page = $params[':PAGE'];
+        else
+            $page = 1;
+
+            $start_from_record = ($page - 1) * $quantity_to_show;
+            $total_records = $this->model->getNumberFlatsByCity($city_name);
+            $total_pages = ceil($total_records / $quantity_to_show);
         
-        // $cities = $this->modelCity->getCities();
-    //     // $this->view->ShowFlats($flats, $cities, $logged, $total_pages);
-    // }
+        if (isset($city_name)) {
+            $flats = $this->model->getFlatsByCityLimit($start_from_record, $quantity_to_show, $city_name);
+            $cities = $this->modelCity->getCities();
+        }
+        if (empty($flats)) {
+            $errorMessaje = "No hay departamentos en esta ciudad.";
+            $this->view->ShowError($cities, $errorMessaje, $logged);
+        } else {
+            $this->view->ShowFlats($flats, $cities, $logged, $total_pages);
+        }
+    }*/
 
 }

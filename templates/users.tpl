@@ -13,6 +13,7 @@
             </thead>
             <tbody>
                 {foreach from=$users item=user}
+                {if $user->email !== $sessionUser['USER']}
                 <tr>
                     <td>{$user->email}</td>
                     {if $user->rol eq 0}
@@ -29,6 +30,7 @@
                                 class="btn btn-secondary">X</button></a></td>
 
                 </tr>
+                {/if}
                 {/foreach}
             </tbody>
         </table>

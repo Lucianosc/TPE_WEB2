@@ -32,10 +32,11 @@ class CityController
     }
 
     //alta
-    function insertCity()   //Es necesario checkeo línea 37?
+    function insertCity()   //Es necesario checkeo línea 37? entra por post
     {
-        $logged = $this->authHelper->isLoggedIn();  //FALTA CHECKEAR QUE SEA SOLO ADMIN
-        if ($logged) {
+        $logged = $this->authHelper->isLoggedIn();  //FALTA CHECKEAR QUE SEA SOLO ADMIN check
+        $role = $this->authHelper->checkLoggedSession();
+        if ($logged && $role == 0) {
             $name = $_POST['input_name'];
             if (isset($name) && !empty($name)) {
                 if ($this->alreadyLoaded($name) === false) {
@@ -46,7 +47,7 @@ class CityController
                     $this->view->ShowError($errorMessaje, $logged);
                 }
             } else
-                $this->viewUser->RenderError("Debe completar todos los campos del formulario"); //---es necesario?
+                $this->viewUser->RenderError("Debe completar todos los campos del formulario");
         } else
             $this->viewUser->RenderError("Debe ser administrador para acceder a esta sección.");
     }
@@ -66,8 +67,9 @@ class CityController
     //baja
     function deleteCity($params = null)
     {
-        $logged = $this->authHelper->isLoggedIn();  //DEBE SER ADMIN
-        if ($logged) {
+        $logged = $this->authHelper->isLoggedIn();  //DEBE SER ADMIN check
+        $role = $this->authHelper->checkLoggedSession();
+        if ($logged && $role == 0) {
             $id = $params[':ID'];   //debo checkear q los params sea isset?
             $result = $this->model->deleteCity($id);
             if ($result > 0)
@@ -83,8 +85,9 @@ class CityController
     //redireccion -> para modificacion
     function editCity($params = null)
     {
-        $logged = $this->authHelper->isLoggedIn();  //debe ser admin
-        if ($logged) {
+        $logged = $this->authHelper->isLoggedIn();  //debe ser admin check
+        $role = $this->authHelper->checkLoggedSession();
+        if ($logged && $role == 0) {
             $id_city = $params[':ID'];  //debo checkear q este seteado params?
             $city = $this->model->getCityById($id_city);
 
@@ -97,10 +100,9 @@ class CityController
             $this->viewUser->RenderError("Debe ser administrador para acceder a esta sección.");
     }
     //modificación
-    function updateCity()   //es necesario el checkeo de linea 103?
+    function updateCity()
     {
-        $logged = $this->authHelper->isLoggedIn();  //debe ser admin
-        if ($logged) {
+        $logged = $this->authHelper->isLoggedIn();
             $id = $_POST['input_edit_id'];
             $name = $_POST['input_edit_name'];
             if ((isset($name) && !empty($name))) {
@@ -112,8 +114,6 @@ class CityController
                     $this->view->ShowError($errorMessaje, $logged);
                 }
             } else
-                $this->viewUser->RenderError("Debe completar todos los campos del formulario"); //---es necesario?
-        } else
-            $this->viewUser->RenderError("Debe ser administrador para acceder a esta sección.");
+                $this->viewUser->RenderError("Debe completar todos los campos del formulario");
     }
 }

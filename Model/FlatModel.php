@@ -90,4 +90,22 @@ class FlatModel
         $query->execute();
         return  $query->rowCount();
     }
+    //paginacion con filtro sin funcionar
+   /* function getFlatsByCityLimit($start_from_record, $quantity_to_show, $city_name){
+        $query = $this->db->prepare("SELECT departamento.*, ciudad.nombre as nombre_ciudad
+                                    FROM departamento INNER JOIN ciudad ON
+                                    departamento.id_ciudad_fk = ciudad.id_ciudad 
+                                    LIMIT $start_from_record, $quantity_to_show
+                                    WHERE ciudad.nombre = ?");
+        $query->execute(array($city_name));
+        return $query->fetchAll(PDO::FETCH_OBJ);
+    }
+
+    function getNumberFlatsByCity($city_name)
+    {
+        $query = $this->db->prepare('SELECT departamento.*, ciudad.nombre as nombre_ciudad
+                                     FROM departamento INNER JOIN ciudad WHERE ciudad.nombre = ?');
+        $query->execute(array($city_name));
+        return  $query->rowCount();
+    }*/
 }

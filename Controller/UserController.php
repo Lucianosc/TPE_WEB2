@@ -66,15 +66,21 @@ class UserController
         $password = $_POST['input_pass'];
         $role = 1;
 
-        if (isset($user) && !empty($user) && isset($password) && !empty($password)) {
-            if ($this->alreadyLoaded($user) === false) {
-                $password_hash = password_hash($password, PASSWORD_DEFAULT);
-                $this->model->createUser($user, $password_hash, $role);
-                $this->verifyUser();
+        $logged = $this->authHelper->isLoggedIn();
+        $roleUser = $this->authHelper->checkLoggedSession();
+
+        if ($logged && $roleUser == 0) {    //DEBO CHECKEAR ESTO?
+            if (isset($user) && !empty($user) && isset($password) && !empty($password)) {
+                if ($this->alreadyLoaded($user) === false) {
+                    $password_hash = password_hash($password, PASSWORD_DEFAULT);
+                    $this->model->createUser($user, $password_hash, $role);
+                    $this->verifyUser();
+                } else
+                    $this->view->ShowSignUp("El usuario ya existe");
             } else
-                $this->view->ShowSignUp("El usuario ya existe");
+                $this->view->ShowSignUp("Complete todos los campos");
         } else
-            $this->view->ShowSignUp("Complete todos los campos");
+            $this->view->RenderError("Debe ser usuario administrador para acceder a esta sección");
     }
 
     //ALTA -> Checkea si existe el mail en la db
@@ -91,50 +97,64 @@ class UserController
 
     function showUsers()
     {
-        $logged = $this->authHelper->isLoggedIn();  //DEBE SER ADMIN
-        if ($logged && $logged['ROLE'] == 0) {
+        $logged = $this->authHelper->isLoggedIn();  //DEBE SER ADMIN check
+        $roleUser = $this->authHelper->checkLoggedSession();
+
+        if ($logged && $roleUser == 0) {
             $users = $this->model->getUsers();
             $this->view->ShowUsers($users, $logged);
-        } else 
-            $this->view->RenderError("Debe ser usuario administrador para acceder a esta sección");
+        } else
+            $this->view->RenderError("Debe ser usuario administrador para acceder a esta sección.");
     }
 
     function deleteUser($params = null)
     {
-        $logged = $this->authHelper->isLoggedIn();  //DEBE SER ADMIN
-        if ($logged && $_SESSION['ROLE'] == 0) {
+        $logged = $this->authHelper->isLoggedIn();  //DEBE SER ADMIN check
+        $roleUser = $this->authHelper->checkLoggedSession();
+
+        if ($logged && $roleUser == 0) {
             $id = $params[':ID'];   //tengo que checkear si esta seteado params?
-            $result = $this->model->deleteUser($id);
-            if ($result > 0)
-                $this->view->showUsersLocation();
-            else
+            $user = $this->model->getUserById($id);
+            if ($user) {
+                if ($logged['USER'] !== $user->email) {   //Es un posible usuario a eliminar
+                    $this->model->deleteUser($id);
+                    $this->view->showUsersLocation();
+                } else    //Es el mismo administrador que inició sesión
+                    $this->view->RenderError("No puede auto eliminarse.");
+            } else
                 $this->view->RenderError("No existe usuario en la base de datos para ser eliminado.");
         } else
-            $this->view->RenderError("Debe ser usuario administrador para acceder a esta sección");
+            $this->view->RenderError("Debe ser usuario administrador para acceder a esta sección.");
     }
 
     function updateUserRole($params = null)
     {
-        $logged = $this->authHelper->isLoggedIn();  //DEBE SER ADMIN
-        if ($logged && $_SESSION['ROLE'] == 0) {
+        $logged = $this->authHelper->isLoggedIn();  //DEBE SER ADMIN check
+        $roleUser = $this->authHelper->checkLoggedSession();
+
+        if ($logged && $roleUser == 0) {
             $id = $params[':ID'];   //ES NECESARIO CHECKEAR PARAMS?
             $user = $this->model->getUserById($id);
             if ($user) {
-                if ($user->rol == 1)
-                    $user = $this->model->updateUserRole($id, 0);
-                else
-                    $user = $this->model->updateUserRole($id, 1);
+                if ($logged['USER'] !== $user->email) {   //Es un posible usuario a modificar
+                    if ($user->rol == 1)
+                        $user = $this->model->updateUserRole($id, 0);
+                    else
+                        $user = $this->model->updateUserRole($id, 1);
+                    $this->view->showUsersLocation();
+                } else    //Es el mismo administrador que inició sesión
+                    $this->view->RenderError("No puede auto modificar su rol de administrador.");
                 /*
             if($user){
                 $errorMessaje = "Debe eliminar los comentarios asociados de este usuario primero.";
                 $this->view->ShowError($errorMessaje, $logged);
             } else {*/
-                $this->view->showUsersLocation();
+                //$this->view->showUsersLocation();
                 //}
             } else
-                $this->view->RenderError("No existe usuario en la base de datos para ser modificado su rol");
+                $this->view->RenderError("No existe usuario en la base de datos para modificar su rol.");
         } else {
-            $this->view->RenderError("Debe ser usuario administrador para acceder a esta sección");
+            $this->view->RenderError("Debe ser usuario administrador para acceder a esta sección.");
         }
     }
 }

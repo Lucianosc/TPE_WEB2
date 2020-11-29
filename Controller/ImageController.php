@@ -22,13 +22,15 @@ class ImageController
     //alta
     function insertImages($tmp_images, $id_flat)
     {
-        $logged = $this->authHelper->isLoggedIn();  //FALTA CHECKEAR QUE SEA SOLO ADMIN
-        if ($logged) {
+        $logged = $this->authHelper->isLoggedIn();  //FALTA CHECKEAR QUE SEA SOLO ADMIN check
+        $role = $this->authHelper->checkLoggedSession();
+        if ($logged && $role == 0) {
             $types_images = $_FILES['imagesToUpload']['type'];
 
             if ($this->areType($types_images)) {
                 $name_images = $_FILES['imagesToUpload']['name'];
-                $this->model->insertImages($tmp_images, $name_images, $id_flat);
+                $paths = $this->uploadImages($tmp_images, $name_images);
+                $this->model->insertImages($id_flat, $paths);
                 $this->viewFlat->showFlatLocation($id_flat);
             } else {
                 $this->viewUser->renderError("Las imágenes deben ser JPG, JPEG o PNG. Intente nuevamente.");
@@ -48,11 +50,28 @@ class ImageController
         return true;
     }
 
+    //ALTA->carga las imágenes de un departamento
+    private function uploadImages($tmp_images, $name_images)
+    {
+        $paths = [];
+
+        for($i = 0; $i < count($tmp_images); $i++){
+            $tmp_image = $tmp_images[$i];
+            $name_image = $name_images[$i];
+            $final_path = 'images/temp/' . uniqid() . "." 
+            . strtolower(pathinfo($name_image, PATHINFO_EXTENSION));
+            move_uploaded_file($tmp_image, $final_path);
+            $paths[] = $final_path;
+        }
+        return $paths;
+    }
+
     //baja
     function deleteImage($params = null)
     {
-        $logged = $this->authHelper->isLoggedIn();  //FALTA CHECKEAR QUE SEA SOLO ADMIN
-        if ($logged) {
+        $logged = $this->authHelper->isLoggedIn();  //FALTA CHECKEAR QUE SEA SOLO ADMIN check
+        $role = $this->authHelper->checkLoggedSession();
+        if ($logged && $role == 0) {
             $id = $params[':ID'];   //es necesario checkear que esten los parametros?
             $image = $this->model->getImage($id);
             if ($image) {

@@ -24,7 +24,7 @@
         </select>
        
         <label for="price">Imágenes</label>
-        <input type="file" name="imagesToUploadEdit[]" id="imagesToUploadEdit" multiple>
+        <input type="file" name="imagesToUpload[]" id="imagesToUploadEdit" multiple>
       
         <button value="{$flat->id_departamento}" name="input_edit_id" class="btn btn-secondary"
             type="submit">Editar</button>
