@@ -96,13 +96,16 @@ class FlatController
     }
 
     //ALTA -> Checkea si existe el depto en la db 
-    private function alreadyLoaded($name, $address, $id_city_fk)
+    private function alreadyLoaded($name, $address, $id_city_fk, $id = null)
     {
         $flats = $this->model->getFlats();
         $exist = false;
         foreach ($flats as $flat) {
             if (($flat->nombre === $name) && ($flat->direccion === $address) && ($flat->id_ciudad_fk === $id_city_fk)) {
-                $exist = true;
+                if($id !== null && $flat->id_departamento == $id)
+                    $exist = false;
+                else
+                    $exist = true;
             }
         }
         return $exist;
@@ -160,7 +163,7 @@ class FlatController
                 (isset($price) && is_numeric($price)) &&
                 (isset($id_city_fk) && is_numeric($id_city_fk))
             ) {
-                //if ($this->alreadyLoaded($name, $address, $id_city_fk) === false) {
+                if ($this->alreadyLoaded($name, $address, $id_city_fk, $id) === false) {
 
                     $this->model->updateFlat($id, $name, $address, $price, $id_city_fk);
 
@@ -168,12 +171,11 @@ class FlatController
                         $this->controllerImage->insertImages($tmp_images, $id);
                     else
                         $this->view->showFlatLocation($id);
-                /*} else {
-                    //$this->viewUser->RenderError("Estos datos corresponden a un departamento en la base de datos. Intente nuevamente.");
+                } else {
                     $cities = $this->modelCity->getCities();
                     $errorMessaje = "Estos datos corresponden a un departamento en la base de datos. Intente nuevamente.";
                     $this->view->ShowError($cities, $errorMessaje, $logged);
-                }*/
+                }
             } else
                 $this->viewUser->RenderError("Debe completar todos los campos del formulario");
         } else
