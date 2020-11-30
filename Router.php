@@ -19,7 +19,7 @@
    
     $r->addRoute("showCities", "GET", "CityController", "showCities");
     $r->addRoute("showFlats/:PAGE", "GET", "FlatController", "showFlats");
-    $r->addRoute("showFlats", "GET", "FlatController", "showFlats");    //VER
+    $r->addRoute("showFlats", "GET", "FlatController", "showFlats");
 
     $r->addRoute("deleteCity/:ID", "GET", "CityController", "deleteCity");
     $r->addRoute("deleteFlat/:ID", "GET", "FlatController", "deleteFlat");
@@ -34,8 +34,7 @@
     $r->addRoute("insertFlat", "POST", "FlatController", "insertFlat");
 
     $r->addRoute("city/:NAME", "GET", "FlatController", "filterFlatsByCity");
-    //ver
-    /*$r->addRoute("city/:NAME/:PAGE", "GET", "FlatController", "filterFlatsByCity");*/
+    $r->addRoute("city/:NAME/:PAGE", "GET", "FlatController", "filterFlatsByCity");
 
     $r->addRoute("flat/:ID", "GET", "FlatController", "showFlat");
 

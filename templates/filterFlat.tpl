@@ -5,7 +5,7 @@
             Filtrar por Ciudad
         </button>
         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-            <a class="dropdown-item" href="showFlats/1">Todas</a>
+            <a class="dropdown-item" href="showFlats">Todas</a>
             <div class="dropdown-divider"></div>
             {foreach from=$cities item=city}
                 <a class="dropdown-item" href="city/{$city->nombre}">{$city->nombre}</a>

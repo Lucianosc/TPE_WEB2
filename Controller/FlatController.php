@@ -102,7 +102,7 @@ class FlatController
         $exist = false;
         foreach ($flats as $flat) {
             if (($flat->nombre === $name) && ($flat->direccion === $address) && ($flat->id_ciudad_fk === $id_city_fk)) {
-                if($id !== null && $flat->id_departamento == $id)
+                if ($id !== null && $flat->id_departamento == $id)
                     $exist = false;
                 else
                     $exist = true;
@@ -183,7 +183,7 @@ class FlatController
     }
 
     //filtro
-    function filterFlatsByCity($params = null)
+    /* function filterFlatsByCity($params = null)
     {
         $logged = $this->authHelper->isLoggedIn();  //FALTA CHECKEAR QUE SEA ADMIN NO?
         $city_name = $params[':NAME'];
@@ -197,13 +197,28 @@ class FlatController
         } else {
             $this->view->ShowFlats($flats, $cities, $logged);
         }
-    }
+    }*/
 
+
+    //---------------------------------NUEVO-------------------------------------------
     //paginación
-
+    
     function showFlats($params = null)
     {
-        $logged = $this->authHelper->isLoggedIn();
+        $total_records = $this->model->getNumberFlats();
+        $this->pagination($total_records, $params);
+    }
+
+    function filterFlatsByCity($params = null, $page = null)
+    {
+        $city_name = $params[':NAME'];
+        $total_records = $this->model->getNumberFlatsByCity($city_name);
+        $this->pagination($total_records, $page, $city_name);
+    }
+
+    function pagination($total_records, $params = null, $city_name = null)
+    {
+        $logged = $this->authHelper->isLoggedIn();  //FALTA CHECKEAR QUE SEA ADMIN
 
         $quantity_to_show = 3;
 
@@ -213,41 +228,23 @@ class FlatController
             $page = 1;
 
         $start_from_record = ($page - 1) * $quantity_to_show;
-        $total_records = $this->model->getNumberFlats();
+
         $total_pages = ceil($total_records / $quantity_to_show);
 
-        $flats = $this->model->getFlatsByLimit($start_from_record, $quantity_to_show);
-
         $cities = $this->modelCity->getCities();
-        $this->view->ShowFlats($flats, $cities, $logged, $total_pages);
-    }
-    //paginacion con filtro sin funcionar
-    /*function filterFlatsByCity($params = null, $page = null)
-    {
-        $logged = $this->authHelper->isLoggedIn();  //FALTA CHECKEAR QUE SEA ADMIN
-        $city_name = $params[':NAME'];
-
-        $quantity_to_show = 3;
-
-        if (isset($params[':PAGE']))
-            $page = $params[':PAGE'];
-        else
-            $page = 1;
-
-            $start_from_record = ($page - 1) * $quantity_to_show;
-            $total_records = $this->model->getNumberFlatsByCity($city_name);
-            $total_pages = ceil($total_records / $quantity_to_show);
-        
-        if (isset($city_name)) {
+        if (isset($city_name))
             $flats = $this->model->getFlatsByCityLimit($start_from_record, $quantity_to_show, $city_name);
-            $cities = $this->modelCity->getCities();
-        }
-        if (empty($flats)) {
-            $errorMessaje = "No hay departamentos en esta ciudad.";
-            $this->view->ShowError($cities, $errorMessaje, $logged);
-        } else {
-            $this->view->ShowFlats($flats, $cities, $logged, $total_pages);
-        }
-    }*/
+        else
+            $flats = $this->model->getFlatsByLimit($start_from_record, $quantity_to_show);
 
+        if (empty($flats)) {
+            if ($page > $total_pages)
+                $this->viewUser->RenderError("Fuera de rango de paginado.");
+            else {
+                $errorMessaje = "No hay departamentos en esta ciudad.";
+                $this->view->ShowError($cities, $errorMessaje, $logged);
+            }
+        } else
+            $this->view->ShowFlats($flats, $cities, $logged, $total_pages, $city_name);
+    }
 }

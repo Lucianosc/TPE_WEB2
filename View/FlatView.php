@@ -11,12 +11,14 @@ class FlatView
         $this->smarty = new Smarty();
     }
 
-    function ShowFlats($flats, $cities, $sessionUser, $totalPages = null)
+    function ShowFlats($flats, $cities, $sessionUser, $totalPages = null, $city)
     {
         $this->smarty->assign('flats', $flats);
         $this->smarty->assign('cities', $cities);
         $this->smarty->assign('sessionUser', $sessionUser);
         $this->smarty->assign('totalPages', $totalPages);
+
+        $this->smarty->assign('city', $city);
     
         $this->smarty->display('templates/flats.tpl');
     }
@@ -67,8 +69,8 @@ class FlatView
         header("Location: " . BASE_URL . "editFlat/". $id);
     }
     //VER SI VA ACA Y SI QUITAR LOS OTROS DOS -> CONSULTAR
-    function showFlatURL($url)
+    /*function showFlatURL($url)
     {
         header("Location: " . $url);
-    }
+    }*/
 }
