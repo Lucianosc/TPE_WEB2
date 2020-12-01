@@ -19,7 +19,18 @@ class AuthHelper{
         }
     }
 
-    // asigna los datos de la session
+    // asigna valores para - admin = 0, user comun = 1, sesion no iniciada = 2.
+    function checkLoggedSession() {
+        if ($this->isLoggedIn()) {
+            if($_SESSION['ROLE'] == 0){
+                return 0;
+            }
+            else
+                return 1;
+        }
+        else 2;
+    }
+
     function login($user) {
         $_SESSION['ID'] = $user->id_usuario;
         $_SESSION['USER'] = $user->email;
