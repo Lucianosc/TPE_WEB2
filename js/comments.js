@@ -66,7 +66,7 @@ function deleteComment(id){
             app.errorMessage = "";
         return response.json();
     })
-    .then(response => {
+    .then( () => {
         deleteCommentById(id);
         app.commentsLength = app.comments.length;
     })
@@ -108,16 +108,20 @@ function addComment(){
         body: JSON.stringify(comment)
     })
     .then(response => {
-        if(!response.ok)
+        if(!response.ok){
             app.errorMessage = "Error no se ah podido postear el comentario";
+        }
         else{
             app.errorMessage = "";
             return response.json();
         }
     })
     .then(comment => {
-        app.comments.push(comment);
-        app.commentsLength = app.comments.length;
+        if(comment != undefined){
+            app.comments.push(comment);
+            app.commentsLength = app.comments.length;
+        }
+        
     })
     .catch(error => console.log(error));
 }

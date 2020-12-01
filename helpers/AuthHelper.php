@@ -19,23 +19,11 @@ class AuthHelper{
         }
     }
 
-    function checkLoggedSession() {
-        if ($this->isLoggedIn()) {
-            if($_SESSION['ROLE'] == 0){
-                return 0;
-            }
-            else
-            return 1;
-        }
-        else 2;
-
-    }
-
+    // asigna los datos de la session
     function login($user) {
         $_SESSION['ID'] = $user->id_usuario;
         $_SESSION['USER'] = $user->email;
         $_SESSION['ROLE'] = $user->rol;
-        
     }
 
     //destruye la sesión y redirige a ShowCities

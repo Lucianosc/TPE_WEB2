@@ -38,7 +38,7 @@ class ApiController{
         $flatId = $params[':ID'];
         $data = $this->model->getCommentByFlatId($flatId);
 
-        if ($data)
+        if ($data || sizeof($data) == 0)
             $this->view->response($data, 200);
         else 
             $this->view->response($data, 404);
@@ -52,7 +52,7 @@ class ApiController{
         if(empty($body->texto) || empty($body->puntaje) || empty($body->id_usuario_fk) ||
             empty($body->id_depto_fk)){
 
-            $this->view->response("Complete todos los campos", 404);
+            $this->view->response("Complete todos los campos", 400);
         }
         else{
             $comment = $this->model->postComment($body->texto, $body->puntaje,

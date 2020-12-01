@@ -73,13 +73,13 @@
                     </div>
                 </div>
                 <div class="row" id="vue-div" flat-id="{$flat->id_departamento}" user-role="{$sessionUser['ROLE']}">
-                    {else}
+                {else}
                     <div class="row" id="vue-div" flat-id="{$flat->id_departamento}" user-role="2">
-                        {/if}
+                {/if}
                         {include file="vue/comments.vue"}
                     </div>
                 </div>
-                {/if}
+            {/if}
             </div>
         </div>
     </div>
