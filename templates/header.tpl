@@ -30,7 +30,7 @@
                         <a class="nav-link" href="showCities">Ciudades</a>
                     </li>
                     <li class="nav-item active">
-                        <a class="nav-link" href="showFlats/1">Departamentos</a>
+                        <a class="nav-link" href="showFlats">Departamentos</a>
                     </li>
                 </ul>
             </div>

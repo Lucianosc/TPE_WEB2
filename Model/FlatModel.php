@@ -32,7 +32,7 @@ class FlatModel
     }
 
     //Obtiene los departamentos pertenecientes a una determinada ciudad
-    function getFlatsByCity($name_city)
+    /*function getFlatsByCity($name_city)
     {
         $query = $this->db->prepare('SELECT departamento.*, ciudad.nombre as nombre_ciudad 
                                     FROM departamento INNER JOIN ciudad ON
@@ -40,7 +40,7 @@ class FlatModel
                                     WHERE ciudad.nombre=?');
         $query->execute(array($name_city));
         return  $query->fetchAll(PDO::FETCH_OBJ);
-    }
+    }*/
 
     //alta
     function insertFlat($name, $address, $price, $id_city_fk)
@@ -77,12 +77,12 @@ class FlatModel
         return $query->fetchAll(PDO::FETCH_OBJ);
     }
 
-    function getCountFlats()
+    /*function getCountFlats()      //NO ANDUVO
     {
         $query = $this->db->prepare('SELECT COUNT(*) FROM departamento');
         $query->execute();
         return  $query->fetch(PDO::FETCH_OBJ);
-    }
+    }*/
 
     function getNumberFlats()
     {
@@ -91,21 +91,23 @@ class FlatModel
         return  $query->rowCount();
     }
     //paginacion con filtro sin funcionar
-   /* function getFlatsByCityLimit($start_from_record, $quantity_to_show, $city_name){
+   function getFlatsByCityLimit($start_from_record, $quantity_to_show, $city_name){
         $query = $this->db->prepare("SELECT departamento.*, ciudad.nombre as nombre_ciudad
                                     FROM departamento INNER JOIN ciudad ON
-                                    departamento.id_ciudad_fk = ciudad.id_ciudad 
-                                    LIMIT $start_from_record, $quantity_to_show
-                                    WHERE ciudad.nombre = ?");
+                                    departamento.id_ciudad_fk = ciudad.id_ciudad
+                                    WHERE ciudad.nombre = ?
+                                    LIMIT $start_from_record, $quantity_to_show");
         $query->execute(array($city_name));
         return $query->fetchAll(PDO::FETCH_OBJ);
     }
 
     function getNumberFlatsByCity($city_name)
     {
-        $query = $this->db->prepare('SELECT departamento.*, ciudad.nombre as nombre_ciudad
-                                     FROM departamento INNER JOIN ciudad WHERE ciudad.nombre = ?');
+        $query = $this->db->prepare('SELECT departamento.*, ciudad.nombre as nombre_ciudad 
+                                    FROM departamento INNER JOIN ciudad
+                                    ON departamento.id_ciudad_fk = ciudad.id_ciudad
+                                    WHERE ciudad.nombre=?');
         $query->execute(array($city_name));
         return  $query->rowCount();
-    }*/
+    }
 }
