@@ -61,7 +61,7 @@ function deleteComment(id){
     fetch("api/comments/" + id, {method: "DELETE"})
     .then(response => {
         if(!response.ok)
-            app.errorMessage = "No se ah podido eliminar el comentario";
+            app.errorMessage = "No se ha podido eliminar el comentario";
         else
             app.errorMessage = "";
         return response.json();
@@ -109,7 +109,7 @@ function addComment(){
     })
     .then(response => {
         if(!response.ok){
-            app.errorMessage = "Error no se ah podido postear el comentario";
+            app.errorMessage = "Error no se ha podido postear el comentario";
         }
         else{
             app.errorMessage = "";
