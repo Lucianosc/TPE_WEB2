@@ -31,7 +31,9 @@
     margin-left: -15%;
     margin-right: 15%;
 }
-
+#flatImgs div{
+    margin: 10px;
+}
 .rating {
     display: flex;
     flex-direction: row-reverse;

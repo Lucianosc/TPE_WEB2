@@ -59,21 +59,15 @@ class UserController
         $password = $_POST['input_pass'];
         $role = 1;
 
-        $logged = $this->authHelper->isLoggedIn();
-        $roleUser = $this->authHelper->checkLoggedSession();
-
-        if ($logged && $roleUser == 0) {
-            if (isset($user) && !empty($user) && isset($password) && !empty($password)) {
-                if ($this->alreadyLoaded($user) === false) {
-                    $password_hash = password_hash($password, PASSWORD_DEFAULT);
-                    $this->model->createUser($user, $password_hash, $role);
-                    $this->verifyUser();
-                } else
-                    $this->view->ShowSignUp("El usuario ya existe");
+        if (isset($user) && !empty($user) && isset($password) && !empty($password)) {
+            if ($this->alreadyLoaded($user) === false) {
+                $password_hash = password_hash($password, PASSWORD_DEFAULT);
+                $this->model->createUser($user, $password_hash, $role);
+                $this->verifyUser();
             } else
-                $this->view->ShowSignUp("Complete todos los campos");
+                $this->view->ShowSignUp("El usuario ya existe");
         } else
-            $this->view->RenderError("Debe ser usuario administrador para acceder a esta sección");
+            $this->view->ShowSignUp("Complete todos los campos");
     }
 
     //ALTA -> Checkea si existe el mail en la db
@@ -144,3 +138,4 @@ class UserController
         }
     }
 }
+

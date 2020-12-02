@@ -64,9 +64,7 @@ class ApiController{
                 $this->view->response($body, 201);
             else
                 $this->view->response("El comentario no se pudo crear", 404);
-        }  
-        
-        
+        }     
     }
 
     function deleteComment($params = null){
@@ -78,5 +76,4 @@ class ApiController{
         else
             $this->view->response("Comentario Id: $commentId No Existe!", 404);
     }
-   
 }

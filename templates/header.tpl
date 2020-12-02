@@ -64,6 +64,5 @@
                     </div>
                 {/if}
             </div>
-            {/if}
         </div>
     </nav>

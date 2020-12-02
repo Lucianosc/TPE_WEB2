@@ -66,27 +66,30 @@ class FlatController
             if ((isset($name) && !empty($name)) &&
                 (isset($address) && !empty($address)) &&
                 (isset($price) && is_numeric($price)) &&
-                (isset($id_city_fk) && is_numeric($id_city_fk))
-            ) {
+                (isset($id_city_fk) && is_numeric($id_city_fk))){
+
                 if ($this->alreadyLoaded($name, $address, $id_city_fk) === false) {
 
                     $id_flat = $this->model->insertFlat($name, $address, $price, $id_city_fk);
 
-                    if (!empty($tmp_images[0]))  //si hay alguna imagen
+                    if (!empty($tmp_images[0]))  //checkea si la primer pocision del arreglo de imagenes no esta vacio
                         $this->controllerImage->insertImages($tmp_images, $id_flat);
 
-                    else $this->view->showFlatLocation($id_flat);
-                } else {
+                    else 
+                        $this->view->showFlatLocation($id_flat);
+                } 
+                else {
                     $cities = $this->modelCity->getCities();
                     $errorMessaje = "Estos datos corresponden a un departamento en la base de datos. Intente nuevamente.";
                     $this->view->ShowError($cities, $errorMessaje, $logged);
                 }
-            } else $this->viewUser->RenderError("Debe completar todos los campos del formulario");
+            } else 
+                $this->viewUser->RenderError("Debe completar todos los campos del formulario");
         } else
             $this->viewUser->RenderError("Debe ser administrador para acceder a esta sección.");
     }
 
-    //ALTA -> Checkea si existe el depto en la db 
+    //ALTA -> Checkea si existe el depto en la db o si solo se quieren modificar las imagenes del mismo.
     private function alreadyLoaded($name, $address, $id_city_fk, $id = null)
     {
         $flats = $this->model->getFlats();
@@ -158,7 +161,7 @@ class FlatController
 
                     $this->model->updateFlat($id, $name, $address, $price, $id_city_fk);
 
-                    if (!empty($tmp_images[0]))  //si hay alguna imagen
+                    if (!empty($tmp_images[0]))  //checkea si la primer pocision del arreglo de imagenes no esta vacio
                         $this->controllerImage->insertImages($tmp_images, $id);
                     else
                         $this->view->showFlatLocation($id);

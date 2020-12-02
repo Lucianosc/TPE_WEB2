@@ -20,7 +20,7 @@ class AuthHelper
         }
     }
 
-    //Asigna valores para - admin = 0, user comun = 1, sesion no iniciada = 2.
+    //Checkea roles y asigna valores -> admin = 0, user comun = 1, sesion no iniciada = 2.
     function checkLoggedSession()
     {
         if ($this->isLoggedIn()) {

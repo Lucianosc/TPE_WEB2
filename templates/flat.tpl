@@ -40,11 +40,13 @@
                         </tr>
 
                     </table>
-                    {foreach from=$images item=image}
-                    <div class="form-group">
-                        <img src="{$image->ruta}" alt="Imagen del departamento {$flat->nombre}">
+                    <div class="d-flex flex-column" id="flatImgs">
+                        {foreach from=$images item=image}
+                        <div class="d-flex justify-content-center">
+                            <img src="{$image->ruta}" class="img-fluid" alt="Imagen del departamento {$flat->nombre}">
+                        </div>
+                        {/foreach}
                     </div>
-                    {/foreach}
                 </div>
                 {if $sessionUser eq true}
                 <div class="row" id="form-div" user-name="{$sessionUser['USER']}" user-id="{$sessionUser['ID']}">

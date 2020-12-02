@@ -3,7 +3,7 @@
 require_once 'ApiController.php';
 
 // devuelve json
-//maneja las respuestas
+// maneja las respuestas
 class ApiView{
 
     function response($data, $status){
