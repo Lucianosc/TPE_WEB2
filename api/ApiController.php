@@ -56,7 +56,7 @@ class ApiController{
         }
         else{
             $comment = $this->model->postComment($body->texto, $body->puntaje,
-            $body->id_usuario_fk, $body->id_depto_fk);
+                $body->id_usuario_fk, $body->id_depto_fk);
 
             $body->id_comentario = $comment;
 
