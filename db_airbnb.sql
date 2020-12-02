@@ -2,10 +2,10 @@
 -- version 5.0.2
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Dec 01, 2020 at 06:23 PM
--- Server version: 10.4.11-MariaDB
--- PHP Version: 7.4.6
+-- Servidor: 127.0.0.1
+-- Tiempo de generación: 22-11-2020 a las 00:22:17
+-- Versión del servidor: 10.4.11-MariaDB
+-- Versión de PHP: 7.4.6
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,13 +18,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `db_airbnb`
+-- Base de datos: `db_airbnb`
 --
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `ciudad`
+-- Estructura de tabla para la tabla `ciudad`
 --
 
 CREATE TABLE `ciudad` (
@@ -33,7 +33,7 @@ CREATE TABLE `ciudad` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `ciudad`
+-- Volcado de datos para la tabla `ciudad`
 --
 
 INSERT INTO `ciudad` (`id_ciudad`, `nombre`) VALUES
@@ -45,7 +45,7 @@ INSERT INTO `ciudad` (`id_ciudad`, `nombre`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `comentario`
+-- Estructura de tabla para la tabla `comentario`
 --
 
 CREATE TABLE `comentario` (
@@ -57,30 +57,21 @@ CREATE TABLE `comentario` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `comentario`
+-- Volcado de datos para la tabla `comentario`
 --
 
 INSERT INTO `comentario` (`id_comentario`, `texto`, `puntaje`, `id_usuario_fk`, `id_depto_fk`) VALUES
 (6, 'y otro mas', 0, 2, 13),
+(7, 'coment numero 12', 0, 2, 12),
 (9, 'Otro comnent jajajajaj', 0, 2, 13),
-(33, 'hfgbdvsaSVF B', 3, 2, 8),
-(34, 'holi', 5, 2, 8),
-(35, 'otro comment', 2, 2, 8),
-(36, 'holi', 1, 2, 8),
-(37, '', 2, 2, 8),
-(38, 'ferd', 2, 2, 8),
-(39, 'fbvdsfa', 2, 2, 8),
-(49, 'esto es un comentario!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!', 4, 2, 12),
-(50, 'fdghbnvbcsd   k k kj j olkm,', 3, 2, 12),
-(53, 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Obcaecati perspiciatis vitae tempore aperiam, numquam provident modi facere repudiandae blanditiis fugiat a optio quas minima laboriosam ipsam nisi, culpa aspernatur excepturi?', 2, 2, 9),
-(66, 'un coment mas', 3, 11, 9),
-(78, 'aANKJSDFNAD', 3, 2, 9),
-(80, 'asdf', 3, 2, 9);
+(10, 'Todo bien por aca!!!!!!', 0, 2, 12),
+(11, 'Lorem epsiumm yo que seee', 0, 2, 12),
+(12, 'Lorem epsiumm yo que seee', 0, 2, 12);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `departamento`
+-- Estructura de tabla para la tabla `departamento`
 --
 
 CREATE TABLE `departamento` (
@@ -92,7 +83,7 @@ CREATE TABLE `departamento` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `departamento`
+-- Volcado de datos para la tabla `departamento`
 --
 
 INSERT INTO `departamento` (`id_departamento`, `nombre`, `direccion`, `precio`, `id_ciudad_fk`) VALUES
@@ -100,12 +91,25 @@ INSERT INTO `departamento` (`id_departamento`, `nombre`, `direccion`, `precio`, 
 (9, 'Depto del calvario', 'España 800', 8000, 24),
 (10, 'Depto Naranja', 'chacabuco 800', 16000, 2),
 (12, 'Depto Centrico', 'Santa fe 2300', 24000, 28),
-(13, 'Depto Belgrano', 'Juncal 1800', 22000, 28);
+(13, 'Depto Belgrano', 'Juncal 1800', 22000, 28),
+(35, 'SIN IMAGEN', '1', 2, 25);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `usuario`
+-- Estructura de tabla para la tabla `imagen`
+--
+
+CREATE TABLE `imagen` (
+  `id_imagen` int(11) NOT NULL,
+  `ruta` varchar(200) CHARACTER SET latin1 NOT NULL,
+  `id_departamento_fk` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `usuario`
 --
 
 CREATE TABLE `usuario` (
@@ -116,27 +120,27 @@ CREATE TABLE `usuario` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `usuario`
+-- Volcado de datos para la tabla `usuario`
 --
 
 INSERT INTO `usuario` (`id_usuario`, `email`, `clave`, `rol`) VALUES
 (2, 'admin@admin', '$2y$12$Nhvr7CwY8fH.IF4AS9lWh.vKgPq2u8EbgYEgzSO4qpNRqNY7fFKHC', 0),
 (3, 'magali', '$2y$10$Pzv4mefUTo2bS4jUNnCA/OFvPyd0t7JiDmR0imN28wOD6XVr.FTtG', 0),
 (7, 'azuquita', '$2y$10$7Nrs7NNxBB3BMU0Jx.2cguoWFwfrNucFQ/JjET1dP4MY8WoCEDk8u', 1),
-(11, 'lucho@usuario', '$2y$10$dkFbk1EXcfpRZRzr3R60tuB5bQN6Dc9GVdtYqOeHthhTK6J.ZXVra', 1);
+(10, 'www', '$2y$10$BZkiFkJ2qLAxu2NOExhYhuX/kvTR8J9j/KBgfGkWXfSbWjuy/Zbl2', 1);
 
 --
--- Indexes for dumped tables
+-- Índices para tablas volcadas
 --
 
 --
--- Indexes for table `ciudad`
+-- Indices de la tabla `ciudad`
 --
 ALTER TABLE `ciudad`
   ADD PRIMARY KEY (`id_ciudad`);
 
 --
--- Indexes for table `comentario`
+-- Indices de la tabla `comentario`
 --
 ALTER TABLE `comentario`
   ADD PRIMARY KEY (`id_comentario`),
@@ -144,62 +148,81 @@ ALTER TABLE `comentario`
   ADD KEY `id_usuario_fk` (`id_usuario_fk`);
 
 --
--- Indexes for table `departamento`
+-- Indices de la tabla `departamento`
 --
 ALTER TABLE `departamento`
   ADD PRIMARY KEY (`id_departamento`),
   ADD KEY `id_ciudad` (`id_ciudad_fk`);
 
 --
--- Indexes for table `usuario`
+-- Indices de la tabla `imagen`
+--
+ALTER TABLE `imagen`
+  ADD PRIMARY KEY (`id_imagen`),
+  ADD KEY `id_departamento_fk` (`id_departamento_fk`);
+
+--
+-- Indices de la tabla `usuario`
 --
 ALTER TABLE `usuario`
   ADD PRIMARY KEY (`id_usuario`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT de las tablas volcadas
 --
 
 --
--- AUTO_INCREMENT for table `ciudad`
+-- AUTO_INCREMENT de la tabla `ciudad`
 --
 ALTER TABLE `ciudad`
   MODIFY `id_ciudad` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
--- AUTO_INCREMENT for table `comentario`
+-- AUTO_INCREMENT de la tabla `comentario`
 --
 ALTER TABLE `comentario`
-  MODIFY `id_comentario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=82;
+  MODIFY `id_comentario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
--- AUTO_INCREMENT for table `departamento`
+-- AUTO_INCREMENT de la tabla `departamento`
 --
 ALTER TABLE `departamento`
-  MODIFY `id_departamento` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id_departamento` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
 
 --
--- AUTO_INCREMENT for table `usuario`
+-- AUTO_INCREMENT de la tabla `imagen`
+--
+ALTER TABLE `imagen`
+  MODIFY `id_imagen` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+
+--
+-- AUTO_INCREMENT de la tabla `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
--- Constraints for dumped tables
+-- Restricciones para tablas volcadas
 --
 
 --
--- Constraints for table `comentario`
+-- Filtros para la tabla `comentario`
 --
 ALTER TABLE `comentario`
   ADD CONSTRAINT `comentario_ibfk_1` FOREIGN KEY (`id_depto_fk`) REFERENCES `departamento` (`id_departamento`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `comentario_ibfk_2` FOREIGN KEY (`id_usuario_fk`) REFERENCES `usuario` (`id_usuario`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Constraints for table `departamento`
+-- Filtros para la tabla `departamento`
 --
 ALTER TABLE `departamento`
   ADD CONSTRAINT `departamento_ibfk_1` FOREIGN KEY (`id_ciudad_fk`) REFERENCES `ciudad` (`id_ciudad`) ON UPDATE CASCADE;
+
+--
+-- Filtros para la tabla `imagen`
+--
+ALTER TABLE `imagen`
+  ADD CONSTRAINT `imagen_ibfk_1` FOREIGN KEY (`id_departamento_fk`) REFERENCES `departamento` (`id_departamento`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
