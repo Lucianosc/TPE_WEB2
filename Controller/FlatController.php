@@ -55,35 +55,32 @@ class FlatController
     function insertFlat()
     {
         $logged = $this->authHelper->isLoggedIn();
-        $role = $this->authHelper->checkLoggedSession();
-        if ($logged && $role == 0) {
-            $name = $_POST['input_name'];
-            $address = $_POST['input_address'];
-            $price = $_POST['input_price'];
-            $id_city_fk = $_POST['input_id_city_fk'];
-            $tmp_images = $_FILES['imagesToUpload']['tmp_name'];
 
-            if ((isset($name) && !empty($name)) &&
-                (isset($address) && !empty($address)) &&
-                (isset($price) && is_numeric($price)) &&
-                (isset($id_city_fk) && is_numeric($id_city_fk))
-            ) {
-                if ($this->alreadyLoaded($name, $address, $id_city_fk) === false) {
+        $name = $_POST['input_name'];
+        $address = $_POST['input_address'];
+        $price = $_POST['input_price'];
+        $id_city_fk = $_POST['input_id_city_fk'];
+        $tmp_images = $_FILES['imagesToUpload']['tmp_name'];
 
-                    $id_flat = $this->model->insertFlat($name, $address, $price, $id_city_fk);
+        if ((isset($name) && !empty($name)) &&
+            (isset($address) && !empty($address)) &&
+            (isset($price) && is_numeric($price)) &&
+            (isset($id_city_fk) && is_numeric($id_city_fk))
+        ) {
+            if ($this->alreadyLoaded($name, $address, $id_city_fk) === false) {
 
-                    if (!empty($tmp_images[0]))  //si hay alguna imagen
-                        $this->controllerImage->insertImages($tmp_images, $id_flat);
+                $id_flat = $this->model->insertFlat($name, $address, $price, $id_city_fk);
 
-                    else $this->view->showFlatLocation($id_flat);
-                } else {
-                    $cities = $this->modelCity->getCities();
-                    $errorMessaje = "Estos datos corresponden a un departamento en la base de datos. Intente nuevamente.";
-                    $this->view->ShowError($cities, $errorMessaje, $logged);
-                }
-            } else $this->viewUser->RenderError("Debe completar todos los campos del formulario");
-        } else
-            $this->viewUser->RenderError("Debe ser administrador para acceder a esta sección.");
+                if (!empty($tmp_images[0]))  //si hay alguna imagen
+                    $this->controllerImage->insertImages($tmp_images, $id_flat);
+
+                else $this->view->showFlatLocation($id_flat);
+            } else {
+                $cities = $this->modelCity->getCities();
+                $errorMessaje = "Estos datos corresponden a un departamento en la base de datos. Intente nuevamente.";
+                $this->view->ShowError($cities, $errorMessaje, $logged);
+            }
+        } else $this->viewUser->RenderError("Debe completar todos los campos del formulario");
     }
 
     //ALTA -> Checkea si existe el depto en la db 
@@ -105,7 +102,7 @@ class FlatController
     //baja
     function deleteFlat($params = null)
     {
-        $logged = $this->authHelper->isLoggedIn(); 
+        $logged = $this->authHelper->isLoggedIn();
         $role = $this->authHelper->checkLoggedSession();
         if ($logged && $role == 0) {
             $id = $params[':ID'];
@@ -120,59 +117,50 @@ class FlatController
     function editFlat($params = null)
     {
         $logged = $this->authHelper->isLoggedIn();
-        $role = $this->authHelper->checkLoggedSession();
-        if ($logged && $role == 0) {
-            $id_flat = $params[':ID'];
-            $cities = $this->modelCity->getCities();
-            $flat = $this->model->getFlatById($id_flat);
+        $id_flat = $params[':ID'];
+        $cities = $this->modelCity->getCities();
+        $flat = $this->model->getFlatById($id_flat);
 
-            if ($flat) {    //checkea si obtuvo un objeto no vacío de la db
-                $images = $this->modelImage->getImagesByFlat($id_flat);
-                $this->view->ShowEditFlat($flat, $cities, $images, $logged);
-            } else {
-                $this->viewUser->RenderError("No existe id en la base de datos");
-            }
-        } else {
-            $this->viewUser->RenderError("Debe ser administrador para acceder a esta sección.");
-        }
+        if ($flat) {    //checkea si obtuvo un objeto no vacío de la db
+            $images = $this->modelImage->getImagesByFlat($id_flat);
+            $this->view->ShowEditFlat($flat, $cities, $images, $logged);
+        } else
+            $this->viewUser->RenderError("No existe id en la base de datos");
     }
     //modificación
-    function updateFlat()   
+    function updateFlat()
     {
-        $logged = $this->authHelper->isLoggedIn(); 
-        $role = $this->authHelper->checkLoggedSession();
-        if ($logged && $role == 0) {
-            $id = $_POST['input_edit_id'];
-            $name = $_POST['input_edit_name'];
-            $address = $_POST['input_edit_address'];
-            $price = $_POST['input_edit_price'];
-            $id_city_fk = $_POST['input_edit_id_city_fk'];
-            $tmp_images = $_FILES['imagesToUpload']['tmp_name'];
+        $logged = $this->authHelper->isLoggedIn();
 
-            if ((isset($name) && !empty($name)) &&
-                (isset($address) && !empty($address)) &&
-                (isset($price) && is_numeric($price)) &&
-                (isset($id_city_fk) && is_numeric($id_city_fk))
-            ) {
-                if ($this->alreadyLoaded($name, $address, $id_city_fk, $id) === false) {
+        $id = $_POST['input_edit_id'];
+        $name = $_POST['input_edit_name'];
+        $address = $_POST['input_edit_address'];
+        $price = $_POST['input_edit_price'];
+        $id_city_fk = $_POST['input_edit_id_city_fk'];
+        $tmp_images = $_FILES['imagesToUpload']['tmp_name'];
 
-                    $this->model->updateFlat($id, $name, $address, $price, $id_city_fk);
+        if ((isset($name) && !empty($name)) &&
+            (isset($address) && !empty($address)) &&
+            (isset($price) && is_numeric($price)) &&
+            (isset($id_city_fk) && is_numeric($id_city_fk))
+        ) {
+            if ($this->alreadyLoaded($name, $address, $id_city_fk, $id) === false) {
 
-                    if (!empty($tmp_images[0]))  //si hay alguna imagen
-                        $this->controllerImage->insertImages($tmp_images, $id);
-                    else
-                        $this->view->showFlatLocation($id);
-                } else {
-                    $cities = $this->modelCity->getCities();
-                    $errorMessaje = "Estos datos corresponden a un departamento en la base de datos. Intente nuevamente.";
-                    $this->view->ShowError($cities, $errorMessaje, $logged);
-                }
-            } else
-                $this->viewUser->RenderError("Debe completar todos los campos del formulario");
+                $this->model->updateFlat($id, $name, $address, $price, $id_city_fk);
+
+                if (!empty($tmp_images[0]))  //si hay alguna imagen
+                    $this->controllerImage->insertImages($tmp_images, $id);
+                else
+                    $this->view->showFlatLocation($id);
+            } else {
+                $cities = $this->modelCity->getCities();
+                $errorMessaje = "Estos datos corresponden a un departamento en la base de datos. Intente nuevamente.";
+                $this->view->ShowError($cities, $errorMessaje, $logged);
+            }
         } else
-            $this->viewUser->RenderError("Debe ser administrador para acceder a esta sección.");
+            $this->viewUser->RenderError("Debe completar todos los campos del formulario");
     }
-    
+
     function showFlats($params = null)
     {
         $total_records = $this->model->getNumberFlats();
@@ -183,7 +171,7 @@ class FlatController
     {
         $city_name = $params[':NAME'];
         $total_records = $this->model->getNumberFlatsByCity($city_name);
-       
+
         $this->pagination($total_records, $params, $city_name);
     }
 
@@ -209,15 +197,14 @@ class FlatController
             $flats = $this->model->getFlatsByLimit($start_from_record, $quantity_to_show);
 
         if (empty($flats)) {
-            if ($page > $total_pages && $total_pages == 0){
+            if ($page > $total_pages && $total_pages == 0) {
                 $errorMessaje = "No hay departamentos en esta ciudad.";
                 $this->view->ShowError($cities, $errorMessaje, $logged);
-
-            } else{
+            } else {
                 $errorMessaje = "Fuera de rango de paginado.";
                 $this->view->ShowError($cities, $errorMessaje, $logged);
-            }      
-        } else{
+            }
+        } else {
             $this->view->ShowFlats($flats, $cities, $logged, $total_pages, $city_name);
         }
     }
