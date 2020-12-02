@@ -62,8 +62,12 @@ class FlatModel
         $query = $this->db->prepare("SELECT departamento.*, ciudad.nombre as nombre_ciudad
                                     FROM departamento INNER JOIN ciudad ON
                                     departamento.id_ciudad_fk = ciudad.id_ciudad 
-                                    LIMIT $start_from_record, $quantity_to_show");
+                                    LIMIT :start_from_record, :quantity_to_show");
+
+        $query->bindParam(":start_from_record", $start_from_record, PDO::PARAM_INT);
+        $query->bindParam(":quantity_to_show", $quantity_to_show, PDO::PARAM_INT);
         $query->execute();
+        
         return $query->fetchAll(PDO::FETCH_OBJ);
     }
 
@@ -81,9 +85,14 @@ class FlatModel
         $query = $this->db->prepare("SELECT departamento.*, ciudad.nombre as nombre_ciudad
                                     FROM departamento INNER JOIN ciudad ON
                                     departamento.id_ciudad_fk = ciudad.id_ciudad
-                                    WHERE ciudad.nombre = ?
-                                    LIMIT $start_from_record, $quantity_to_show");
-        $query->execute(array($city_name));
+                                    WHERE ciudad.nombre = :city_name
+                                    LIMIT :start_from_record, :quantity_to_show");
+
+        $query->bindParam(":city_name", $city_name, PDO::PARAM_STR);
+        $query->bindParam(":start_from_record", $start_from_record, PDO::PARAM_INT);
+        $query->bindParam(":quantity_to_show", $quantity_to_show, PDO::PARAM_INT);
+        $query->execute();
+
         return $query->fetchAll(PDO::FETCH_OBJ);
     }
 
