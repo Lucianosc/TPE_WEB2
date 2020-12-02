@@ -27,7 +27,6 @@ class UserView
 
         $this->smarty->display('templates/error.tpl');
     }
-    //NUEVO
 
     function ShowSignUp($message = "")
     {

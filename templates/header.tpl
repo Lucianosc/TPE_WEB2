@@ -36,33 +36,33 @@
             </div>
             <div class="input-group-prepend">
                 {if $sessionUser eq false}
-                <div class="row">
-                    <div class="col">
-                        <a href="login"><button type="button" class="btn btn-danger" id="btn-color">Login</button></a>
+                    <div class="row">
+                        <div class="col">
+                            <a href="login"><button type="button" class="btn btn-danger" 
+                                    id="btn-color">Login</button></a>
+                        </div>
+                        <div class="col">
+                            <a href="signUp"><button type="button" class="btn btn-danger"
+                                    id="btn-color">Registrate</button></a>
+                        </div>
                     </div>
-                    <div class="col">
-                        <a href="signUp"><button type="button" class="btn btn-danger"
-                                id="btn-color">Registrate</button></a>
-                    </div>
-                </div>
                 {else}
-                <div class="row">
-                    <div class="col">
-                        <h6>Usuario: {$sessionUser['USER']}</h6>
+                    <div class="row">
+                        <div class="col">
+                            <h6>Usuario: {$sessionUser['USER']}</h6>
+                        </div>
+                        {if $sessionUser eq true && $sessionUser['ROLE'] eq 0}
+                            <div class="col">
+                                <a href="admin"><button type="button" class="btn btn-danger"
+                                    id="btn-color">Administración</button></a>
+                            </div>
+                        {/if}
+                        <div class="col">
+                            <a href="logout"><button type="button" class="btn btn-danger" 
+                                id="btn-color">Logout</button></a>
+                        </div>
                     </div>
-                    {if $sessionUser eq true && $sessionUser['ROLE'] eq 0}
-                    <div class="col">
-                        <a href="admin"><button type="button" class="btn btn-danger"
-                            id="btn-color">Administración</button></a>
-                    </div>
-                    {/if}
-                    <div class="col">
-                        <a href="logout"><button type="button" class="btn btn-danger" 
-                            id="btn-color">Logout</button></a>
-                    </div>
-                </div>
+                {/if}
             </div>
-            {/if}
-        </div>
         </div>
     </nav>

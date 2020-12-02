@@ -25,16 +25,16 @@ class CityController
     //muestra todas las ciudades
     function showCities()
     {
-        $logged = $this->authHelper->isLoggedIn();  //debe ser admin?
+        $logged = $this->authHelper->isLoggedIn(); 
 
         $cities = $this->model->getCities();
         $this->view->ShowHome($cities, $logged);
     }
 
     //alta
-    function insertCity()   //Es necesario checkeo línea 37? entra por post
+    function insertCity()   
     {
-        $logged = $this->authHelper->isLoggedIn();  //FALTA CHECKEAR QUE SEA SOLO ADMIN check
+        $logged = $this->authHelper->isLoggedIn();  
         $role = $this->authHelper->checkLoggedSession();
         if ($logged && $role == 0) {
             $name = $_POST['input_name'];
@@ -64,13 +64,14 @@ class CityController
         }
         return $exist;
     }
+    
     //baja
     function deleteCity($params = null)
     {
-        $logged = $this->authHelper->isLoggedIn();  //DEBE SER ADMIN check
+        $logged = $this->authHelper->isLoggedIn();  
         $role = $this->authHelper->checkLoggedSession();
         if ($logged && $role == 0) {
-            $id = $params[':ID'];   //debo checkear q los params sea isset?
+            $id = $params[':ID'];  
             $result = $this->model->deleteCity($id);
             if ($result > 0)
                 $this->view->showCitiesLocation();
@@ -85,10 +86,10 @@ class CityController
     //redireccion -> para modificacion
     function editCity($params = null)
     {
-        $logged = $this->authHelper->isLoggedIn();  //debe ser admin check
+        $logged = $this->authHelper->isLoggedIn(); 
         $role = $this->authHelper->checkLoggedSession();
         if ($logged && $role == 0) {
-            $id_city = $params[':ID'];  //debo checkear q este seteado params?
+            $id_city = $params[':ID']; 
             $city = $this->model->getCityById($id_city);
 
             if ($city) {    //checkea si obtuvo un objeto no vacío de la db
@@ -99,6 +100,7 @@ class CityController
         } else
             $this->viewUser->RenderError("Debe ser administrador para acceder a esta sección.");
     }
+
     //modificación
     function updateCity()
     {

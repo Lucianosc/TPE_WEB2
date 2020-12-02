@@ -41,12 +41,10 @@
     $r->addRoute("login", "GET", "UserController", "showLogin");
     $r->addRoute("verifyUser", "POST", "UserController", "verifyUser");
     $r->addRoute("logout", "GET", "AuthHelper", "logout");
-
-    //--------------------NUEVO----------------------------------------
     $r->addRoute("signUp", "GET", "UserController", "showSignUp");
-    $r->addRoute("insertUser", "POST", "UserController", "insertUser");
-    $r->addRoute("admin", "GET", "UserController", "showUsers");
 
+    $r->addRoute("admin", "GET", "UserController", "showUsers");
+    $r->addRoute("insertUser", "POST", "UserController", "insertUser");
     $r->addRoute("deleteUser/:ID", "GET", "UserController", "deleteUser");
     $r->addRoute("updateUserRole/:ID", "GET", "UserController", "updateUserRole");
 

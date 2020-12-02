@@ -31,17 +31,6 @@ class FlatModel
         return  $query->fetch(PDO::FETCH_OBJ);
     }
 
-    //Obtiene los departamentos pertenecientes a una determinada ciudad
-    /*function getFlatsByCity($name_city)
-    {
-        $query = $this->db->prepare('SELECT departamento.*, ciudad.nombre as nombre_ciudad 
-                                    FROM departamento INNER JOIN ciudad ON
-                                    departamento.id_ciudad_fk = ciudad.id_ciudad
-                                    WHERE ciudad.nombre=?');
-        $query->execute(array($name_city));
-        return  $query->fetchAll(PDO::FETCH_OBJ);
-    }*/
-
     //alta
     function insertFlat($name, $address, $price, $id_city_fk)
     {
@@ -66,8 +55,9 @@ class FlatModel
         $query->execute(array($name, $address, $price, $id_city_fk, $id));
     }
 
-    //paginación
+    //Paginación
 
+    //Obtiene un listado de cantidad limitada de departamentos a partir de un registro inicial determinado.
     function getFlatsByLimit($start_from_record, $quantity_to_show){
         $query = $this->db->prepare("SELECT departamento.*, ciudad.nombre as nombre_ciudad
                                     FROM departamento INNER JOIN ciudad ON
@@ -77,20 +67,16 @@ class FlatModel
         return $query->fetchAll(PDO::FETCH_OBJ);
     }
 
-    /*function getCountFlats()      //NO ANDUVO
-    {
-        $query = $this->db->prepare('SELECT COUNT(*) FROM departamento');
-        $query->execute();
-        return  $query->fetch(PDO::FETCH_OBJ);
-    }*/
-
+    //Devuelve la cantidad total de departamentos
     function getNumberFlats()
     {
         $query = $this->db->prepare('SELECT departamento.* FROM departamento');
         $query->execute();
         return  $query->rowCount();
     }
-    //paginacion con filtro sin funcionar
+
+   /*Obtiene un listado de cantidad limitada de departamentos de cierta ciudad
+    a partir de un registro inicial determinado.*/
    function getFlatsByCityLimit($start_from_record, $quantity_to_show, $city_name){
         $query = $this->db->prepare("SELECT departamento.*, ciudad.nombre as nombre_ciudad
                                     FROM departamento INNER JOIN ciudad ON
@@ -101,6 +87,7 @@ class FlatModel
         return $query->fetchAll(PDO::FETCH_OBJ);
     }
 
+    //Devuelve la cantidad total de departamentos de una determinada ciudad
     function getNumberFlatsByCity($city_name)
     {
         $query = $this->db->prepare('SELECT departamento.*, ciudad.nombre as nombre_ciudad 

@@ -38,11 +38,6 @@ class UserController
 
                 if (password_verify($pass, $userFromDB->clave)) {
                     $this->authHelper->login($userFromDB);
-
-                    // session_start();                       //
-                    // $_SESSION['USER'] = $userFromDB->email;
-                    // $_SESSION['ID'] = $userFromDB->id_usuario;
-                    // $_SESSION['ROLE'] = $userFromDB->rol; // mandar al auth helper
                     $this->viewCity->ShowCitiesLocation();
                 } else
                     $this->view->ShowLogin("Contraseña incorrecta");
@@ -51,9 +46,7 @@ class UserController
         }
     }
 
-    //---------------------------------------NUEVO
-
-    //muestra sign Up
+    //muestra registración
     function showSignUp()
     {
         $this->view->showSignUp();
@@ -69,7 +62,7 @@ class UserController
         $logged = $this->authHelper->isLoggedIn();
         $roleUser = $this->authHelper->checkLoggedSession();
 
-        if ($logged && $roleUser == 0) {    //DEBO CHECKEAR ESTO?
+        if ($logged && $roleUser == 0) {
             if (isset($user) && !empty($user) && isset($password) && !empty($password)) {
                 if ($this->alreadyLoaded($user) === false) {
                     $password_hash = password_hash($password, PASSWORD_DEFAULT);
@@ -97,7 +90,7 @@ class UserController
 
     function showUsers()
     {
-        $logged = $this->authHelper->isLoggedIn();  //DEBE SER ADMIN check
+        $logged = $this->authHelper->isLoggedIn();
         $roleUser = $this->authHelper->checkLoggedSession();
 
         if ($logged && $roleUser == 0) {
@@ -109,11 +102,11 @@ class UserController
 
     function deleteUser($params = null)
     {
-        $logged = $this->authHelper->isLoggedIn();  //DEBE SER ADMIN check
+        $logged = $this->authHelper->isLoggedIn(); 
         $roleUser = $this->authHelper->checkLoggedSession();
 
         if ($logged && $roleUser == 0) {
-            $id = $params[':ID'];   //tengo que checkear si esta seteado params?
+            $id = $params[':ID'];
             $user = $this->model->getUserById($id);
             if ($user) {
                 if ($logged['USER'] !== $user->email) {   //Es un posible usuario a eliminar
@@ -129,11 +122,11 @@ class UserController
 
     function updateUserRole($params = null)
     {
-        $logged = $this->authHelper->isLoggedIn();  //DEBE SER ADMIN check
+        $logged = $this->authHelper->isLoggedIn();
         $roleUser = $this->authHelper->checkLoggedSession();
 
         if ($logged && $roleUser == 0) {
-            $id = $params[':ID'];   //ES NECESARIO CHECKEAR PARAMS?
+            $id = $params[':ID'];
             $user = $this->model->getUserById($id);
             if ($user) {
                 if ($logged['USER'] !== $user->email) {   //Es un posible usuario a modificar
@@ -144,13 +137,6 @@ class UserController
                     $this->view->showUsersLocation();
                 } else    //Es el mismo administrador que inició sesión
                     $this->view->RenderError("No puede auto modificar su rol de administrador.");
-                /*
-            if($user){
-                $errorMessaje = "Debe eliminar los comentarios asociados de este usuario primero.";
-                $this->view->ShowError($errorMessaje, $logged);
-            } else {*/
-                //$this->view->showUsersLocation();
-                //}
             } else
                 $this->view->RenderError("No existe usuario en la base de datos para modificar su rol.");
         } else {

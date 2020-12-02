@@ -11,7 +11,6 @@
     <link rel="stylesheet" href="css\style.css">
     <title>{$title}</title>
 </head>
-<!--Es el mismo header q para login y es casi el mismo tpl de login-->
 <body class="h-100">
     <div class="container-fluid">
         <div class="row">
@@ -31,12 +30,13 @@
                         <input type="password" class="form-control" id="pass" name="input_pass"
                             placeholder="Contraseña">
                     </div>
-                    <button type="submit" class="btn btn-danger col-md-4 offset-md-4" id="btn-color" >Registrarte</button>
+                    <button type="submit" class="btn btn-danger col-md-4 offset-md-4" 
+                            id="btn-color" >Registrarte</button>
                 </form>
                 {if $message neq false}
-                <div class="alert alert-danger" id="alert" role="alert">
-                    {$message}
-                </div>
+                    <div class="alert alert-danger" id="alert" role="alert">
+                        {$message}
+                    </div>
                 {/if}
                 <div>
                     <h6><a href="showCities" class="text-dark">Volver</a></h6>
@@ -46,4 +46,4 @@
         </div>
     </div>
 
-    {include file="footer.tpl"}
+{include file="footer.tpl"}

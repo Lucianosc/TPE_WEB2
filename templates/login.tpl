@@ -31,13 +31,13 @@
                         <input type="password" class="form-control" id="pass" name="input_pass"
                             placeholder="Contraseña" required>
                     </div>
-                    <button type="submit" class="btn btn-danger col-md-4 offset-md-4" id="btn-color" >Login</button>
-                    <!--ver si hay alguna forma de que no queden templates similares con signUp -->
+                    <button type="submit" class="btn btn-danger col-md-4 offset-md-4"
+                            id="btn-color">Login</button>
                 </form>
                 {if $message neq false}
-                <div class="alert alert-danger" id="alert" role="alert">
-                    {$message}
-                </div>
+                    <div class="alert alert-danger" id="alert" role="alert">
+                        {$message}
+                    </div>
                 {/if}
                 <div>
                     <h6><a href="showCities" class="text-dark">Volver</a></h6>
@@ -47,4 +47,4 @@
         </div>
     </div>
 
-    {include file="footer.tpl"}
+{include file="footer.tpl"}
