@@ -13,24 +13,21 @@
             </thead>
             <tbody>
                 {foreach from=$users item=user}
-                {if $user->email !== $sessionUser['USER']}
-                <tr>
-                    <td>{$user->email}</td>
-                    {if $user->rol eq 0}
-                    <td>{"Admin"}</td>
-                    {else}
-                    <td>{"Común"}</td>
+                    {if $user->email !== $sessionUser['USER']}
+                        <tr>
+                            <td>{$user->email}</td>
+                            {if $user->rol eq 0}
+                                <td>{"Admin"}</td>
+                            {else}
+                                <td>{"Común"}</td>
+                            {/if}
+                            <td><a href="updateUserRole/{$user->id_usuario}"><button type="button" 
+                                        class="btn btn-secondary"> {if $user->rol eq 0} Comun
+                                        {else} Admin {/if}</button></a></td>
+                            <td><a href="deleteUser/{$user->id_usuario}"><button type="button"
+                                        class="btn btn-secondary">X</button></a></td>
+                        </tr>
                     {/if}
-
-                    <td><a href="updateUserRole/{$user->id_usuario}"><button type="button" 
-                                class="btn btn-secondary"> {if $user->rol eq 0} Comun
-                                {else} Admin {/if}</button></a></td>
-
-                    <td><a href="deleteUser/{$user->id_usuario}"><button type="button"
-                                class="btn btn-secondary">X</button></a></td>
-
-                </tr>
-                {/if}
                 {/foreach}
             </tbody>
         </table>

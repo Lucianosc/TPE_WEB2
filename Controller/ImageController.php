@@ -22,7 +22,7 @@ class ImageController
     //alta
     function insertImages($tmp_images, $id_flat)
     {
-        $logged = $this->authHelper->isLoggedIn();  //FALTA CHECKEAR QUE SEA SOLO ADMIN check
+        $logged = $this->authHelper->isLoggedIn(); 
         $role = $this->authHelper->checkLoggedSession();
         if ($logged && $role == 0) {
             $types_images = $_FILES['imagesToUpload']['type'];
@@ -50,7 +50,7 @@ class ImageController
         return true;
     }
 
-    //ALTA->carga las imágenes de un departamento
+    //ALTA->genera las rutas para cada imagen
     private function uploadImages($tmp_images, $name_images)
     {
         $paths = [];
@@ -69,16 +69,14 @@ class ImageController
     //baja
     function deleteImage($params = null)
     {
-        $logged = $this->authHelper->isLoggedIn();  //FALTA CHECKEAR QUE SEA SOLO ADMIN check
+        $logged = $this->authHelper->isLoggedIn();
         $role = $this->authHelper->checkLoggedSession();
         if ($logged && $role == 0) {
-            $id = $params[':ID'];   //es necesario checkear que esten los parametros?
+            $id = $params[':ID'];
             $image = $this->model->getImage($id);
             if ($image) {
                 $this->model->deleteImage($id);
-                //$_SESSION['url'] = $_SERVER['HTTP_REFERER'];
-                //$this->viewFlat->showFlatURL($_SESSION['url']);
-                $this->viewFlat->showFlatEditLocation($image->id_departamento_fk);  //---VER SI CON ESTA LINEA O 54 Y 55
+                $this->viewFlat->showFlatEditLocation($image->id_departamento_fk);
             } else
                 $this->viewUser->RenderError("No existe esta imagen en la base de datos para ser eliminada.");
         } else

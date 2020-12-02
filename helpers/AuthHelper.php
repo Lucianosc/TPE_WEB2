@@ -1,6 +1,7 @@
 <?php
 
-class AuthHelper{
+class AuthHelper
+{
 
     public function __construct()
     {
@@ -9,9 +10,9 @@ class AuthHelper{
         }
     }
 
-    //verifica si hay una sesión activa
+    //Verifica si hay una sesión activa
     function isLoggedIn()
-    {            
+    {
         if (isset($_SESSION['USER'])) {
             return $_SESSION;
         } else {
@@ -19,29 +20,30 @@ class AuthHelper{
         }
     }
 
-    // asigna valores para - admin = 0, user comun = 1, sesion no iniciada = 2.
-    function checkLoggedSession() {
+    //Asigna valores para - admin = 0, user comun = 1, sesion no iniciada = 2.
+    function checkLoggedSession()
+    {
         if ($this->isLoggedIn()) {
-            if($_SESSION['ROLE'] == 0){
+            if ($_SESSION['ROLE'] == 0) {
                 return 0;
-            }
-            else
+            } else
                 return 1;
-        }
-        else 2;
+        } else
+            return 2;
     }
 
-    function login($user) {
+    //Almacena los datos del usuario logueado en la sesión
+    function login($user)
+    {
         $_SESSION['ID'] = $user->id_usuario;
         $_SESSION['USER'] = $user->email;
         $_SESSION['ROLE'] = $user->rol;
     }
 
-    //destruye la sesión y redirige a ShowCities
+    //Destruye la sesión y redirige a ShowCities
     function logout()
     {
         session_destroy();
-        header("Location: ".BASE_URL."showCities");
+        header("Location: " . BASE_URL . "showCities");
     }
-
 }

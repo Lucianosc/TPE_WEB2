@@ -21,6 +21,7 @@ class ImageModel
         return  $query->fetchAll(PDO::FETCH_OBJ);
     }
 
+    //Obtiene una imagen
     function getImage($id_image)
     {
         $query = $this->db->prepare('SELECT imagen.* FROM imagen WHERE id_imagen=?');
@@ -28,7 +29,7 @@ class ImageModel
         return  $query->fetch(PDO::FETCH_OBJ);
     }
 
-    //Alta
+    //alta
     function insertImages($id_flat, $paths)
     {
         $images_query = $this->db->prepare('INSERT INTO imagen(id_departamento_fk, ruta) VALUES(?,?)');
@@ -37,7 +38,7 @@ class ImageModel
         }
     }
    
-    //Baja
+    //baja
     function deleteImage($id)
     {
         $query = $this->db->prepare('DELETE FROM imagen WHERE id_imagen=?');

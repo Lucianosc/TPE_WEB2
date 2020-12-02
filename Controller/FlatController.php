@@ -36,17 +36,9 @@ class FlatController
         $this->controllerImage = new ImageController();
     }
 
-    /*function showFlats()
-    {
-        $logged = $this->authHelper->isLoggedIn();
-        $flats = $this->model->getFlats();
-        $cities = $this->modelCity->getCities();
-        $this->view->ShowFlats($flats, $cities, $logged);
-    }*/
-
     function showFlat($params = null)
     {
-        $logged = $this->authHelper->isLoggedIn();  //debe ser admin?
+        $logged = $this->authHelper->isLoggedIn();
         $id_flat = $params[':ID'];
         $flat = $this->model->getFlatById($id_flat);
 
@@ -60,9 +52,9 @@ class FlatController
     }
 
     //alta
-    function insertFlat()   //Es necesario checkeo línea 66?
+    function insertFlat()
     {
-        $logged = $this->authHelper->isLoggedIn();  //FALTA CHECKEAR QUE SEA SOLO ADMIN check
+        $logged = $this->authHelper->isLoggedIn();
         $role = $this->authHelper->checkLoggedSession();
         if ($logged && $role == 0) {
             $name = $_POST['input_name'];
@@ -85,12 +77,11 @@ class FlatController
 
                     else $this->view->showFlatLocation($id_flat);
                 } else {
-                    //$this->viewUser->RenderError("Estos datos corresponden a un departamento en la base de datos. Intente nuevamente.");
                     $cities = $this->modelCity->getCities();
                     $errorMessaje = "Estos datos corresponden a un departamento en la base de datos. Intente nuevamente.";
                     $this->view->ShowError($cities, $errorMessaje, $logged);
                 }
-            } else $this->viewUser->RenderError("Debe completar todos los campos del formulario"); //---es necesario?
+            } else $this->viewUser->RenderError("Debe completar todos los campos del formulario");
         } else
             $this->viewUser->RenderError("Debe ser administrador para acceder a esta sección.");
     }
@@ -114,10 +105,10 @@ class FlatController
     //baja
     function deleteFlat($params = null)
     {
-        $logged = $this->authHelper->isLoggedIn();  //FALTA CHECKEAR QUE SEA SOLO ADMIN check
+        $logged = $this->authHelper->isLoggedIn(); 
         $role = $this->authHelper->checkLoggedSession();
         if ($logged && $role == 0) {
-            $id = $params[':ID'];   //falta checkear que exista el departamento en la db x si entra por url?
+            $id = $params[':ID'];
             $this->model->deleteFlat($id);
             $this->view->showFlatsLocation();
         } else {
@@ -128,7 +119,7 @@ class FlatController
     //redirección -> para modificación
     function editFlat($params = null)
     {
-        $logged = $this->authHelper->isLoggedIn();  //FALTA CHECKEAR QUE SEA SOLO ADMIN check
+        $logged = $this->authHelper->isLoggedIn();
         $role = $this->authHelper->checkLoggedSession();
         if ($logged && $role == 0) {
             $id_flat = $params[':ID'];
@@ -146,9 +137,9 @@ class FlatController
         }
     }
     //modificación
-    function updateFlat()   //Es necesario checkeo línea 142?
+    function updateFlat()   
     {
-        $logged = $this->authHelper->isLoggedIn();  //FALTA CHECKEAR QUE SEA SOLO ADMIN
+        $logged = $this->authHelper->isLoggedIn(); 
         $role = $this->authHelper->checkLoggedSession();
         if ($logged && $role == 0) {
             $id = $_POST['input_edit_id'];
@@ -181,27 +172,6 @@ class FlatController
         } else
             $this->viewUser->RenderError("Debe ser administrador para acceder a esta sección.");
     }
-
-    //filtro
-    /* function filterFlatsByCity($params = null)
-    {
-        $logged = $this->authHelper->isLoggedIn();  //FALTA CHECKEAR QUE SEA ADMIN NO?
-        $city_name = $params[':NAME'];
-        if (isset($city_name)) {
-            $flats = $this->model->getFlatsByCity($city_name);
-            $cities = $this->modelCity->getCities();
-        }
-        if (empty($flats)) {
-            $errorMessaje = "No hay departamentos en esta ciudad.";
-            $this->view->ShowError($cities, $errorMessaje, $logged);
-        } else {
-            $this->view->ShowFlats($flats, $cities, $logged);
-        }
-    }*/
-
-
-    //---------------------------------NUEVO-------------------------------------------
-    //paginación
     
     function showFlats($params = null)
     {
@@ -219,7 +189,7 @@ class FlatController
 
     function pagination($total_records, $params = null, $city_name = null)
     {
-        $logged = $this->authHelper->isLoggedIn();  //FALTA CHECKEAR QUE SEA ADMIN
+        $logged = $this->authHelper->isLoggedIn();
 
         $quantity_to_show = 3;
 
