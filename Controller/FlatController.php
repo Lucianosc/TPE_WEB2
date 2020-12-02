@@ -179,11 +179,12 @@ class FlatController
         $this->pagination($total_records, $params);
     }
 
-    function filterFlatsByCity($params = null, $page = null)
+    function filterFlatsByCity($params = null)
     {
         $city_name = $params[':NAME'];
         $total_records = $this->model->getNumberFlatsByCity($city_name);
-        $this->pagination($total_records, $page, $city_name);
+       
+        $this->pagination($total_records, $params, $city_name);
     }
 
     function pagination($total_records, $params = null, $city_name = null)
@@ -208,13 +209,16 @@ class FlatController
             $flats = $this->model->getFlatsByLimit($start_from_record, $quantity_to_show);
 
         if (empty($flats)) {
-            if ($page > $total_pages)
-                $this->viewUser->RenderError("Fuera de rango de paginado.");
-            else {
+            if ($page > $total_pages && $total_pages == 0){
                 $errorMessaje = "No hay departamentos en esta ciudad.";
                 $this->view->ShowError($cities, $errorMessaje, $logged);
-            }
-        } else
+
+            } else{
+                $errorMessaje = "Fuera de rango de paginado.";
+                $this->view->ShowError($cities, $errorMessaje, $logged);
+            }      
+        } else{
             $this->view->ShowFlats($flats, $cities, $logged, $total_pages, $city_name);
+        }
     }
 }
