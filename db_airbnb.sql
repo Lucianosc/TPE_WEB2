@@ -18,13 +18,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `db_airbnb`
+-- Base de datos: `db_airbnb`
 --
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `ciudad`
+-- Estructura de tabla para la tabla `ciudad`
 --
 
 CREATE TABLE `ciudad` (
@@ -33,7 +33,7 @@ CREATE TABLE `ciudad` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `ciudad`
+-- Volcado de datos para la tabla `ciudad`
 --
 
 INSERT INTO `ciudad` (`id_ciudad`, `nombre`) VALUES
@@ -46,7 +46,7 @@ INSERT INTO `ciudad` (`id_ciudad`, `nombre`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `comentario`
+-- Estructura de tabla para la tabla `comentario`
 --
 
 CREATE TABLE `comentario` (
@@ -58,7 +58,7 @@ CREATE TABLE `comentario` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `comentario`
+-- Volcado de datos para la tabla `comentario`
 --
 
 INSERT INTO `comentario` (`id_comentario`, `texto`, `puntaje`, `id_usuario_fk`, `id_depto_fk`) VALUES
@@ -76,7 +76,7 @@ INSERT INTO `comentario` (`id_comentario`, `texto`, `puntaje`, `id_usuario_fk`, 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `departamento`
+-- Estructura de tabla para la tabla `departamento`
 --
 
 CREATE TABLE `departamento` (
@@ -88,7 +88,7 @@ CREATE TABLE `departamento` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `departamento`
+-- Volcado de datos para la tabla `departamento`
 --
 
 INSERT INTO `departamento` (`id_departamento`, `nombre`, `direccion`, `precio`, `id_ciudad_fk`) VALUES
@@ -127,7 +127,19 @@ INSERT INTO `imagen` (`id_imagen`, `ruta`, `id_departamento_fk`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `usuario`
+-- Estructura de tabla para la tabla `imagen`
+--
+
+CREATE TABLE `imagen` (
+  `id_imagen` int(11) NOT NULL,
+  `ruta` varchar(200) CHARACTER SET latin1 NOT NULL,
+  `id_departamento_fk` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `usuario`
 --
 
 CREATE TABLE `usuario` (
@@ -138,7 +150,7 @@ CREATE TABLE `usuario` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `usuario`
+-- Volcado de datos para la tabla `usuario`
 --
 
 INSERT INTO `usuario` (`id_usuario`, `email`, `clave`, `rol`) VALUES
@@ -148,17 +160,17 @@ INSERT INTO `usuario` (`id_usuario`, `email`, `clave`, `rol`) VALUES
 (13, 'cualquiera@usuario', '$2y$10$sW6r71lHUv5wh43BOGwZle1StyHQVKqIb..J6ocN2xupFFeMXIVVi', 1);
 
 --
--- Indexes for dumped tables
+-- Índices para tablas volcadas
 --
 
 --
--- Indexes for table `ciudad`
+-- Indices de la tabla `ciudad`
 --
 ALTER TABLE `ciudad`
   ADD PRIMARY KEY (`id_ciudad`);
 
 --
--- Indexes for table `comentario`
+-- Indices de la tabla `comentario`
 --
 ALTER TABLE `comentario`
   ADD PRIMARY KEY (`id_comentario`),
@@ -166,7 +178,7 @@ ALTER TABLE `comentario`
   ADD KEY `id_usuario_fk` (`id_usuario_fk`);
 
 --
--- Indexes for table `departamento`
+-- Indices de la tabla `departamento`
 --
 ALTER TABLE `departamento`
   ADD PRIMARY KEY (`id_departamento`),
@@ -186,23 +198,23 @@ ALTER TABLE `usuario`
   ADD PRIMARY KEY (`id_usuario`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT de las tablas volcadas
 --
 
 --
--- AUTO_INCREMENT for table `ciudad`
+-- AUTO_INCREMENT de la tabla `ciudad`
 --
 ALTER TABLE `ciudad`
   MODIFY `id_ciudad` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
--- AUTO_INCREMENT for table `comentario`
+-- AUTO_INCREMENT de la tabla `comentario`
 --
 ALTER TABLE `comentario`
   MODIFY `id_comentario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=102;
 
 --
--- AUTO_INCREMENT for table `departamento`
+-- AUTO_INCREMENT de la tabla `departamento`
 --
 ALTER TABLE `departamento`
   MODIFY `id_departamento` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
@@ -214,24 +226,24 @@ ALTER TABLE `imagen`
   MODIFY `id_imagen` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
 
 --
--- AUTO_INCREMENT for table `usuario`
+-- AUTO_INCREMENT de la tabla `usuario`
 --
 ALTER TABLE `usuario`
   MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
--- Constraints for dumped tables
+-- Restricciones para tablas volcadas
 --
 
 --
--- Constraints for table `comentario`
+-- Filtros para la tabla `comentario`
 --
 ALTER TABLE `comentario`
   ADD CONSTRAINT `comentario_ibfk_1` FOREIGN KEY (`id_depto_fk`) REFERENCES `departamento` (`id_departamento`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `comentario_ibfk_2` FOREIGN KEY (`id_usuario_fk`) REFERENCES `usuario` (`id_usuario`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Constraints for table `departamento`
+-- Filtros para la tabla `departamento`
 --
 ALTER TABLE `departamento`
   ADD CONSTRAINT `departamento_ibfk_1` FOREIGN KEY (`id_ciudad_fk`) REFERENCES `ciudad` (`id_ciudad`) ON UPDATE CASCADE;
