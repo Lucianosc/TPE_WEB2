@@ -31,9 +31,11 @@
     margin-left: -15%;
     margin-right: 15%;
 }
-#flatImgs div{
+#flatImgs img{
+    max-width: 400px;
     margin: 10px;
 }
+
 .rating {
     display: flex;
     flex-direction: row-reverse;

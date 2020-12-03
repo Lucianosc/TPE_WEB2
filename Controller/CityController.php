@@ -84,14 +84,17 @@ class CityController
     function editCity($params = null)
     {
         $logged = $this->authHelper->isLoggedIn();
-
+        $role = $this->authHelper->checkLoggedSession();
         $id_city = $params[':ID'];
         $city = $this->model->getCityById($id_city);
 
-        if ($city) {    //checkea si obtuvo un objeto no vacío de la db
-            $this->view->ShowEditCity($city, $logged);
+        if ($logged && $role == 0) {
+            if ($city) {    //checkea si obtuvo un objeto no vacío de la db
+                $this->view->ShowEditCity($city, $logged);
+            } else
+                $this->viewUser->RenderError("No existe id en la base de datos");
         } else
-            $this->viewUser->RenderError("No existe id en la base de datos");
+        $this->viewUser->RenderError("Debe ser administrador para acceder a esta sección.");
     }
 
     //modificación

@@ -117,15 +117,20 @@ class FlatController
     function editFlat($params = null)
     {
         $logged = $this->authHelper->isLoggedIn();
+        $role = $this->authHelper->checkLoggedSession();
         $id_flat = $params[':ID'];
         $cities = $this->modelCity->getCities();
         $flat = $this->model->getFlatById($id_flat);
 
-        if ($flat) {    //checkea si obtuvo un objeto no vacío de la db
-            $images = $this->modelImage->getImagesByFlat($id_flat);
-            $this->view->ShowEditFlat($flat, $cities, $images, $logged);
-        } else
-            $this->viewUser->RenderError("No existe id en la base de datos");
+        if ($logged && $role == 0) {
+            if ($flat) {    //checkea si obtuvo un objeto no vacío de la db
+                $images = $this->modelImage->getImagesByFlat($id_flat);
+                $this->view->ShowEditFlat($flat, $cities, $images, $logged);
+            } else
+                $this->viewUser->RenderError("No existe id en la base de datos");
+        } else {
+            $this->viewUser->RenderError("Debe ser administrador para acceder a esta sección.");
+        }
     }
     //modificación
     function updateFlat()
