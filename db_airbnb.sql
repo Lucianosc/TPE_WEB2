@@ -124,17 +124,6 @@ INSERT INTO `imagen` (`id_imagen`, `ruta`, `id_departamento_fk`) VALUES
 (36, 'images/temp/5fc7fa9f15172.jpg', 10),
 (37, 'images/temp/5fc7fa9f15852.jpg', 10);
 
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `imagen`
---
-
-CREATE TABLE `imagen` (
-  `id_imagen` int(11) NOT NULL,
-  `ruta` varchar(200) CHARACTER SET latin1 NOT NULL,
-  `id_departamento_fk` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
